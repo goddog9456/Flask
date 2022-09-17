@@ -1,0 +1,28 @@
+﻿{{df.loc[4]['CT1_1_1']}}
+<table class = 't2'>
+<tr><th>Step</th><th>機台</th><th>點檢位</th><th>檢查方式</th>
+
+
+<tr><td>CT1</td><td>MJC</td><td>Pre-Alignment</td><td>1. STOPPER是否損壞或無法轉動<br/>(未夾取Panel時檢查)</td>
+{% for key,value in df.iterrows() %}
+<td>{{key}}</td>
+<td>{{df.loc[key]['CT1_1_1']}}</td>
+{% endfor %}
+
+<tr><td>{{df.loc[5]['站點']}}</td><td>MJC</td><td>Pre-Alignment</td><td>2. 機構範圍是否有玻璃屑<br/>(Pre-Alignment平躺時檢查)</td>
+{% for key,value in df.iterrows() %}
+<td><input type="text" name="CT1_1_2" value="{{df.loc[key]['CT1_1_2']}}" ></td>
+{% endfor %}
+
+
+<tr><td>{{df.loc[0]['Class']}}</td><td>MJC</td><td>Pre-Alignment</td><td>3. 點檢Panel夾取後，Stopper量測距離需在4~7mm</td>
+{% for key,value in df.iterrows() %}
+<td><input type="text" name="CT1_1_2" value="{{df.loc[key]['CT1_1_3']}}" ></td>
+{% endfor %}
+
+<tr><td>{{df.loc[0]['Class']}}</td><td>MJC</td><td>Pre-Alignment</td><td>4. 上下手臂至放PANEL是否置中(A等於B) </td>
+{% for key,value in df.iterrows() %}
+<td><input type="text" name="CT1_1_2" value="{{df.loc[key]['CT1_1_4']}}" ></td>
+{% endfor %}
+
+</tr></table>

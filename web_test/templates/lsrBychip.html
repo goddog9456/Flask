@@ -1,0 +1,117 @@
+
+{% macro table_chipRaw(df_chipRaw, df_chipImg, df_arrayRaw) -%}
+
+
+</br>
+{% if df_chipRaw|length != 0%}
+	<p class='title1'>RAW DATA</p>
+
+	<table class = 'redTable'>
+	<thead><tr>
+	{% for i in df_chipRaw.head(1)%}
+		{# loop.index 號碼從1開始, 1,2,3... #}
+		{%if i not in ['IMAGE']%}
+			<th>{{i}}</th>
+		{%endif%}
+	{% endfor %}
+
+
+	<tr></thead>
+
+
+	{% for key,value in df_chipRaw.iterrows() %}
+	<tr>
+		{% for i in df_chipRaw.head(1)%}
+			{%if i not in ['IMAGE']%}
+				<td>{{value[i]}}</td>
+			{%endif%}
+		{% endfor %}
+	</tr>
+	{% endfor %}
+	</table>
+
+
+	<p class='title1'>Image</p>
+
+	<table class = 'redTable'>
+	<thead><tr>
+	{% for i in df_chipImg.head(1)%}
+		{# loop.index 號碼從1開始, 1,2,3... #}
+		{%if i in ['CHIP_ID', 'REWORK人員', '1st_TEST_DEFECT', '2nd_TEST_DEFECT', 'Info', 'IMAGE']%}
+			<th>{{i}}</th>
+		{%endif%}
+	{% endfor %}
+
+
+	<tr></thead>
+
+
+	<tr>
+
+
+	{% for key,value in df_chipImg.iterrows() %}
+		
+		{% for i in df_chipImg.head(1)%}
+			{%if key == 0 and i == 'CHIP_ID'%}
+				<td rowspan={{df_chipImg|length}}>{{value[i]}}</td>
+			{%elif value['IMG_CNT'] != 0 and i == 'REWORK人員'%}
+				<td rowspan={{value['IMG_CNT']}}>{{value[i]}}</td>
+		
+			{%elif i in ['IMAGE'] and value[i] != 'No image' %}
+			<td><a href="{{ value[i] }}"><img align="center" width='320' height='240' src="{{ value[i] }}" onerror="this.parentNode.removeChild(this)"></a></td>  
+			{%elif i in ['IMAGE', '1st_TEST_DEFECT', '2nd_TEST_DEFECT']%}
+				<td>{{value[i]}}</td>
+			{%elif i in ['Info']%}
+				<td>{{value[i]|safe}}</td>
+			
+			
+			{%endif%}
+		{% endfor %}
+	</tr>
+	{% endfor %}
+	</table>
+{%endif%}
+
+
+{% if df_arrayRaw|length != 0%}
+
+	
+	<p class='title1'>Array Data</p>
+
+	<table class = 'redTable'>
+	<thead><tr>
+	{% for i in df_arrayRaw.head(1)%}
+		
+		
+			<th>{{i}}</th>
+
+	{% endfor %}
+
+	</tr></thead>
+	<tr>
+
+
+	{% for key,value in df_arrayRaw.iterrows() %}
+		
+		{% for i in df_arrayRaw.head(1)%}
+				<td>{{value[i]|safe}}</td>
+
+
+		{% endfor %}
+	</tr>
+	{% endfor %}
+	</table>
+
+	
+{% endif %}
+
+
+
+	
+
+{%- endmacro %}
+
+
+
+
+

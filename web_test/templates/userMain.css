@@ -1,0 +1,268 @@
+td{
+	padding: 20px 40px;
+	
+	}
+     /*將CSS寫在HTML中*/
+     body{
+     width: 130%;
+     color: BLACK;
+     margin:0 auto;
+     font-family: sans-serif, "微軟正黑體";
+     overflow: auto;
+     }
+     
+	   
+	
+	 
+	 
+	 
+    #header{
+     background-color: #40292F;
+     padding: 0.05%;
+     }
+
+     #nav{
+     background-color: #40292F;
+     padding: 5px;
+     }
+
+     #aside{ 
+     width: 6.3%;
+     height: 95%;
+     text-align: center;
+     background-color: #E1C4C4;
+     padding:20px 10px;
+     float: left;
+     }
+
+     #section{
+     width: 88%;
+     height: 90%;
+     background-color: 	#FCFCFC;
+     line-height: 1.5em;
+     padding: 20px;
+     float: right;
+     overflow: auto;
+	 
+	 
+	
+
+		
+	}
+	
+     #footer{
+     padding:2%;
+     background-color: #425660;
+     clear: both;
+     }
+  
+     h2{
+     font-family: sans-serif, "微軟正黑體";
+     font-size: 23px;
+     color: #930000;
+     text-align: left;
+	 //cursor: crosshair;
+	 //cursor: url(https://ani.cursors-4u.net/others/oth-9/oth929.cur), auto !important;
+     cursor: url(https://cur.cursors-4u.net/games/gam-12/gam1113.cur), auto !important;
+	 }
+	 h2:hover {
+	color:white; /*變換文字顏色*/
+	}
+	
+	 
+	.bdtxt{
+	  font-family: sans-serif, "微軟正黑體";
+	  font-size: 20px;
+       color: #930000;
+	  border-width: 3px; 
+	  border-style:solid ; 
+	   
+	  border-color: white; 
+	  padding: 5px; 
+	  text-align: center;
+	}
+	 h1{
+     //font-family: Brush Script MT, Brush Script Std, cursive;
+	 font-family: sans-serif, "微軟正黑體";
+     font-size: 30px;
+     color: white;
+     text-align: left;
+     }
+     
+	 h5{
+     font-family: sans-serif, "微軟正黑體";
+     font-size: 30px;
+     color: black;
+     text-align: left;
+     }
+	 
+	
+	
+	
+	txt1 {
+	font-size: 25px;
+	font-family: "Arial Black", Gadget, sans-serifpx;
+	color: #ba421e;
+	text-shadow: rgba(23, 14, 11, 0.61) 6px 9px 14px;
+	
+	}
+	woodTxt {
+    font-size: 59px;
+    -webkit-text-stroke-width: 1.4px;
+    -webkit-text-stroke-color: #4f0606;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+            background-clip: text;
+    background-image: url('/images/bg/mask-image2.jpg');
+    background-position: 0px 0px;
+    letter-spacing: 9px;
+    font-family: Impact, Charcoal, sans-serif;
+    }
+     
+	 .oct {
+    font-size: 40px;
+    //-webkit-text-stroke-width: 2.6px;
+    //webkit-text-stroke-color: #9e3636;
+    //-webkit-text-fill-color: #ffffff;
+    letter-spacing: 10px;
+    //font-family: 'Comic Sans MS', cursive, sans-serif;
+    text-shadow: -4px -4px 7px rgba(163, 163, 163, 0.91);
+	border-width: 3px; 
+	border-style:solid ; 
+	//width: 150px; 
+	height: 50px; 
+	cursor: url(https://cur.cursors-4u.net/cursors/cur-10/cur970.cur), auto !important;
+}
+.oct:hover {
+color:red; /*變換文字顏色*/
+}
+
+
+
+
+table.t2 {
+  font-family: "Times New Roman", Times, serif;
+  border: 2px solid #FFFFFF;
+  width: 40%;
+}
+table.t2 td, table.t2 th {
+  border: 1px solid #FFFFFF;
+  padding: 3px 4px;
+}
+table.t2 tbody td {
+  font-size: 13px;
+}
+table.t2 td:nth-child(even) {
+  background: #EBEBEB;
+}
+table.t2 thead {
+  background: #FFFFFF;
+  border-bottom: 2px solid #333333;
+}
+table.t2 thead th {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333333;
+  text-align: left;
+  border-left: 2px solid #333333;
+}
+table.t2 thead th:first-child {
+  border-left: none;
+}	
+
+
+table.t3 {
+  font-family: "Times New Roman", Times, serif;
+  border: 2px solid #FFFFFF;
+  width: 40%;
+}
+table.t3 td, table.t3 th {
+  border: 1px solid #FFFFFF;
+  padding: 3px 4px;
+}
+table.t3 tbody td {
+  font-size: 18px;
+}
+table.t3 td:nth-child(even) {
+  background: #EBEBEB;
+}
+table.t3 thead {
+  background: #FFFFFF;
+  border-bottom: 2px solid #333333;
+}
+table.t3 thead th {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333333;
+  text-align: left;
+  border-left: 2px solid #333333;
+}
+table.t3 thead th:first-child {
+  border-left: none;
+}	
+
+
+
+
+
+input.in5{
+background-color:transparent;
+border:0;
+font-size:23px;
+font-family: sans-serif, "Monospace";
+outline:medium;
+}
+
+
+
+input.inAside{
+//同h2 input版;
+background-color: transparent;
+border:0;
+
+font-weight: bold; 
+font-family: sans-serif, "微軟正黑體";
+font-size:20px;
+outline:medium;
+color: #930000;
+text-align: left;
+cursor: url(https://cur.cursors-4u.net/games/gam-12/gam1113.cur), auto !important;
+padding-left: 0;
+
+}
+input.inAside:hover {
+color:white; /*變換文字顏色*/
+}
+
+
+
+
+input.green{
+background-image:url({{ url_for('static', filename='Green.gif')}}); 
+width:45px; 
+height:40px; 
+border:0;
+text-indent:-9999px;
+}input.yellow{
+background-image:url({{ url_for('static', filename='Yellow.gif')}}); 
+width:45px; 
+height:40px; 
+border:0;
+text-indent:-9999px;
+}input.red{
+background-image:url({{ url_for('static', filename='Red.gif')}}); 
+width:45px; 
+height:40px; 
+border:0;
+text-indent:-9999px;
+}input.redng{
+background-image:url({{ url_for('static', filename='Red_NG.gif')}}); 
+width:45px; 
+height:40px; 
+border:0;
+text-indent:-9999px;
+size:50px;
+}
+
+
+

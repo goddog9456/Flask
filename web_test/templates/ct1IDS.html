@@ -1,0 +1,119 @@
+
+
+
+{% macro df2redTable(df)  -%}
+	<table class = 'redTable'>
+	<thead><tr>
+	{% for i in df.head(1)%}
+		{# loop.index 號碼從1開始, 1,2,3... #}
+		{% if "ROW_CNT" not in i %}
+			<th>{{i}}</th>
+		{% endif %}
+	{% endfor %}
+	</tr></thead>
+	{% for key,value in df.iterrows() %}
+	<tr>
+		{% for i in df.head(1)%}
+			{% if i in ['Date', 'Shift_DN'] %}
+				{%  if value['ROW_CNT_' + i] == 1%}
+					<td>{{value[i]}}</td>
+				{%  elif value['ROW_CNT_' + i] == -1%}
+				
+				
+				
+				{%  else %}
+					<td rowspan="{{value['ROW_CNT_' + i]}}">{{value[i]}}</td>
+				{% endif %}
+			
+			{% elif i in ['NG_IMG'] %}	
+				<td>{{value[i]|safe}}</td>
+			
+			{% elif "ROW_CNT" not in i %}
+				<td>{{value[i]}}</td>
+			
+			{% endif %}
+				
+		{% endfor %}
+	</tr>
+	{% endfor %}
+	</table>
+{%- endmacro %}
+
+
+
+
+{% macro table_ct1chipids(df, imgLinks, df_check) -%}
+{{df_check.to_html()|safe}}
+</br>
+<table class = 'redTable'>
+<thead><tr>
+{% for i in df.head(1)%}
+	{# loop.index 號碼從1開始, 1,2,3... #}
+	{% if loop.index <= 28888 %}
+	<th>{{i}}</th>
+	{% endif %}
+{% endfor %}
+
+
+<tr></thead>
+
+<script language="JavaScript" type="text/javascript">
+   function PopupPic(sPicURL) { 
+	 window.open( "static/popup_ct1.htm?"+sPicURL,"","resizable=1"); 
+   } 
+</script>
+{% for key,value in df.iterrows() %}
+<tr>
+	{% for i in df.head(1)%}
+		{% if  i in [ 'DEFECT'] %}
+			<td><input type="text" class='in1' name="DEFECT_CODE_DESC__{{key}}" value ="{{value[i]}}" size="7" readonly></td>
+		
+		{% elif  i in ['TEST_TIME'] %}
+			<td>
+			<input type="text" class='in_hidden' name="{{i}}__{{key}}" value ="{{value[i]}}"  size="1"readonly><br/>
+			{{ value[i].strftime('%Y/%m/%d')}}<br/>{{ value[i].strftime('%H:%M:%S')}}
+			</td>
+			
+		
+		{% elif  i in ['PRODUCT_CODE', 'SHEET_ID', 'MODEL_NO'] %}
+			<td><input type="text" class='in1' name="{{i}}__{{key}}" value ="{{value[i]}}" size="12" readonly></td>
+		{% elif  i in ['TEST_USER', 'TOOL_ID'] %}
+			<td><input type="text" class='in1' name="{{i}}__{{key}}" value ="{{value[i]}}" size="7" readonly></td>
+		{% elif  'IMG' in i %}
+			<td>{{value[i]|safe}}</td>
+		{% elif  i == '確認' and value[i]=='N/A'%}
+			<td><input type="radio" class='in_radio' name="imgCheck__{{key}}" id="imgCheck__{{key}}_R" value="R"><label for="imgCheck__{{key}}_R" ><h3>Real</h3></label>
+				<input type="radio" class='in_radio' name="imgCheck__{{key}}" id="imgCheck__{{key}}_F" value="F"><label for="imgCheck__{{key}}_F" ><h3>False</h3></label></td>
+		{% elif  i == '備註' and value[i]=='N/A' %}
+			<td><input type="input" name="imgCheckRemarks__{{key}}" value=""></td>
+		
+		{% elif  i in ['確認', '備註']%}
+			<td>{{value[i]}}</td>
+		{% else  %}
+			<td><input type="text" class='in1' name="{{i}}__{{key}}" value ="{{value[i]}}" size="5" readonly></td>
+		{% endif %}
+			
+	{% endfor %}
+</tr>
+{% endfor %}
+</table>
+</br></br>
+{# 圖太多張時，移至下方另以表格呈現 #}
+
+<p class='title1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defect影像檢查完畢後，請記得按下「上傳」↓↓↓</p>
+{# <button type='submit' name='imgCheckUpload'  style="width:100px;height:60px;font:50px">上傳</button> #}
+{#<input type='submit' class='in_subDate' name='imgCheckUpload' value="上傳">#}
+<button type='submit' class='in_subDate' value="ct1IDS" name='imgCheckUpload'>上傳並回到此頁</button>
+			
+</br></br>
+{%- endmacro %}
+
+
+
+
+
+
+
+
+
+

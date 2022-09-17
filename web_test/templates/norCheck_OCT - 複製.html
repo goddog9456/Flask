@@ -1,0 +1,288 @@
+
+
+
+{% macro showCST(df) -%}
+<h3>CST點檢</h3>
+<table class = 't2'>
+<tr>
+<thead>
+<tr><th>    </th>   <th>    EQP      </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['Machine']}}</th>{% endfor %}</tr>
+<tr><th>    </th>   <th>    Date     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['time'][0:10]}}</th>{% endfor %}</tr></tr>
+<tr><th>    </th>   <th>    Time     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['time'][11:]}}</th>{% endfor %}</tr></tr>
+<tr><th>    </th>   <th>    填單人員     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['Name']}}</th>{% endfor %}</tr></tr>
+
+
+<tr><td>是否為換線</td><td></td><td></td>
+
+	{% for key,value in df.iterrows() %}
+		{% if value['Mode'] == 'CST_Linechange' %}
+		<td><input type="text" name="OCT_A1" class='in0' value ="是"  size="3" readonly></td>
+		{% else %}
+		<td><input type="text" name="OCT_A1" class='in0' value ="否"  size="3" readonly></td>
+		{%endif%}
+	{% endfor %}</tr>	
+
+
+<tr><td>CST ID 01</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	      <td><input type="text" class='in0' name='{{key}}' value ="{{value['CST_Check_ID01_OK']}}, {{value['CST_Check_ID01']}}, {{value['CST_Check_rem']}}" size="25" readonly></td>
+{% endfor %}</tr>
+<tr><td>CST ID 02</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	      <td><input type="text" class='in0' name='{{key}}' value ="{{value['CST_Check_ID02_OK']}}, {{value['CST_Check_ID02']}}, {{value['CST_Check_ID02_rem']}}"  size="25" readonly></td>
+{% endfor %}</tr>
+<tr><td>CST ID 03</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	      <td><input type="text" class='in0' name='{{key}}' value ="{{value['CST_Check_ID03_OK']}}, {{value['CST_Check_ID03']}}, {{value['CST_Check_ID03_rem']}}"  size="25" readonly></td>
+{% endfor %}</tr>
+<tr><td>CST ID 04</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	      <td><input type="text" class='in0' name='{{key}}' value ="{{value['CST_Check_ID04_OK']}}, {{value['CST_Check_ID04']}}, {{value['CST_Check_ID04_rem']}}"  size="25" readonly></td>
+{% endfor %}</tr>
+<tr><td>CST ID 05</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	      <td><input type="text" class='in0' name='{{key}}' value ="{{value['CST_Check_ID05_OK']}}, {{value['CST_Check_ID05']}}, {{value['CST_Check_ID05_rem']}}"  size="25" readonly></td>
+{% endfor %}</tr>
+
+
+</table>
+{%- endmacro %}
+
+
+{% macro showClear(df) -%}
+<h3>清潔點檢</h3>
+<table class = 't2'>
+<tr>
+<thead>
+<tr><th>    </th>   <th>    EQP      </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['Machine']}}</th>{% endfor %}</tr>
+<tr><th>    </th>   <th>    Date     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['time'][0:10]}}</th>{% endfor %}</tr></tr>
+<tr><th>    </th>   <th>    Time     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['time'][11:]}}</th>{% endfor %}</tr></tr>
+<tr><th>    </th>   <th>    填單人員     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['Name']}}</th>{% endfor %}</tr></tr>
+<tr><td>確認狀況</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	      <td><input type="text" class='in0' name='{{key}}' value ="{{value['Clear_Check']}}" title="{{value['Clear_Check_rem']}}" size="4" readonly></td>
+{% endfor %}</tr>
+
+</table>
+{%- endmacro %}
+
+
+{% macro showMaint(df) -%}
+<h3>保養點檢</h3>
+<table class = 't2'>
+<tr>
+<thead>
+<tr><th>    </th>   <th>    EQP      </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['Machine']}}</th>{% endfor %}</tr>
+<tr><th>    </th>   <th>    Date     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['time'][0:10]}}</th>{% endfor %}</tr></tr>
+<tr><th>    </th>   <th>    Time     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['time'][11:]}}</th>{% endfor %}</tr></tr>
+<tr><th>    </th>   <th>    填單人員     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['Name']}}</th>{% endfor %}</tr></tr>
+<tr><td>CST ID 01</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	      <td><input type="text" class='in0' name='{{key}}' value ="{{value['Maint_Check_ID01_OK']}}, {{value['Maint_Check_ID01']}}" title="{{value['Maint_Check_ID01_rem']}}" size="8" readonly></td>
+{% endfor %}</tr>
+
+</table>
+{%- endmacro %}
+
+{% macro showLight(df) -%}
+<h3>機台點檢</h3>
+<table class = 't2'>
+<thead>
+<tr><th>  </th>     <th></th><th>    EQP      </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['Machine']}}</th>{% endfor %}</tr>
+<tr><th>  </th>     <th></th><th>    Date     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['time'][0:10]}}</th>{% endfor %}</tr></tr>
+<tr><th>  </th>     <th></th><th>    Time     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['time'][11:]}}</th>{% endfor %}</tr></tr>
+<tr><th>  </th>     <th></th><th>    填單人員 </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['Name']}}</th>{% endfor %}</tr></tr>
+
+<tr><th>Step</th><th>機台</th><th>點檢位</th><th><input type="text" class='in0'value ="檢查方式" size="20" readonly></th></tr></thead>
+<tr><td></td><td></td><td></td><td>未RUN貨</td>
+	{% for key,value in df.iterrows() %}
+		<td><input type="text" name="NOT_RUN_MODEL" class='in0' value ="{{value['NOT_RUN_MODEL']}}"  size="3" readonly></td>
+	{% endfor %}</tr>
+	
+	
+<tr><td> - </td><td> - </td><td> - </td><td>是否為換線</td>
+	{% for key,value in df.iterrows() %}
+		{% if value['Mode'] == 'Light_Linechange' %}
+		<td><input type="text" name="OCT_A1" class='in0' value ="是"  size="3" readonly></td>
+		{% else %}
+		<td><input type="text" name="OCT_A1" class='in0' value ="否"  size="3" readonly></td>
+		{%endif%}
+	{% endfor %}</tr>	
+	
+<tr><td>A</td><td>MJC</td><td>Pre-Alignment</td><td>1. STOPPER是否損壞<br/>(需於未夾取Panel時檢查，不可有固定位置凹槽或單邊磨秏，不分嚴重輕微皆更換，平均磨為正常)</td>
+	{% for key,value in df.iterrows() %}
+		<td><input type="text" name="OCT_A1" class='in0' value ="{{value['OCT_A1']}}" title="{{value['OCT_A1_rem']}}" size="3" readonly></td>
+	{% endfor %}</tr>
+
+<tr><td>A</td><td>MJC</td><td>Pre-Alignment</td><td>2. STOPPER無法轉動(未夾取Panel時檢查)</td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="OCT_A2" class='in0' value ="{{value['OCT_A2']}}" title="{{value['OCT_A2_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+<tr><td>A</td><td>MJC</td><td>Pre-Alignment</td><td>3. 點檢Panel夾取後，Panel於Stopper，需在白區內</td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="OCT_A3" class='in0' value ="{{value['OCT_A3']}}" title="{{value['OCT_A3_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+
+
+<tr><td>A</td><td>MJC</td><td>Pre-Alignment</td><td>4. 用手推動滑塊，檢查是否有移動會卡住及彈簧是否斷掉 </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="OCT_A4" class='in0' value ="{{value['OCT_A4']}}" title="{{value['OCT_A4_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+
+
+<tr><td>B</td><td>MJC</td><td>Up Carrier</td><td>1. Carrier優力膠塊是否受損<br/>(需於未夾取Panel時檢查，不可有固定位置凹槽或單邊磨秏，不分嚴重輕微皆更換，平均磨為正常) </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT_B1']}}" title="{{value['OCT_B1_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+
+<tr><td>B</td><td>MJC</td><td>Down Carrier</td><td>2. Carrier優力膠塊是否受損<br/>(需於未夾取Panel時檢查，不可有固定位置凹槽或單邊磨秏，不分嚴重輕微皆更換，平均磨為正常) </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT_B2']}}" title="{{value['OCT_B2_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+
+
+<tr><td>C</td><td>MJC</td><td>Up Carrier</td><td>1. Carrier的上頂PIN彈簧是否斷裂 </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT_C1']}}" title="{{value['OCT_C1_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+<tr><td>C</td><td>MJC</td><td>Down Carrier</td><td>2. Carrier的上頂PIN彈簧是否斷裂 </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT_C2']}}" title="{{value['OCT_C2_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+
+<tr><td>C</td><td>MJC</td><td>Up Carrier</td><td>3. 優力膠底座螺絲是否鬆動 </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT_C3']}}" title="{{value['OCT_C3_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+<tr><td>C</td><td>MJC</td><td>Down Carrier</td><td>4. 優力膠底座螺絲是否鬆動 </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT_C4']}}" title="{{value['OCT_C4_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+<tr><td>D</td><td>MJC</td><td>Workstage</td><td>1. STOPPER & CLAMP是否損壞<br/>(需於未夾取Panel時檢查，不可有固定位置凹槽或單邊磨秏，不分嚴重輕微，更換後觀察，平均磨為正常)  </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT_D1']}}" title="{{value['OCT_D1_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+<tr><td>D</td><td>MJC</td><td>Workstage</td><td>2. Workstage框上溝槽是否有玻璃屑(有，需拍照及點檢機構並MAIL告知ENG，清除後，交接點檢該處3個班，是否仍有玻璃屑) </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT_D2']}}" title="{{value['OCT_D2_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+<tr><td>D</td><td>MJC</td><td>Workstage</td><td>3. 鐵氟龍膠帶是否有受損<br/>(Panel接觸面，單邊受損大於2mm且3處以上，直接更換) </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT_D3']}}" title="{{value['OCT_D3_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+<tr><td>D</td><td>MJC</td><td>Workstage</td><td>4. CLAMP作動是否有3段Sensor燈號</br>(夾不到：不亮、正確：亮、沒夾到：不亮) </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT_D4']}}" title="{{value['OCT_D4_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+<tr><td>D</td><td>MJC</td><td>Workstage</td><td>5. 用手轉動STOPPER，確認Panel都有承靠在右邊Stopper上</td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT_D5']}}" title="{{value['OCT_D5_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+
+
+
+
+
+
+<tr><td>E</td><td>MJC</td><td>Workstage</td><td>1. 傳片位置確認(STOPPER與PANEL距離)，使用塑膠尺量測約0.8~2mm </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT_E1']}}" title="{{value['OCT_E1_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+<tr><td>F</td><td>MJC</td><td>Workstage</td><td>1. Carrier撈抓與Stage溝槽是否置中(使用塑膠尺量測左、右皆需大於2mm) </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT_F1']}}" title="{{value['OCT_F1_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+
+<tr><td>G</td><td>MJC</td><td>Block</td><td>1. 是否有鎖緊(手去搖動) </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT_G1']}}" title="{{value['OCT_G1_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+<tr><td>G</td><td>MJC</td><td>Block</td><td>2. 是否有多餘block，依量測電壓表確認數量(僅換線點檢確認) </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT_G2']}}" title="{{value['OCT_G2_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+<tr><td>H</td><td>MJC</td><td>探針</td><td>1. 按壓探針後，再目視確認是否縮針 </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT_H1']}}" title="{{value['OCT_H1_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+<tr><td>J</td><td>MJC</td><td>Workstage</td><td>1. STOPPER與PANEL間，是否可以利用塑膠尺(1mm厚)刷過 </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT_J1']}}" title="{{value['OCT_J1_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+<tr><td>M</td><td>MJC</td><td>Panel 外觀檢</td><td>1. 使用手電筒，於Pre-A處，確認當下Panel(上下臂各兩片)，四邊是否有延裂/破片 and 探針伸 </td>
+{% for key,value in df.iterrows() %}
+    <td><input type="text" class='in0' name='{{key}}' value ="{{value['OCT_K1_ID01']}}" title="{{value['OCT_K1_rem']}}" size="3" readonly><br/>
+	<input type="text" class='in0' name='{{key}}' value ="{{value['OCT_K1_ID02']}}" title="{{value['OCT_K1_rem']}}" size="3" readonly><br/>
+	<input type="text" class='in0' name='{{key}}' value ="{{value['OCT_K1_ID03']}}" title="{{value['OCT_K1_rem']}}" size="3" readonly><br/>
+	<input type="text" class='in0' name='{{key}}' value ="{{value['OCT_K1_ID04']}}" title="{{value['OCT_K1_rem']}}" size="3" readonly><br/>
+	</td>
+{% endfor %}</tr>
+<tr><td>A</td><td>robot</td><td>上下FORK吸嘴</td><td>1. 確認吸嘴是否有受損(使用手電筒，手轉吸嘴360度確認)，無論損傷狀況先更換處理 </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT_A_Robot1']}}" title="{{value['OCT_A_Robot1_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+
+{#  GPM機台  #}
+
+<tr><td>A</td><td>GPM</td><td>Pre-Alignment</td><td>1. 優力膠是否損壞<br/>(需於未夾取Panel時檢查，不可有固定位置凹槽或單邊磨秏，不分嚴重輕微皆更換) </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT2_A1']}}" title="{{value['OCT2_A1_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+<tr><td>B</td><td>GPM</td><td>Up Carrier</td><td>1. Carrier 優力膠塊是否受損(需於未夾取Panel時檢查，有凹槽，需轉面使用) </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT2_B1']}}" title="{{value['OCT2_B1_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+<tr><td>B</td><td>GPM</td><td>Down Carrier</td><td>2. Carrier 優力膠塊是否受損(需於未夾取Panel時檢查，有凹槽，需轉面使用) </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT2_B2']}}" title="{{value['OCT2_B2_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+<tr><td>C</td><td>GPM</td><td>Up Carrier</td><td>1. 優力膠底座螺絲重新鎖附測試有無鬆動 </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT2_C1']}}" title="{{value['OCT2_C1_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+<tr><td>C</td><td>GPM</td><td>Down Carrier</td><td>2. 優力膠底座螺絲重新鎖附測試有無鬆動 </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT2_C2']}}" title="{{value['OCT2_C2_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+<tr><td>D</td><td>GPM</td><td>Workstage</td><td>1. CLAMP作動是否有3段Sensor燈號<br/>(夾不到：不亮、正確：亮、沒夾到：不亮) </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT2_D1']}}" title="{{value['OCT2_D1_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+<tr><td>D</td><td>GPM</td><td>Workstage</td><td>2. Workstage邊框是否有玻璃屑 </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT2_D2']}}" title="{{value['OCT2_D2_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+<tr><td>D</td><td>GPM</td><td>Workstage</td><td>3. 鐵氟龍膠帶是否有受損<br/>(Panel接觸面，單邊受損大於2mm且3處以上，直接更換) </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT2_D3']}}" title="{{value['OCT2_D3_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+<tr><td>D</td><td>GPM</td><td>Workstage</td><td>4. 用手轉動STOPPER，確認Panel都有承靠在Stopper上 </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT2_D4']}}" title="{{value['OCT2_D4_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+<tr><td>D</td><td>GPM</td><td>Workstage</td><td>5. 傳片位置確認(STOPPER與PANEL距離)，使用塑膠尺量測約0.8~2mm </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT2_D5']}}" title="{{value['OCT2_D5_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+
+<tr><td>E</td><td>GPM</td><td>Workstage</td><td>1. 是否有鎖緊(手去搖動) </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT2_E1']}}" title="{{value['OCT2_E1_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+<tr><td>F</td><td>GPM</td><td>Workstage</td><td>1. 是否有多餘block，依量測電壓表確認數量(換線點檢確認) </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT2_F1']}}" title="{{value['OCT2_F1_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+<tr><td>F</td><td>GPM</td><td>Workstage</td><td>2. 鐵氟龍膠帶是否有受損 </td>
+{% for key,value in df.iterrows() %}
+      <td><input type="text" name="" class='in0' value ="{{value['OCT2_F2']}}" title="{{value['OCT2_F2_rem']}}" size="3" readonly>
+{% endfor %}</tr>
+
+
+</table>
+
+
+{%- endmacro %}
+
+
+

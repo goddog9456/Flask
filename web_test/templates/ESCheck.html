@@ -1,0 +1,355 @@
+
+{% macro table_ESCheck(df) -%}
+{#}
+<table class='t2'>
+<tr><td>
+<p class='title2'>[AOI GO Ratio]
+<p class='title2'>ADC X: RATIO <= 35%  & move >= 30 pcs => 亮紅燈</p>
+<p class='title2'>CNG  : RATIO <= 80%  & move >= 30 pcs => 亮紅燈</p>
+<p class='title2'>RB   : RATIO <= 70%  & move >= 30 pcs => 亮紅燈</p>
+<p class='title2'>RA(G): RATIO <= 30%  & move >= 30 pcs => 亮紅燈</p>
+<p class='title2'>RA   : RATIO <= 30%  & move >= 30 pcs => 亮紅燈</p>
+</td><td>
+<p class='title2'>[Right kill]
+<p class='title2'>Right kill(%) < 80% (片數<30)  => 亮咖啡燈</p>
+<td></tr></table>
+#}
+<br/><br/><br/>
+<table class = 'redTable' align="left">
+
+
+<thead><tr>
+{% for i in df.head(1)%}
+	{% if  i in ['ROW_CNT'] %}
+	
+	{%else%}
+		<th>{{i}}</th>
+	{% endif %}
+{% endfor %}
+</tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+<tr>
+
+	{% for i in df.head(1)%}
+		{# loop.index 號碼從1開始, 1,2,3... #}
+		{% if  i in ['GO'] and value['TYPE_GROUP'] in ['ADC X'] and value['GOLD_RATIO(%)'] <= 35 and value['總數'] >= 30%}<td bgcolor="#FFC1E0">
+		{% elif  i in ['GO'] and value['TYPE_GROUP'] in ['CNG'] and value['GOLD_RATIO(%)'] <= 80 and value['總數'] >= 30%}<td bgcolor="#FFC1E0">
+		{% elif  i in ['GO'] and value['TYPE_GROUP'] in ['RB'] and value['GOLD_RATIO(%)'] <= 70 and value['總數'] >= 30%}<td bgcolor="#FFC1E0">
+		{% elif  i in ['GO'] and value['TYPE_GROUP'] in ['RA', 'RA(G)'] and value['GOLD_RATIO(%)'] <= 30 and value['總數'] >= 30%}<td bgcolor="#FFC1E0">
+		
+		
+		{% elif  i in ['Right_Kill'] and value['Right_Kill(%)'] < 80 and value['RK總數'] >= 30 %}<td bgcolor="#D9B3B3">
+		
+		
+		
+		
+		{% else %}	{% endif %} 
+			
+		
+		{% if  i in ['TYPE_NAME', 'NO_GO'] %}
+			{%  if value['ROW_CNT'] == 1%}
+				<td>{{value[i]}}</td>
+			{%  elif value['ROW_CNT'] == -1%}
+			
+			{%  else %}
+				<td rowspan="{{value['ROW_CNT']}}">{{value[i]}}</td>
+			{% endif %}
+			
+		{% elif  i in ['ROW_CNT'] %}
+		
+		{% elif  i in ['STATUS'] and value[i]== 'G' %}
+			<td><input type="submit" class='green' value ="{{value['Class']}}_{{value['Machine']}}_Light" name = "Status">
+		{% elif  i in ['Right_Kill(%)'] and value[i]|safe == 'nan'%}
+			<td>N/A </td>
+		
+		{% elif  loop.index <= 25 %}
+			 <td>{{value[i]}} </td>
+		{% endif %}
+	{% endfor %}
+</tr>
+{% endfor %}
+
+</table>
+
+{%- endmacro %}
+
+
+
+
+{% macro table_monitorRAW1(df) -%}
+<input type="text" class='in2' name="date1" value ="{{date1}}" readonly size="6">~
+<input type="text" class='in2' name="date2" value ="{{date2}}" readonly size="6">
+<table class = 'redTable' >
+
+<thead><tr>
+{% for i in df.head(1)%}
+	
+	{% if  i not in ['ROW_CNT'] %}
+		<th>{{i}}</th>
+	{% endif %}
+{% endfor %}
+<tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+<tr>
+	{% for i in df.head(1)%}
+		{% if  i in [ 'TEST_TIME', 'ABBR_NO'] %}
+			<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="14" readonly></td>
+		
+		{% elif  i in ['', 'PRE_DEFECT', 'PRE_TEST_USER'] %}
+			<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="10" readonly></td>
+			
+		{% elif  i in ['PRODUCT_CODE', '', '', 'CHIP_ID', ''] %}
+			<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="7" readonly></td>
+		{% elif  i in ['片數']  %}
+			<td>
+			<button type='submit' class='in_sub' value="{{value['TYPE_GROUP']}}__{{value['MFG_DAY']}}__{{value['TOOL_ID']}}__{{value['isG']}}__{{value['DEFECT']}}" name='octAOIGORaw2'>{{value[i]}}</button>
+			</td>
+			{#
+			<td><input type="submit" class='in1' name="" value ="{{value[i]}}" readonly></td>
+			#}
+		{% elif  i in ['isG', 'TYPE_GROUP', 'MFG_DAY', 'TOOL_ID'] %}
+			{%  if value['ROW_CNT'] == 1%}
+				<td>{{value[i]}}</td>
+			{%  elif value['ROW_CNT'] == -1%}
+			
+			{%  else %}
+				<td rowspan="{{value['ROW_CNT']}}">{{value[i]}}</td>
+			{% endif %}
+			
+		{% elif  i in ['ROW_CNT'] %}
+			
+
+		
+		{% else  %}
+			<td>{{value[i]}}</td>
+		{% endif %}
+			
+	{% endfor %}
+</tr>
+{% endfor %}
+</table>
+
+
+
+
+
+
+
+
+{%- endmacro %}
+
+
+
+
+
+{% macro table_monitorRAW2(df, df_aoi) -%}
+{#
+{{value['TYPE_GROUP']}}__{{value['MFG_DAY']}}__{{value['TOOL_ID']}}__{{value['isG']}}__{{value['DEFECT']}}
+<button type='submit' class='in_subDate' value="octAOIGORaw2__{{date1}}__{{date2}}__{{tool_id}}__{{pc}}__{{def_col}}" name='csvDownload'>資料下載</button>
+
+<input type="text" class='in2' name="mfg_day" value ="{{df.loc[0]['MFG_DAY']}}" readonly size="6">
+#}
+<input type="text" class='in2' name="mfg_day" value ="{{df.loc[0]['MFG_DAY']}}" readonly size="6">
+
+<br/><br/>
+<table class = 'redTable' >
+<script language="JavaScript" type="text/javascript">
+   function PopupPic(sPicURL) { 
+	 window.open( "static/popup_oct.htm?"+sPicURL,"","resizable=1"); 
+   } 
+</script>
+<thead><tr>
+{% for i in df.head(1)%}
+	
+	{% if  loop.index <= 25 %}
+		<th>{{i}}</th>
+	{% endif %}
+{% endfor %}
+<tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+<tr>
+	{% for i in df.head(1)%}
+		{% if  i in [ '', 'ABBR_NO'] %}
+			<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="18" readonly></td>
+		
+		{% elif  i in ['TEST_TIME'] %}
+			<td>
+			<input type="text" class='in_hidden' name="{{key}}__{{i}}" value ="{{value[i]}}"  size="1"readonly><br/>
+			{{ value[i][:10]}}<br/>{{ value[i][11:]}}
+			</td>
+		
+		
+		{% elif  i in ['DEFECT', 'PRE_DEFECT', 'PRE_TEST_USER'] %}
+			<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="10" readonly></td>
+			
+		{% elif  i in ['PRODUCT_CODE', 'MFG_DAY', 'TOOL_ID', 'CHIP_ID', 'GRADE', 'PRE_GRADE', 'TYPE_GROUP', 'TEST_USER'] %}
+			<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="7" readonly></td>
+		{% elif  i in ['確認'] and value[i] == 'NA' %}
+			<td>
+			<select id="reason{{key}}" name="{{key}}__Check" >
+					   <option  value="---">請選擇</option>
+						<option  value="Real">Real</option>
+						<option  value="Real(CT1相關)">Real(CT1相關)</option>
+						<option  value="髒汙汙判">單顆Real</option>
+						<option  value="機台異常">誤判</option>
+						<option  value="其他請說明">其他請說明</option>
+					</select>
+			</td>
+		{% elif  i in ['說明'] and value[i] == 'NA' %}
+			<td>
+			<input type="text" name="{{key}}__Remarks"  style="width:200px;height:35px;font-size:16px"  value="" placeholder="其他請說明" size="10">
+			</td>
+			
+			
+		{% elif  i in ['說明', '確認'] and value[i] != 'NA' %}
+			<td>{{value[i]}}</td>
+		{% elif value[i]|safe == 'nan'%}	
+			<td></td>
+
+		
+		{% else  %}
+			<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}"  readonly></td>
+		{% endif %}
+			
+	{% endfor %}
+</tr>
+{% endfor %}
+</table>
+<br/>
+<br/><br/>
+<input type='submit' class='in_subDate' name='octAOIGO_Upload' value="上傳">
+<br/>
+
+<h5>AOI影像</h5>
+<table class = 'redTable' >
+<thead><tr>
+{% for i in df_aoi.head(1)%}
+	{% if  loop.index <= 25 %}<th>{{i}}</th>{% endif %}
+{% endfor %}
+<tr></thead>
+
+
+{% for key,value in df_aoi.iterrows() %}
+
+
+
+
+
+
+<tr>
+	{% for i in df_aoi.head(1)%}
+		{% if  i in ['確認'] and value[i] == 'NA' %}
+			<td>
+			<select id="reason{{key}}" name="{{key}}__Check2" >
+					   <option  value="---">請選擇</option>
+						<option  value="Real">Real</option>
+						<option  value="Real(CT1相關)">Real(CT1相關)</option>
+						<option  value="髒汙汙判">單顆Real</option>
+						<option  value="機台異常">誤判</option>
+						<option  value="其他請說明">其他請說明</option>
+					</select>
+			</td>
+		{% elif  i in ['說明'] and value[i] == 'NA' %}
+			<td>
+			<input type="text" name="{{key}}__Remarks2"  style="width:200px;height:35px;font-size:16px"  value="" placeholder="其他請說明" size="10">
+			</td>
+			
+			
+		{% elif  i in ['說明', '確認'] and value[i] != 'NA' %}
+			<td>{{value[i]}}</td>
+		{% elif value[i]|safe == 'nan'%}	
+			<td></td>
+		{% elif value[i][:4] == 'http'%}	
+			<td>
+			<a href="javascript:PopupPic('{{ value[i] }}')"> AOI IMG</a>  			
+			<a href="{{ value[i] }}"><img align="center" width='160' height='120' src="{{ value[i] }}" ></a>  
+			</td>
+		{% else %}	
+			<td>{{value[i]|safe}}</td>
+		{% endif %}
+	{% endfor %}
+</tr>
+{% endfor %}
+</table>
+
+
+
+
+
+
+
+{%- endmacro %}
+
+
+
+
+
+
+
+
+
+		
+		
+{% macro table_octADCRBSucEQP(df, tool_id, pc) -%}
+<p class='title1'>{{tool_id}}</p>
+<p class='title1'> {{pc}}</p>
+<p class='title2'>※ CT1單一機台 > 5片 & 百分比 > 30% => 亮紅燈</p>
+<table class = 'redTable' >
+<thead><tr>
+{% for i in df.head(1)%}
+	{% if i != '單位(%)'%}
+		<th>{{i[2:]}}</th>
+	{%else%}
+		<th>{{i}}</th>
+	{%endif%}
+{% endfor %}
+</tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+<tr>
+	{% for i in df.head(1)%}
+		{% if i != '單位(%)' and 100*value[i]/df.loc[df.index[-1], i] > 30 and value[i]>5  and value['單位(%)']== '   '%}
+			<td bgcolor="#FFC1E0">{{value[i]|int}}<p style="color:blue;">{{(100*value[i]/df.loc[df.index[-1], i])|round(1)}} %</td>
+		{% elif  i != '單位(%)' and value[i]== 0 %}
+			<td>{{value[i]|int}}  <p style="color:blue;">0 %</td>
+		{% elif  i != '單位(%)'%}
+			<td>{{value[i]|int}} <p style="color:blue;">{{(100*value[i]/df.loc[df.index[-1], i])|round(1)}} %</td>
+		{% else %}
+			<td>{{value[i]}}</td>
+		{% endif%}
+	{% endfor %}
+</tr>
+{% endfor %}
+</table>
+{%- endmacro %}		
+		
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

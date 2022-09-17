@@ -1,0 +1,139 @@
+{# num為超過幾片要紅底#}
+
+{% macro table_octOGDOAPD1(df,num) -%}
+{% if  df|length != 0 %}
+	{% set oct_def = df.loc[0]['OCT_DEF_ABBR']  %}
+{% endif %}
+<table class = 'redTable' align="left">
+
+<thead><tr>
+{% for i in df.head(1)%}
+	
+	{% if  i == 'RATIO' %}
+		<th>{{i}} (%)</th>
+	{% elif  loop.index <= 4 %}
+		<th>{{i}}</th>
+	{% endif %}
+{% endfor %}
+<tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+<tr>
+	{% for i in df.head(1)%}
+		{# loop.index 號碼從1開始, 1,2,3... #}
+		
+		{% if  i == 'RATIO' %}
+		<td>{{value[i]}}</td>
+		{% elif  i == oct_def %}
+			{% if value[i]|int >= num %}<td bgcolor="#FFC1E0">{% else %}<td>	{% endif %} 
+			{{value[i]}}</td>
+		{% elif  loop.index <= 4 %}
+		<td>{{value[i]}}</td>
+		{% endif %}
+	{% endfor %}
+</tr>
+{% endfor %}
+
+</table>
+
+{%- endmacro %}
+
+
+
+
+{# num為超過幾片要紅底#}
+{% macro table_octOGDOAPD2(df, num) -%}
+{% if  df|length != 0 %}
+	{% set oct_def = df.loc[0]['OCT_DEF_ABBR']  %}
+{% endif %}
+<table class = 'redTable' align="left">
+<thead><tr><th colspan=5>原始資料</th><th colspan=4>確認後資料</th></tr>
+<thead><tr>
+{% for i in df.head(1)%}
+	{# loop.index 號碼從1開始, 1,2,3... #}
+	{% if  i[-5:] == 'RATIO' %}
+		<th>{{i}} (%)</th>
+	{% elif  loop.index <= 5 or i in ['OK','NG', '待確認']%}
+		<th>{{i}}</th>
+	{% endif %}
+{% endfor %}
+<tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+<tr>
+	{% for i in df.head(1)%}
+		{# loop.index 號碼從1開始, 1,2,3... #}
+		
+		{% if  i == 'RATIO' and value[oct_def] >= 1%}
+		<td><input type="submit" class='in_sub' value ="{{value[i]}}" name = "octOLDRaw__{{value['START_DAY']}}+{{value['END_DAY']}}__{{value['PRODUCT_CODE']}}__{{value['EQP']}}__{{value['SHIFT']}}__{{value['OCT_DEF']}}"> </td>
+		{% elif  i == oct_def %}
+			{% if value[i]|int >= num %}<td bgcolor="#FFC1E0">{% else %}<td>	{% endif %} 
+			{{value[i]}}</td>
+		{% elif  i in ['待確認'] %}
+			{% if value[i]|int >= num %}<td bgcolor="#FFC1E0">{% else %}<td>	{% endif %} 
+			{{(value[i]|string)[0:-2]}}</td>	
+		
+		{% elif  loop.index <= 5 %}
+		<td>{{value[i]}}</td>
+		{% elif  i in ['OK','NG']%}
+		<td>{{(value[i]|string)[0:-2]}}</td>
+		{% elif  i in ['NG_RATIO']%}
+		<td>{{(value[i])}}</td>
+		
+		
+		
+		{% endif %}
+	{% endfor %}
+</tr>
+{% endfor %}
+
+</table>
+
+{%- endmacro %}
+
+
+
+
+
+
+{% macro table_oct_ct1eqp(df) -%}
+	<table class = 'redTable' align="left">
+	<thead><tr>
+	{% for i in df.head(1)%}
+		{% if  i == 'RATIO' %}
+			<th>{{i}} (%)</th>
+		{% elif  i != 'rowspan' %}
+			<th>{{i}}</th>
+		{% endif %}
+	{% endfor %}
+	<tr></thead>
+
+
+	{% for key,value in df.iterrows() %}
+		<tr>
+		{% for i in df.head(1)%}
+			{% if i == 'CT1_EQ' and value['rowspan'] != 1 %}
+				<td rowspan="{{value['rowspan']}}">{{value[i]}}</td>
+			{% elif i not in ['rowspan', 'CT1_EQ'] %}
+				<td>{{value[i]}}</td>
+			{% endif %}
+		{% endfor %}
+		</tr>
+	{% endfor %}
+
+	</table>
+{%- endmacro %}
+
+
+
+
+
+
+
+
+
+
+
+

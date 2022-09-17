@@ -1,0 +1,852 @@
+
+
+{% macro df2redTable(df)  -%}
+	<table class = 'redTable'>
+	<thead><tr>
+	{% for i in df.head(1)%}
+		{# loop.index 號碼從1開始, 1,2,3... #}
+		{% if "ROW_CNT" not in i %}
+			<th>{{i}}</th>
+		{% endif %}
+	{% endfor %}
+	</tr></thead>
+	{% for key,value in df.iterrows() %}
+	<tr>
+		{% for i in df.head(1)%}
+			{% if i in ['Date', 'Shift_DN'] %}
+				{%  if value['ROW_CNT_' + i] == 1%}
+					<td>{{value[i]}}</td>
+				{%  elif value['ROW_CNT_' + i] == -1%}
+				
+				{%  else %}
+					<td rowspan="{{value['ROW_CNT_' + i]}}">{{value[i]}}</td>
+				{% endif %}
+			{% elif "ROW_CNT" not in i %}
+				<td>{{value[i]}}</td>
+			
+				
+			{% endif %}
+				
+		{% endfor %}
+	</tr>
+	{% endfor %}
+	</table>
+{%- endmacro %}
+
+{# 請假選單 #}
+{% macro leaveRecordTable(df, auth)  -%}
+	<table class = 'redTable'>
+	<thead><tr>
+	{% for i in df.head(1)%}
+		{# loop.index 號碼從1開始, 1,2,3... #}
+		{% if "ROW_CNT" not in i %}
+			<th>{{i}}</th>
+		{% endif %}
+	{% endfor %}
+	</tr></thead>
+	{% for key,value in df.iterrows() %}
+	<tr>
+		{% for i in df.head(1)%}
+			{% if i in ['Date', 'Shift_DN'] %}
+				{%  if value['ROW_CNT_' + i] == 1%}
+					<td>{{value[i]}}</td>
+				{%  elif value['ROW_CNT_' + i] == -1%}
+				
+				{%  else %}
+					<td rowspan="{{value['ROW_CNT_' + i]}}">{{value[i]}}</td>
+				{% endif %}
+			
+			{% elif auth in ['IDL', 'BOSS'] and i == 'AUO_Check' and value[i] != 'Y' %}
+				<td><button type='submit' class='btn_small' style='background-color:#272727;' name="hr_leave" value="check_{{value['Date']}}_{{value['Name']}}" >請假確認</button>
+					&ensp;<button type='submit' class='btn_small' style='background-color:red;' name="hr_leave" value="del_{{value['Date']}}_{{value['Name']}}" >刪除</button>
+					
+			</td>
+			{% elif "ROW_CNT" not in i %}
+				<td>{{value[i]}}</td>
+			
+		
+				
+			{% endif %}
+				
+		{% endfor %}
+	</tr>
+	{% endfor %}
+	</table>
+{%- endmacro %}
+
+
+
+{# 請假選單 #}
+{% macro replaceTable(df)  -%}
+	<table class = 'redTable'>
+	<thead><tr>
+	{% for i in df.head(1)%}
+		{# loop.index 號碼從1開始, 1,2,3... #}
+		
+			
+		{% if "ROW_CNT" not in i %}
+			<th>{{i}}</th>
+		
+		
+		
+		{% endif %}
+	{% endfor %}
+	</tr></thead>
+	{% for key,value in df.iterrows() %}
+	<tr>
+		{% for i in df.head(1)%}
+			{% if i in ['可代班人員'] and value['可代班人員'] != '當班PM已達上限'%}
+				<td><select name="Replace_Name__{{key}}" >
+						<option value="N/A" >N/A</option>
+					{% for user0 in value[i].split(', ') %}
+						{%if user0 not in [''] %}
+							<option value="{{user0}}" >{{user0}}</option>
+						{% endif %}
+					{% endfor %}
+				</select></td>
+				
+			{% elif i in ['假別'] and value['可代班人員'] != '當班PM已達上限' %}
+				<td><select name="Leave_Type__{{key}}" >
+			
+					{% for type0 in value[i].split(', ') %}
+						<option value="{{type0}}" >{{type0}}</option>
+						
+					{% endfor %}
+				</select></td>
+			{% elif i in ['備註'] and value['可代班人員'] != '當班PM已達上限' %}
+				
+				<td><input type="input" name="Leave_Remark__{{key}}" style="width:200px;height:35px;font-size:16px" value=""></td>
+
+			{% elif i in ['可代班人員'] and value['可代班人員'] == '當班PM已達上限' %}
+				<td><b style='color:red;'>{{value[i]}}</td>
+			{% elif i in ['請假時間']  %}
+				
+				<td> 
+					<select name="Working_Time1__{{key}}">	
+						{% for hour0 in range(7, 24) %}
+							{% for min0 in [':00', ":30"] %}
+								{% if value['Name'] in ['尚怡璇'] and ((hour0|string).zfill(2) + min0) == '08:00'%}
+									<option value="{{(hour0|string).zfill(2)}}{{min0}}" selected>
+								
+								{% elif value['Name'] not in ['尚怡璇'] and value['Shift_DN'] == 'D' and ((hour0|string).zfill(2) + min0) == '07:30'%}
+									<option value="{{(hour0|string).zfill(2)}}{{min0}}" selected>
+								{% elif value['Name'] not in ['尚怡璇'] and value['Shift_DN'] == 'N' and ((hour0|string).zfill(2) + min0) == '19:30'%}
+									<option value="{{(hour0|string).zfill(2)}}{{min0}}" selected>
+								
+								{%else%}
+									<option value="{{(hour0|string).zfill(2)}}{{min0}}">
+									
+								{%endif%}
+								{{(hour0|string).zfill(2)}}{{min0}}</option>
+									
+							{% endfor %}
+						{% endfor %}
+						{% for hour0 in range(0, 7) %}
+							{% for min0 in [':00', ":30"] %}
+								<option value="{{(hour0|string).zfill(2)}}{{min0}}">{{(hour0|string).zfill(2)}}{{min0}}</option>
+							{% endfor %}
+						{% endfor %}
+					</select>
+					<b>~</b>
+					<select name="Working_Time2__{{key}}">	
+						{% for hour0 in range(7, 24) %}
+							{% for min0 in [':00', ":30"] %}
+								<option value="{{(hour0|string).zfill(2)}}{{min0}}">{{(hour0|string).zfill(2)}}{{min0}}</option>
+								{% if value['Name'] in ['尚怡璇'] and ((hour0|string).zfill(2) + min0) == '17:00'%}
+									<option value="{{(hour0|string).zfill(2)}}{{min0}}" selected>
+								{% elif value['Name'] not in ['尚怡璇'] and value['Shift_DN'] == 'D' and ((hour0|string).zfill(2) + min0) == '19:30'%}
+									<option value="{{(hour0|string).zfill(2)}}{{min0}}" selected>
+								
+								{% elif value['Name'] not in ['尚怡璇'] and value['Shift_DN'] == 'N' and ((hour0|string).zfill(2) + min0) == '07:30'%}
+									<option value="{{(hour0|string).zfill(2)}}{{min0}}" selected>
+								
+								{%else%}
+									<option value="{{(hour0|string).zfill(2)}}{{min0}}">
+									
+								{%endif%}
+								{{(hour0|string).zfill(2)}}{{min0}}</option>
+							
+							
+							{% endfor %}
+						{% endfor %}
+						{% for hour0 in range(0, 7) %}
+							{% for min0 in [':00', ":30"] %}
+								<option value="{{(hour0|string).zfill(2)}}{{min0}}">{{(hour0|string).zfill(2)}}{{min0}}</option>
+							{% endfor %}
+						{% endfor %}
+					</select>
+				
+				
+				</td>
+				
+				
+			{% else %}
+				<td><input type="text" class='in1' name="{{i}}__{{key}}" value ="{{value[i]}}" size="14" readonly></td>
+			
+			{% endif %}
+				
+		{% endfor %}
+	</tr>
+	{% endfor %}
+	</table>
+{%- endmacro %}
+
+
+
+
+
+
+
+
+{# 主頁面 #}
+{% macro hr(df, date1, date2) -%}
+	<input type="submit" class='btn28G' style="background-color:#01814A;" name="hr_changeShift" value="查詢&變更班別">&emsp;&emsp;&emsp;&emsp;
+		
+	<input type="submit" class='btn28G' style="background-color:#FF7575;" name="hr_leave" value="請假系統">&emsp;&emsp;&emsp;&emsp;
+	<input type="submit" class='btn28G' style="background-color:#AAAAFF;" name="hr_overwork" value="加班系統">&emsp;&emsp;&emsp;&emsp;
+	</br></br></br>
+
+	<input type="date" class='inDate1' name="hr_date1" value='{{date1}}' size='7'  >&nbsp;&nbsp;~&nbsp;
+	<input type="date" class='inDate1' name="hr_date2" value='{{date2}}' size='7'  >
+	&nbsp;&nbsp;&nbsp;
+	<button type='submit' class='in_subDate' name='hr'>送出</button>
+		
+	</br></br>
+	<table class = 'redTable'>
+	<thead><tr>
+	{% for i in df.head(1)%}
+		{# loop.index 號碼從1開始, 1,2,3... #}
+		{% if "ROW_CNT" not in i %}
+			<th>{{i}}</th>
+		{% endif %}
+	{% endfor %}
+	</tr></thead>
+	{% for key,value in df.iterrows() %}
+	<tr>
+		{% for i in df.head(1)%}
+			{% if i in ['Date', 'Shift_DN'] %}
+				{%  if value['ROW_CNT_' + i] == 1%}
+					<td>{{value[i]}}</td>
+				{%  elif value['ROW_CNT_' + i] == -1%}
+				
+				{%  else %}
+					<td rowspan="{{value['ROW_CNT_' + i]}}">{{value[i]}}</td>
+				{% endif %}
+			{% elif "ROW_CNT" not in i %}
+				<td>{{value[i]}}</td>
+			{% endif %}
+				
+		{% endfor %}
+	</tr>
+	{% endfor %}
+	</table>
+
+
+
+
+
+	
+
+{%- endmacro %}
+
+{# 新增人員 #}
+{% macro hr_newEmpolyee(auth) -%}
+</br>
+<table class = 'redTable'>
+<tr><td>工號: </td><td><input type="text" name="newNumber"  value=""  size="15" maxlength="7"></td></tr>
+<tr><td>姓名: </td><td><input type="text" name="newName"  value=""  size="15"></td></tr>
+<tr><td>部門: </td><td><input type="text" name="newDepart"  value=""  size="15"></td></tr>
+<tr><td>班別: </td><td><select id="newShift" name="newShift">
+							<option value="DA" selected="selected">DA</option>
+							<option value="DB">DB</option>
+							<option value="NA">NA</option>
+							<option value="NB">NB</option>
+							<option value="Normal">常日</option>
+						</select></td></tr>
+<tr><td>IDL/DL: </td><td><input type="radio" name="newAuth" value="DL">DL<input type="radio" name="newAuth" value="IDL">IDL</td></tr>
+</table>
+</br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+<input type="button" style="width:100px;height:60px;font-size: 20px" name="return" value="返回" onClick="javascript:history.back()">
+&emsp;<input type="submit" style="width:100px;height:60px;font-size:20px" name="hr_newEmployeeBtn" value="送出">
+{%- endmacro %}
+
+
+
+{# 變更班別 #}
+{% macro hr_changeShift(df_table, df_indiv, auth, upload_ans) -%}
+
+	</br>
+	<script>
+		function user_select(obj){
+			
+			alert('aaa');
+			
+		}
+	</script>
+	  
+	  <input type="submit" class='btn28G' name="hr" value="班表主頁">&emsp;&emsp;&emsp;&emsp;
+		<input type="submit" class='btn28G' style="background-color:#01814A;" name="hr_changeShift" value="查詢&變更班別">&emsp;&emsp;&emsp;&emsp;
+			<input type="submit" class='btn28G' style="background-color:#FF7575;" name="hr_leave" value="請假系統">&emsp;&emsp;&emsp;&emsp;
+
+		<input type="submit" class='btn28G' style="background-color:#AAAAFF;" name="hr_overwork" value="加班系統">&emsp;&emsp;&emsp;&emsp;
+	&emsp;&emsp;&emsp;&emsp;	
+		</br></br></br>
+	  
+	<table class = 'redTable'>
+	 {% set hr_n = df_indiv.loc[0]['Name'] %}
+	<tr><td>人員: </td><td>
+		
+
+			<select name="hr_Name" onchange="this.name='hr_changeShift'; this.form.submit();this.name='hr_Name';">
+								
+					<option value="---" >---</option>
+			{% for key,value in df_table.drop_duplicates(['Name'], keep='last').iterrows() %}
+				{% if value['Shift_AB'] != 'Normal' %}
+					<option value="{{value['Name']}}"  {% if value['Name'] == hr_n %} selected   {% endif %}   >{{value['Name']}}</option>
+				{% endif %}	
+			{% endfor %}
+			</select>
+		
+		
+		
+		
+		</td></tr>						
+				
+					
+	<tr><td>更改班別: </td><td><select id="newShift" name="hr_Shift">
+								<option value="DA" selected="selected">DA</option>
+								<option value="DB">DB</option>
+								
+								{% if hr_n not in ['游雯芳', '鐘貴珠', '劉秀桃']%}
+									<option value="NA">NA</option>
+									<option value="NB">NB</option>
+								{%endif%}
+							</select></td></tr>
+							
+	<tr><td>班別資訊: </td><td>   {{df_indiv.to_html()|safe}}  </td></tr>
+							
+	<tr><td>生效日期: </td><td><input type="date" class='inDate1' name="hr_Shift_Date" id="hr_Shift_Date" size='7'  ></td></tr>
+	<script
+		src="https://code.jquery.com/jquery-3.5.1.js"
+		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+
+	<script>
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; //January is 0!
+
+		var yyyy = today.getFullYear();
+		if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} today = yyyy + '-' + mm + '-' + dd;
+		
+		//document.getElementById('hr_Shift_Date').value = today;
+		$('#hr_Shift_Date').attr('value', today);
+
+	</script>
+
+	</table>
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+		  <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+		  <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+			<link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
+			
+			<script>
+			$( "#dialog" ).dialog({ autoOpen: false });
+			
+			
+			
+			{% if upload_ans != ""%}
+				
+			  $("#dialog").dialog({
+
+				//height: 1600,
+				position: {
+
+					  my: "top",
+
+					  at: "top"
+
+				   }
+				
+				});
+		 
+
+					//alert('{{upload_ans|safe}}');
+					$(function() {
+						$( "#dialog" ).dialog({
+						  autoOpen: false,
+						  show: {
+							// blind, bounce, clip, drop, explode, fade, fold, highlight,
+							//pulsate, puff, slide, scale, size, shake, transfer
+							effect: "bounce",
+							duration: 1000
+						  },
+						  hide: {
+							effect: "explode",
+							duration: 1000
+						  },
+						  position: {
+
+							  my: "top",
+
+							  at: "top"
+
+						   }
+						});
+					 
+						
+					$( "#dialog" ).dialog( "open" );
+						
+					  });
+					  
+			{% endif %}
+			</script>
+			
+	<div id="dialog" title="通知">
+		<p class='title2'>{{upload_ans|safe}}</p>
+	</div>
+
+	{% if auth in ['IDL', 'BOSS'] %}
+		</br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+		&emsp;&emsp;&emsp;&emsp;&emsp;
+		<button type="submit" style="width:80px;height:50px;font-size:28px" name="hr_changeShift" value="upload"> 送出
+		</button>
+	{% endif %}
+
+</br></br>
+<p class='title1'>換班紀錄:</p>
+<div id= 'user_data'>
+{{df2redTable(df_table) }}
+
+</div>
+
+
+
+
+{%- endmacro %}
+
+
+
+
+{# 請假系統 #}
+{% macro hr_leave(name, leave_date1, leave_date2, leave_record_date1, leave_record_date2,
+					df_table, df_replace,df_indiv, df_leave, auth, upload_ans) -%}
+	
+	</br>
+		
+	  <input type="submit" class='btn28G' name="hr" value="班表主頁">&emsp;&emsp;&emsp;&emsp;
+		<input type="submit" class='btn28G' style="background-color:#01814A;" name="hr_changeShift" value="查詢&變更班別">&emsp;&emsp;&emsp;&emsp;
+		<input type="submit" class='btn28G' style="background-color:#AAAAFF;" name="hr_overwork" value="加班系統">&emsp;&emsp;&emsp;&emsp;
+	</br></br>
+	  <h5>※ 系統僅能於7~30天內送出請假，7天內的請先知會ENG.</h5>
+	  <h5>※ 當班PM只剩2人時，請假請先知會ENG.</h5>
+	  <h5>(註: 周一~周五日班可為1人)</h5>
+	<table class = 'redTable'>
+	{% if df_indiv|length > 0 %}
+
+		{% set hr_n = df_indiv.loc[0]['Name'] %}
+		
+	{% else %}
+		{% set hr_n = name %}
+	
+	{% endif %}
+	<tr><td>人員: </td><td>
+							<select name="hr_Name1" onchange="this.name='hr_leave'; this.form.submit();this.name='hr_Name1';">
+							{% if auth in ['IDL', 'BOSS'] %}
+									<option value="---" >---</option>
+									{% for key,value in df_table.drop_duplicates(['Name'], keep='last').iterrows() %}
+										{% if value['Shift_AB'] != 'Normal' and value['Name'] not in ['鍾貴珠22', '劉秀桃22', '游雯芳22', '尚怡璇22'] %}
+											<option value="{{value['Name']}}"  {% if value['Name'] == hr_n %} selected   {% endif %}   >{{value['Name']}}</option>
+										{% endif %}	
+											
+									{% endfor %}
+									<option value="尚怡璇" {% if hr_n == "尚怡璇" %} selected   {% endif %}  >尚怡璇</option>
+									
+							{% else %}
+								<option value="{{name}}"  selected      >{{name}}</option>
+							{% endif %}
+							</select></td></tr>						
+	<tr><td>請假起始: </td><td><input type="date" onchange="this.name='hr_leave'; this.form.submit();this.name='hr_leave_date1';" class='inDate1' name="hr_leave_date1" id="hr_leave_date1" size='7' value="{{leave_date1}}" ></td></tr>
+							
+	<tr><td>請假結束: </td><td><input type="date" onchange="this.name='hr_leave'; this.form.submit();this.name='hr_leave_date2';" class='inDate1' name="hr_leave_date2" id="hr_leave_date2" size='7' value="{{leave_date2}}" ></td></tr>
+						
+	
+	{% if name in ['蕭智予22'] %}						
+		<tr><td>班別資訊: </td><td>  {{df_indiv.to_html()|safe}}   </td></tr>
+	{% endif %}
+	<tr><td>代班方案: </td><td>
+	
+	
+	{{ replaceTable(df_replace)}}
+	
+
+	</td></tr>	
+	<tr><td colspan=2>
+	{% if  (df_replace|length > 0 and (df_replace['可代班人員'] == '當班PM已達上限').sum() == 0  )or auth in ['IDL', 'BOSS']%}
+		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+		&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+		<button type="submit" style="width:180px;height:80px;font-size:42px" name="hr_leave" value="upload"> 送出
+		</button>
+	</td></tr>	
+	{% endif %}
+	<script
+		src="https://code.jquery.com/jquery-3.5.1.js"
+		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+
+	<script>
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; //January is 0!
+		var yyyy = today.getFullYear();
+		var min_day = new Date(today);
+		var max_day = new Date(today);
+		
+		
+		min_day.setDate(min_day.getDate() + 7);
+		var min_dd = min_day.getDate();
+		var min_mm = min_day.getMonth()+1;
+		var min_yyyy = min_day.getFullYear();
+		
+		max_day.setDate(max_day.getDate() + 30);
+		var max_dd = max_day.getDate();
+		var max_mm = max_day.getMonth()+1;
+		var max_yyyy = max_day.getFullYear();
+		
+		if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} today = yyyy + '-' + mm + '-' + dd;
+		
+		if(min_dd<10){min_dd='0'+min_dd} if(min_mm<10){min_mm='0'+min_mm} min_day = min_yyyy + '-' + min_mm + '-' + min_dd;
+		if(max_dd<10){max_dd='0'+max_dd} if(max_mm<10){max_mm='0'+max_mm} max_day = max_yyyy + '-' + max_mm + '-' + max_dd;
+		
+		
+		//document.getElementById('hr_Leave_Date').value = today;
+		{% if auth not in ['IDL', 'BOSS'] %}
+			//$('#hr_leave_date1').attr('value', min_day);
+			$('#hr_leave_date1').attr('min', min_day);
+			$('#hr_leave_date1').attr('max', max_day);
+			//$('#hr_leave_date2').attr('value', min_day);
+			$('#hr_leave_date2').attr('min', min_day);
+			$('#hr_leave_date2').attr('max', max_day);
+		{% endif %}
+	</script>
+
+	</table>
+	
+	
+	
+	
+	
+	<br/>
+	<hr >
+	<br/>
+	
+	<p class='title1'>[ 請假紀錄 ]</p>
+	<input type="date" class='inDate1' name="leave_record_date1" value='{{leave_record_date1}}' size='7'  >&nbsp;&nbsp;~&nbsp;
+	<input type="date" class='inDate1' name="leave_record_date2" value='{{leave_record_date2}}' size='7'  >    
+	&nbsp;&nbsp;&nbsp;
+	<button type='submit' class='in_subDate' name="hr_leave" value="Record" >送出</button>
+	<br/><br/>
+	{%if auth in ['IDL', 'BOSS']%}
+		{{leaveRecordTable(df_leave, auth)}}
+	{% else %}
+		{{df2redTable(df_leave[df_leave['Name'] == name])}}
+	{% endif %}
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+		  <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+		  <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
+			
+			<script>
+			$( "#dialog" ).dialog({ autoOpen: false });
+			
+			
+			
+			{% if upload_ans != ""%}
+				
+			  $("#dialog").dialog({
+
+				//height: 1600,
+				position: {
+
+					  my: "top",
+
+					  at: "top"
+
+				   }
+				
+				});
+		 
+
+					//alert('{{upload_ans|safe}}');
+					$(function() {
+						$( "#dialog" ).dialog({
+						  autoOpen: false,
+						  show: {
+							// blind, bounce, clip, drop, explode, fade, fold, highlight,
+							//pulsate, puff, slide, scale, size, shake, transfer
+							effect: "bounce",
+							duration: 1000
+						  },
+						  hide: {
+							effect: "explode",
+							duration: 1000
+						  },
+						  position: {
+
+							  my: "top",
+
+							  at: "top"
+
+						   }
+						});
+					 
+						
+					$( "#dialog" ).dialog( "open" );
+						
+					  });
+					  
+			{% endif %}
+			</script>
+			
+	<div id="dialog" title="通知">
+		<p class='title2'>{{upload_ans|safe}}</p>
+	</div>
+
+	
+
+
+{%- endmacro %}
+
+
+
+{# 加班系統 #}
+{% macro hr_overwork(name, leave_date1, leave_date2, df_table, df_replace,df_indiv, df_leave, auth, upload_ans) -%}
+
+	</br>
+		
+	  <input type="submit" class='btn28G' name="hr" value="班表主頁">&emsp;&emsp;&emsp;&emsp;
+	<input type="submit" class='btn28G' style="background-color:#01814A;" name="hr_changeShift" value="查詢&變更班別">&emsp;&emsp;&emsp;&emsp;
+		
+		<input type="submit" class='btn28G' style="background-color:#FF7575;" name="hr_leave" value="請假系統">&emsp;&emsp;&emsp;&emsp;
+		</br></br></br>
+	  
+	<table class = 'redTable'>
+	{% if df_indiv|length > 0 %}
+
+		{% set hr_n = df_indiv.loc[0]['Name'] %}
+		
+	{% else %}
+		{% set hr_n = name %}
+	
+	{% endif %}
+	<tr><td>人員: </td><td>
+							<select name="hr_Name" >
+							{% if auth in ['IDL', 'BOSS'] %}
+									<option value="---" >---</option>
+									{% for key,value in df_table.drop_duplicates(['Name'], keep='last').iterrows() %}
+										{% if value['Shift_AB'] != 'Normal' and value['Name'] not in ['鍾貴珠22', '劉秀桃22', '游雯芳22', '尚怡璇22'] %}
+											<option value="{{value['Name']}}"  {% if value['Name'] == hr_n %} selected   {% endif %}   >{{value['Name']}}</option>
+										{% endif %}	
+									{% endfor %}
+									
+							{% else %}
+								<option value="{{name}}"  selected      >{{name}}</option>
+							{% endif %}
+							</select></td></tr>	
+				
+	<tr><td>加班起始: </td><td>
+				<input type="date" class='inDate1' name="hr_overwork_Date" id="hr_overwork_Date1" size='7' value="{{leave_date1}}" >
+				<br/>
+				<select name="hr_overwork_Date_time1">	
+					{% for hour0 in range(7, 24) %}
+						{% for min0 in [':00', ":30"] %}
+							<option value="{{(hour0|string).zfill(2)}}{{min0}}">{{(hour0|string).zfill(2)}}{{min0}}</option>
+						{% endfor %}
+					{% endfor %}
+					{% for hour0 in range(0, 7) %}
+						{% for min0 in [':00', ":30"] %}
+							<option value="{{(hour0|string).zfill(2)}}{{min0}}">{{(hour0|string).zfill(2)}}{{min0}}</option>
+						{% endfor %}
+					{% endfor %}
+				</select>
+				</td></tr>
+	<tr><td>加班結束: </td><td>
+				<select name="hr_overwork_Date_time2">	
+					{% for hour0 in range(7, 24) %}
+						{% for min0 in [':00', ":30"] %}
+							<option value="{{(hour0|string).zfill(2)}}{{min0}}">{{(hour0|string).zfill(2)}}{{min0}}</option>
+						{% endfor %}
+					{% endfor %}
+					{% for hour0 in range(0, 7) %}
+						{% for min0 in [':00', ":30"] %}
+							<option value="{{(hour0|string).zfill(2)}}{{min0}}">{{(hour0|string).zfill(2)}}{{min0}}</option>
+						{% endfor %}
+					{% endfor %}
+				</select>
+				
+				
+				
+				</td></tr>
+						
+	<tr><td>備註: </td>
+	<td>
+	<input type="input" name="Leave_Remark" style="width:200px;height:35px;font-size:16px" value="">
+	</td></tr>
+	{% if name in ['蕭智予'] %}						
+		<tr><td>班別資訊: </td><td>  {{df_indiv.to_html()|safe}}   </td></tr>
+		
+	
+		<tr><td>代班方案: </td><td>
+		
+		{{ replaceTable(df_replace)}}
+		
+		</td></tr>	
+		
+		
+	{% endif %}
+	
+		<tr><td colspan=2>
+			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+		<button type="submit" style="width:180px;height:80px;font-size:42px" name="hr_overwork" value="upload"> 送出
+		</button>
+		</td></tr>	
+
+	
+	<script
+		src="https://code.jquery.com/jquery-3.5.1.js"
+		integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+
+	<script>
+		var today = new Date();
+		var dd = today.getDate();
+		var mm = today.getMonth()+1; //January is 0!
+		var yyyy = today.getFullYear();
+		var min_day = new Date(today);
+		var max_day = new Date(today);
+		
+		
+		min_day.setDate(min_day.getDate() + 7);
+		var min_dd = min_day.getDate();
+		var min_mm = min_day.getMonth()+1;
+		var min_yyyy = min_day.getFullYear();
+		
+		max_day.setDate(max_day.getDate() + 60);
+		var max_dd = max_day.getDate();
+		var max_mm = max_day.getMonth()+1;
+		var max_yyyy = max_day.getFullYear();
+		
+		if(dd<10){dd='0'+dd} if(mm<10){mm='0'+mm} today = yyyy + '-' + mm + '-' + dd;
+		
+		if(min_dd<10){min_dd='0'+min_dd} if(min_mm<10){min_mm='0'+min_mm} min_day = min_yyyy + '-' + min_mm + '-' + min_dd;
+		if(max_dd<10){max_dd='0'+max_dd} if(max_mm<10){max_mm='0'+max_mm} max_day = max_yyyy + '-' + max_mm + '-' + max_dd;
+		
+		
+		//document.getElementById('hr_Leave_Date').value = today;
+		{% if auth not in ['IDL', 'BOSS'] %}
+			//$('#hr_leave_date1').attr('value', min_day);
+			//$('#hr_leave_date1').attr('min', min_day);
+			//$('#hr_leave_date1').attr('max', max_day);
+			//$('#hr_leave_date2').attr('value', min_day);
+			//$('#hr_leave_date2').attr('min', min_day);
+			//$('#hr_leave_date2').attr('max', max_day);
+		{% endif %}
+	</script>
+
+	</table>
+	
+	
+	
+	
+	
+	<br/><br/><br/>
+
+	<p class='title1'>加班紀錄</p>
+	{%if auth in ['IDL', 'BOSS']%}
+		{{df2redTable(df_leave)}}
+	{% else %}
+		{{df2redTable( df_leave[ (df_leave['Replace_Name'] == name) ] )}}
+	{% endif %}
+	<link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+		  <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+		  <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+			<link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
+			
+			<script>
+			$( "#dialog" ).dialog({ autoOpen: false });
+			
+			
+			
+			{% if upload_ans != ""%}
+				
+			  $("#dialog").dialog({
+
+				//height: 1600,
+				position: {
+
+					  my: "top",
+
+					  at: "top"
+
+				   }
+				
+				});
+		 
+
+					//alert('{{upload_ans|safe}}');
+					$(function() {
+						$( "#dialog" ).dialog({
+						  autoOpen: false,
+						  show: {
+							// blind, bounce, clip, drop, explode, fade, fold, highlight,
+							//pulsate, puff, slide, scale, size, shake, transfer
+							effect: "bounce",
+							duration: 1000
+						  },
+						  hide: {
+							effect: "explode",
+							duration: 1000
+						  },
+						  position: {
+
+							  my: "top",
+
+							  at: "top"
+
+						   }
+						});
+					 
+						
+					$( "#dialog" ).dialog( "open" );
+						
+					  });
+					  
+			{% endif %}
+			</script>
+			
+	<div id="dialog" title="通知">
+		<p class='title2'>{{upload_ans|safe}}</p>
+	</div>
+
+	
+
+
+{%- endmacro %}
+
+
+
+
+
+
+
+
+
+
+

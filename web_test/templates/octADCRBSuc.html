@@ -1,0 +1,236 @@
+
+{% macro table_octADCRBSuc(df,date1, date2) -%}
+
+
+<p class='title2'>1. OGD(%) > 5%; 空白(%) > 30 => 亮紅燈</p>
+<table class = 'redTable' align="left">
+<thead><tr><th colspan=13 style="height:1px;">確認前</th><th colspan=7 style="height:1px;">確認後</th></tr></thead>
+<thead><tr>
+{% for i in df.head(1)%}
+	
+	{% if  loop.index <= 25 %}
+		<th>{{i}}</th>
+	{% endif %}
+{% endfor %}
+</tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+<tr>
+	{% for i in df.head(1)%}
+		{# loop.index 號碼從1開始, 1,2,3... #}
+		{% if  i in ['OGD(%)'] and value[i] >= 5 %}<td bgcolor="#D9B3B3">
+		{% elif  i in ['空白(%)'] and value[i] >= 30 %}<td bgcolor="#D9B3B3">
+		{% elif  i in ['OGD確認(%)'] and value[i] >= 5 %}<td bgcolor="#FFC1E0">
+		{% elif  i in ['空白確認(%)'] and value[i] >= 30 %}<td bgcolor="#FFC1E0">
+		
+		
+		
+		{% else %}<td>	{% endif %} 
+			
+		
+		{% if  i in ['BPs', 'OGD', '空白', 'CP'] %}
+			<input type="submit" class='in_sub' value ="{{value[i]}}" name = "octADCRBSucRaw__{{date1}}__{{date2}}__{{value['TOOL_ID']}}__{{value['PRODUCT_CODE']}}__{{i}}"> </td>
+		
+		{% elif  i in ['BPs(%)', 'OGD(%)', '空白(%)', 'CP(%)'] %}
+			<input type="submit" class='in_sub2' value ="{{value[i]}}" name = "octADCRBSucEQP__{{date1}}__{{date2}}__{{value['TOOL_ID']}}__{{value['PRODUCT_CODE']}}__{{i[:-3]}}"> </td>
+		
+		
+		{% elif  loop.index <= 25 %}
+			{{value[i]}} </td>
+		{% endif %}
+	{% endfor %}
+</tr>
+{% endfor %}
+
+</table>
+
+{%- endmacro %}
+
+
+
+
+{% macro table_octADCRBSucRaw(df, df_adc, date1, date2, tool_id, pc, def_col) -%}
+<input type="text" class='in2' name="date1" value ="{{date1}}" readonly size="6">~
+<input type="text" class='in2' name="date2" value ="{{date2}}" readonly size="6">
+<button type='submit' class='in_subDate' value="octADCRBSucRaw__{{date1}}__{{date2}}__{{tool_id}}__{{pc}}__{{def_col}}" name='csvDownload'>資料下載</button>
+<br/><br/>
+<table class = 'redTable' >
+
+<thead><tr>
+{% for i in df.head(1)%}
+	
+	{% if  loop.index <= 25 %}
+		<th>{{i}}</th>
+	{% endif %}
+{% endfor %}
+<tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+<tr>
+	{% for i in df.head(1)%}
+		{% if  i in [ 'TEST_TIME', 'ABBR_NO'] %}
+			<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="14" readonly></td>
+		
+		{% elif  i in ['DEFECT', 'PRE_DEFECT', 'PRE_TEST_USER'] %}
+			<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="10" readonly></td>
+			
+		{% elif  i in ['PRODUCT_CODE', '', 'TOOL_ID', 'CHIP_ID', ''] %}
+			<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="7" readonly></td>
+		{% elif  i in ['確認'] and value[i] == 'NA' %}
+			<td>
+			
+			</td>
+		{% elif  i in ['說明'] and value[i] == 'NA' %}
+			<td>
+			</td>
+			
+			
+		{% elif  i in ['說明', '確認'] and value[i] != 'NA' %}
+			<td>{{value[i]}}</td>
+
+		
+		{% else  %}
+			<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="2" readonly></td>
+		{% endif %}
+			
+	{% endfor %}
+</tr>
+{% endfor %}
+</table>
+<br/>
+<br/><br/>
+<input type='submit' class='in_subDate' name='octADCRBSuc_Upload' value="上傳">
+<br/>
+
+<h5>ADC影像</h5>
+<table class = 'redTable' >
+<thead><tr>
+{% for i in df_adc.head(1)%}
+	{% if  loop.index <= 25 %}<th>{{i}}</th>{% endif %}
+{% endfor %}
+<tr></thead>
+
+
+{% for key,value in df_adc.iterrows() %}
+
+
+
+
+
+
+<tr>
+	{% for i in df_adc.head(1)%}
+		{% if  i in ['確認'] and value[i] == 'NA' %}
+			<td>
+			<select id="reason{{key}}" name="{{key}}__Check" >
+					   <option  value="---">請選擇</option>
+						<option  value="多顆">多顆</option>
+						<option  value="Real">Real</option>
+						<option  value="單顆Real">單顆Real</option>
+						<option  value="誤判">誤判</option>
+						<option  value="邊緣誤判">邊緣誤判</option>
+						<option  value="髒汙">髒汙</option>
+						<option  value="其他請說明">其他請說明</option>
+					</select>
+			</td>
+		{% elif  i in ['說明'] and value[i] == 'NA' %}
+			<td>
+			<input type="text" name="{{key}}__Remarks"  style="width:200px;height:35px;font-size:16px"  value="" placeholder="其他請說明" size="10">
+			</td>
+			
+			
+		{% elif  i in ['說明', '確認'] and value[i] != 'NA' %}
+			<td>{{value[i]}}</td>
+		{% elif value[i]|safe == 'nan'%}	
+			<td></td>
+		{% else %}	
+			<td>{{value[i]|safe}}</td>
+		{% endif %}
+	{% endfor %}
+</tr>
+{% endfor %}
+</table>
+
+
+
+
+
+
+
+{%- endmacro %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+		
+{% macro table_octADCRBSucEQP(df, tool_id, pc) -%}
+<p class='title1'>{{tool_id}}</p>
+<p class='title1'> {{pc}}</p>
+<p class='title2'>※ CT1單一機台 > 5片 & 百分比 > 30% => 亮紅燈</p>
+<table class = 'redTable' >
+<thead><tr>
+{% for i in df.head(1)%}
+	{% if i != '單位(%)'%}
+		<th>{{i[2:]}}</th>
+	{%else%}
+		<th>{{i}}</th>
+	{%endif%}
+{% endfor %}
+</tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+<tr>
+	{% for i in df.head(1)%}
+		{% if i != '單位(%)' and 100*value[i]/df.loc[df.index[-1], i] > 30 and value[i]>5  and value['單位(%)']== '   '%}
+			<td bgcolor="#FFC1E0">{{value[i]|int}}<p style="color:blue;">{{(100*value[i]/df.loc[df.index[-1], i])|round(1)}} %</td>
+		{% elif  i != '單位(%)' and value[i]== 0 %}
+			<td>{{value[i]|int}}  <p style="color:blue;">0 %</td>
+		{% elif  i != '單位(%)'%}
+			<td>{{value[i]|int}} <p style="color:blue;">{{(100*value[i]/df.loc[df.index[-1], i])|round(1)}} %</td>
+		{% else %}
+			<td>{{value[i]}}</td>
+		{% endif%}
+	{% endfor %}
+</tr>
+{% endfor %}
+</table>
+{%- endmacro %}		
+		
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

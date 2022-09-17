@@ -1,0 +1,439 @@
+{% macro df2redTable(df)  -%}
+	<table class = 'redTable'>
+	<thead><tr>
+	{% for i in df.head(1)%}
+		{# loop.index 號碼從1開始, 1,2,3... #}
+		{% if "ROW_CNT" not in i %}
+			<th>{{i}}</th>
+		{% endif %}
+	{% endfor %}
+	</tr></thead>
+	{% for key,value in df.iterrows() %}
+	<tr>
+		{% for i in df.head(1)%}
+			{% if i in ['Date', 'Shift_DN'] %}
+				{%  if value['ROW_CNT_' + i] == 1%}
+					<td>{{value[i]}}</td>
+				{%  elif value['ROW_CNT_' + i] == -1%}
+				
+				{%  else %}
+					<td rowspan="{{value['ROW_CNT_' + i]}}">{{value[i]}}</td>
+				{% endif %}
+			{% elif "ROW_CNT" not in i %}
+				<td>{{value[i]}}</td>
+			{% endif %}
+				
+		{% endfor %}
+	</tr>
+	{% endfor %}
+	</table>
+{%- endmacro %}
+
+{% macro mainPage() -%}
+
+<br/><br/><br/>
+<h5>[ CT1交接(未開放) ]</h5>
+
+<h5>[ OCT交接 ]</h5>
+	<b>交接事項進度:</b><br/>
+	<table class='t2'><tr>
+	<td><h1><input type='submit' name='handover'  value='總表' size='7' class='inAside'   readonly></h1></td>
+	<td><h1><input type='submit' name='handover'  value='交接事項' size='7' class='inAside'   readonly></h1></td>
+	<td><h1><input type='submit' name='handover_octEQPAlarm'  value='機況說明' size='7' class='inAside'   readonly></h1></td>
+	
+	</tr>
+	</table>
+
+
+<h5>[ 公佈欄 ]</h5>
+
+
+
+
+
+
+</table>
+
+{%- endmacro %}
+
+{% macro octEQPAlarm(df_eqpAlarm, date1, date2) -%}
+	<script type="text/javascript">
+		function getWeekOnYears(val) {
+		  const year = dayjs(val).year() //获取年
+		  const month = dayjs(val).month() + 1 //获取月
+		  const day = dayjs(val).date() //获取天
+		  const isLeapYear = (year % 400 === 0) || (year % 4 === 0 && year % 100 !== 0) //判断是否为闰年
+		  const second = isLeapYear ? 29 : 28
+		  const monthList = [31, second, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31].splice(0, month - 1) //获取月份数组
+		  let currentDays; //当前日期天数
+		  let currentWeek; //当前周数
+		  //计算天数
+		  currentDays = month === 1 ? day : (monthList.reduce((t, v) => {
+			return t + v
+		  }, 0)) + day
+		  //计算是第几周
+		  currentWeek = currentDays % 7 === 0 ? currentDays / 7 : Math.ceil(currentDays / 7)
+		  return currentWeek
+		};
+
+		var newN = 0;
+	   function newEQPAlarm() {
+			newN0 = String(newN)
+			newN += 1
+			
+			var table0 = document.getElementById("eqpAlarmTable");
+			var html0;
+			var row0 = table0.insertRow(newN);
+			var cell0 = row0.insertCell(0);
+			var cell1 = row0.insertCell(1);
+			var cell2 = row0.insertCell(2);
+			var cell3 = row0.insertCell(3);
+			var cell4 = row0.insertCell(4);
+			var cell5 = row0.insertCell(5);
+			var oct_eqps = ["OCT100", "OCT200", "OCT300", "OCT400", "OCT502", 
+							 "OCT503", "OCT602", "OCT603", "OCT702", "OCT703", 
+							 "OCTA00", "OCTB00", "OCTC00", "CTS100", "CTS200", 		   	    		
+							 "CTS300", "CTS400", "CTS500", "CTS600", "CTS900", 
+							 "CTSA00", "OM100", "SORT200"]
+
+			// EQP選擇
+			html0 = "<select id='EQP' name='EQP__" + newN0 + "' >"
+			for (var i = 0; i < oct_eqps.length; i++) {
+				html0 += "<option value='" + oct_eqps[i] + "' >" + oct_eqps[i]	+ "</option>";
+			}
+			html0 += "</select>"
+			cell0.innerHTML=html0;
+		
+			
+			html0 = "<input type='text' class='in_text' name='EQP_Alarm_Type__"+ newN0 +"' id='EQP_Alarm_Type__" + newN0 + "'>";
+			
+			cell1.innerHTML=html0;
+			// 開始結束時間
+			html0 = "<input type='text'  class='in_text' style='width:200px;' name='EQP_Alarm__"+ newN0 +"' id='EQP_Alarm__" + newN0 + "'>";
+			cell2.innerHTML=html0;
+		
+			html0 = "<input type='datetime-local' style='width:320px;' class='in_subDate' name='Start_Time__"+ newN0 +"' id='Start_Time__" + newN0 + "' style='width:400px;' >";
+			cell3.innerHTML=html0;
+			
+			html0 = "<input type='datetime-local' style='width:320px;' class='in_subDate' name='End_Time__"+ newN0 +"' id='End_Time__" + newN0 + "' style='width:400px;' >";
+			cell4.innerHTML=html0;
+			
+			// 發生次數
+			html0 = "<select id='EQP_Alarm_Times__'" + newN0 + "' name='EQP_Alarm_Times__" + newN0 + "' >"
+			var times_list = ['1', '2', '3', '4', '5', '>5', 'N/A']
+			for (var i = 0; i < times_list.length; i++) {
+				html0 += "<option value='" + times_list[i] + "' >" + times_list[i]	+ "</option>";
+			}
+			html0 += "</select>"
+			cell5.innerHTML=html0;
+			
+	   }
+	</script>
+	<br/><br/><br/>
+	<h5>OCT機況說明</h5>
+	
+		<input type="date" class='inDate1' name="handover_octEQPAlarm_date1" value='{{date1}}' size='7'  >
+		&nbsp;&nbsp;<b class='title2'>~<b>&nbsp;
+		<input type="date" class='inDate1' name="handover_octEQPAlarm_date2" value='{{date2}}' size='7'  >    
+		&nbsp;&nbsp;&nbsp;
+		<button type='submit' class='in_subDate' name="handover_octEQPAlarm" value="record" >送出</button>
+		<br/><br/>
+	
+		{{df2redTable(df_eqpAlarm)}}
+		<br/><hr >
+		<input type="button"  class='in_subDate' value ="新增機況"  onclick="newEQPAlarm()"  >
+		<br/><br/>
+		<table class = 't2' id="eqpAlarmTable" >
+		   <tr><th>機台</th> <th>機況種類</th><th>機況</th> <th>發生時間</th> <th>結束時間</th><th>次數</th></tr>
+			
+					
+					
+			</select>
+		</table>
+		
+		<br/>
+		<button type='submit' class='in_subDate' name='handover_octEQPAlarm' value='upload'>上傳</button>
+		<script> newEQPAlarm() </script>
+
+
+
+
+
+{%- endmacro %}
+
+
+{% macro table_monitorRAW1(df) -%}
+<input type="text" class='in2' name="date1" value ="{{date1}}" readonly size="6">~
+<input type="text" class='in2' name="date2" value ="{{date2}}" readonly size="6">
+<table class = 'redTable' >
+
+<thead><tr>
+{% for i in df.head(1)%}
+	
+	{% if  i not in ['ROW_CNT'] %}
+		<th>{{i}}</th>
+	{% endif %}
+{% endfor %}
+<tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+<tr>
+	{% for i in df.head(1)%}
+		{% if  i in [ 'TEST_TIME', 'ABBR_NO'] %}
+			<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="14" readonly></td>
+		
+		{% elif  i in ['', 'PRE_DEFECT', 'PRE_TEST_USER'] %}
+			<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="10" readonly></td>
+			
+		{% elif  i in ['PRODUCT_CODE', '', '', 'CHIP_ID', ''] %}
+			<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="7" readonly></td>
+		{% elif  i in ['片數']  %}
+			<td>
+			<button type='submit' class='in_sub' value="{{value['TYPE_GROUP']}}__{{value['MFG_DAY']}}__{{value['TOOL_ID']}}__{{value['isG']}}__{{value['DEFECT']}}" name='octAOIGORaw2'>{{value[i]}}</button>
+			</td>
+			{#
+			<td><input type="submit" class='in1' name="" value ="{{value[i]}}" readonly></td>
+			#}
+		{% elif  i in ['isG', 'TYPE_GROUP', 'MFG_DAY', 'TOOL_ID'] %}
+			{%  if value['ROW_CNT'] == 1%}
+				<td>{{value[i]}}</td>
+			{%  elif value['ROW_CNT'] == -1%}
+			
+			{%  else %}
+				<td rowspan="{{value['ROW_CNT']}}">{{value[i]}}</td>
+			{% endif %}
+			
+		{% elif  i in ['ROW_CNT'] %}
+			
+
+		
+		{% else  %}
+			<td>{{value[i]}}</td>
+		{% endif %}
+			
+	{% endfor %}
+</tr>
+{% endfor %}
+</table>
+
+
+
+
+
+
+
+
+{%- endmacro %}
+
+
+
+
+
+{% macro table_monitorRAW2(df, df_aoi) -%}
+{#
+{{value['TYPE_GROUP']}}__{{value['MFG_DAY']}}__{{value['TOOL_ID']}}__{{value['isG']}}__{{value['DEFECT']}}
+<button type='submit' class='in_subDate' value="octAOIGORaw2__{{date1}}__{{date2}}__{{tool_id}}__{{pc}}__{{def_col}}" name='csvDownload'>資料下載</button>
+
+<input type="text" class='in2' name="mfg_day" value ="{{df.loc[0]['MFG_DAY']}}" readonly size="6">
+#}
+<input type="text" class='in2' name="mfg_day" value ="{{df.loc[0]['MFG_DAY']}}" readonly size="6">
+
+<br/><br/>
+<table class = 'redTable' >
+<script language="JavaScript" type="text/javascript">
+   function PopupPic(sPicURL) { 
+	 window.open( "static/popup_oct.htm?"+sPicURL,"","resizable=1"); 
+   } 
+</script>
+<thead><tr>
+{% for i in df.head(1)%}
+	
+	{% if  loop.index <= 25 %}
+		<th>{{i}}</th>
+	{% endif %}
+{% endfor %}
+<tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+<tr>
+	{% for i in df.head(1)%}
+		{% if  i in [ '', 'ABBR_NO'] %}
+			<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="18" readonly></td>
+		
+		{% elif  i in ['TEST_TIME'] %}
+			<td>
+			<input type="text" class='in_hidden' name="{{key}}__{{i}}" value ="{{value[i]}}"  size="1"readonly><br/>
+			{{ value[i][:10]}}<br/>{{ value[i][11:]}}
+			</td>
+		
+		
+		{% elif  i in ['DEFECT', 'PRE_DEFECT', 'PRE_TEST_USER'] %}
+			<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="10" readonly></td>
+			
+		{% elif  i in ['PRODUCT_CODE', 'MFG_DAY', 'TOOL_ID', 'CHIP_ID', 'GRADE', 'PRE_GRADE', 'TYPE_GROUP', 'TEST_USER'] %}
+			<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="7" readonly></td>
+		{% elif  i in ['確認'] and value[i] == 'NA' %}
+			<td>
+			<select id="reason{{key}}" name="{{key}}__Check" >
+					   <option  value="---">請選擇</option>
+						<option  value="Real">Real</option>
+						<option  value="Real(CT1相關)">Real(CT1相關)</option>
+						<option  value="髒汙汙判">單顆Real</option>
+						<option  value="機台異常">誤判</option>
+						<option  value="其他請說明">其他請說明</option>
+					</select>
+			</td>
+		{% elif  i in ['說明'] and value[i] == 'NA' %}
+			<td>
+			<input type="text" name="{{key}}__Remarks"  style="width:200px;height:35px;font-size:16px"  value="" placeholder="其他請說明" size="10">
+			</td>
+			
+			
+		{% elif  i in ['說明', '確認'] and value[i] != 'NA' %}
+			<td>{{value[i]}}</td>
+		{% elif value[i]|safe == 'nan'%}	
+			<td></td>
+
+		
+		{% else  %}
+			<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}"  readonly></td>
+		{% endif %}
+			
+	{% endfor %}
+</tr>
+{% endfor %}
+</table>
+<br/>
+<br/><br/>
+<input type='submit' class='in_subDate' name='octAOIGO_Upload' value="上傳">
+<br/>
+
+<h5>AOI影像</h5>
+<table class = 'redTable' >
+<thead><tr>
+{% for i in df_aoi.head(1)%}
+	{% if  loop.index <= 25 %}<th>{{i}}</th>{% endif %}
+{% endfor %}
+<tr></thead>
+
+
+{% for key,value in df_aoi.iterrows() %}
+
+
+
+
+
+
+<tr>
+	{% for i in df_aoi.head(1)%}
+		{% if  i in ['確認'] and value[i] == 'NA' %}
+			<td>
+			<select id="reason{{key}}" name="{{key}}__Check2" >
+					   <option  value="---">請選擇</option>
+						<option  value="Real">Real</option>
+						<option  value="Real(CT1相關)">Real(CT1相關)</option>
+						<option  value="髒汙汙判">單顆Real</option>
+						<option  value="機台異常">誤判</option>
+						<option  value="其他請說明">其他請說明</option>
+					</select>
+			</td>
+		{% elif  i in ['說明'] and value[i] == 'NA' %}
+			<td>
+			<input type="text" name="{{key}}__Remarks2"  style="width:200px;height:35px;font-size:16px"  value="" placeholder="其他請說明" size="10">
+			</td>
+			
+			
+		{% elif  i in ['說明', '確認'] and value[i] != 'NA' %}
+			<td>{{value[i]}}</td>
+		{% elif value[i]|safe == 'nan'%}	
+			<td></td>
+		{% elif value[i][:4] == 'http'%}	
+			<td>
+			<a href="javascript:PopupPic('{{ value[i] }}')"> AOI IMG</a>  			
+			<a href="{{ value[i] }}"><img align="center" width='160' height='120' src="{{ value[i] }}" ></a>  
+			</td>
+		{% else %}	
+			<td>{{value[i]|safe}}</td>
+		{% endif %}
+	{% endfor %}
+</tr>
+{% endfor %}
+</table>
+
+
+
+
+
+
+
+{%- endmacro %}
+
+
+
+
+
+
+
+
+
+		
+		
+{% macro table_octADCRBSucEQP(df, tool_id, pc) -%}
+<p class='title1'>{{tool_id}}</p>
+<p class='title1'> {{pc}}</p>
+<p class='title2'>※ CT1單一機台 > 5片 & 百分比 > 30% => 亮紅燈</p>
+<table class = 'redTable' >
+<thead><tr>
+{% for i in df.head(1)%}
+	{% if i != '單位(%)'%}
+		<th>{{i[2:]}}</th>
+	{%else%}
+		<th>{{i}}</th>
+	{%endif%}
+{% endfor %}
+</tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+<tr>
+	{% for i in df.head(1)%}
+		{% if i != '單位(%)' and 100*value[i]/df.loc[df.index[-1], i] > 30 and value[i]>5  and value['單位(%)']== '   '%}
+			<td bgcolor="#FFC1E0">{{value[i]|int}}<p style="color:blue;">{{(100*value[i]/df.loc[df.index[-1], i])|round(1)}} %</td>
+		{% elif  i != '單位(%)' and value[i]== 0 %}
+			<td>{{value[i]|int}}  <p style="color:blue;">0 %</td>
+		{% elif  i != '單位(%)'%}
+			<td>{{value[i]|int}} <p style="color:blue;">{{(100*value[i]/df.loc[df.index[-1], i])|round(1)}} %</td>
+		{% else %}
+			<td>{{value[i]}}</td>
+		{% endif%}
+	{% endfor %}
+</tr>
+{% endfor %}
+</table>
+{%- endmacro %}		
+		
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,284 @@
+
+{% macro table_lsrRJCheck(df,date1, date2) -%}
+
+
+<h5>1. 成功率<80% & 總片數 > 30 => 請確認是否誤判</h5>
+<table class = 'redTable' align="left">
+
+<thead><tr>
+{% for i in df.head(1)%}
+	
+		<th>{{i}}</th>
+	
+{% endfor %}
+</tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+<tr>
+	{% for i in df.head(1)%}
+		{# loop.index 號碼從1開始, 1,2,3... #}
+		{% if  i in ['Target'] and  value['總數'] > 30 and value[i] < 80 %}<td bgcolor="#FFC1E0">
+		{% else %}<td>	{% endif %} 
+			
+		
+		{% if  i in ['VO', 'BLs', 'OTHERs'] %}
+			<input type="submit" class='in_sub' value ="{{value[i]}}" name = "lsrRJCheckRaw__{{date1}}__{{date2}}__{{value['TOOL_ID']}}__{{value['PRODUCT_CODE']}}__{{i}}"> </td>
+		
+		{% elif  i in ['ZP(%)', 'X(%)'] %}
+			<input type="submit" class='in_sub2' value ="{{value[i]}}" name = "lsrRJCheckEQP__{{date1}}__{{date2}}__{{value['TOOL_ID']}}__{{value['PRODUCT_CODE']}}__{{i[:-3]}}"> </td>
+		
+		
+		{% elif  loop.index <= 25 %}
+			{{value[i]}} </td>
+		{% endif %}
+	{% endfor %}
+</tr>
+{% endfor %}
+
+</table>
+
+{%- endmacro %}
+
+
+
+
+{% macro table_lsrRJCheckRaw(df, df_adc, df_lsr, date1, date2) -%}
+<input type="text" class='in2' name="date1" value ="{{date1}}" readonly size="6">~
+<input type="text" class='in2' name="date2" value ="{{date2}}" readonly size="6">
+
+<table class = 'redTable' >
+
+<thead><tr>
+{% for i in df.head(1)%}
+	
+	{% if  i == 'isSameXY' %}
+		<th>是否同點</th>
+	{% elif  i == 'OCT1_USER' %}
+		
+	{% elif  i == 'OCT1_USER' %}
+		<th>標點人員</th>
+
+		
+		
+	{% elif  i == 'OCT2_X' %}
+		<th>覆判Data座標</th>
+	{% elif  i == 'OCT2_Y' %}
+		<th>覆判Gate座標</th>
+	{% elif  i == 'REPAIR_COLOR' %}
+		<th>維修顏色</th>
+	{% elif  i == 'OCT2_USER' %}
+		<th>覆判人員</th> 
+	{% elif  i == 'REWORK_USER_ID' %}
+	{% elif  i == 'REWORK_USER_ID' %}
+		<th>LASER人員</th>
+	
+	{% elif  i == 'TOOL_ID' %}
+		
+	
+	{% elif  i == 'TOOL_ID' %}
+		<th>測試機台</th>
+	{% else %}
+		<th>{{i}}</th>
+	{% endif %}
+{% endfor %}
+<tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+<tr>
+	{% for i in df.head(1)%}
+		
+		{% if  i in [ 'TEST_TIME', 'ABBR_NO'] %}
+			<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="14" readonly></td>
+		
+		{% elif  i in ['DEFECT', 'PRE_DEFECT', 'PRE_TEST_USER'] %}
+			<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="10" readonly></td>
+			
+		{% elif  i in ['PRODUCT_CODE', 'CT1_EQP', '', 'CHIP_ID', ''] %}
+			<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="7" readonly></td>
+		{% elif  i in ['確認'] and value[i] == 'NA' %}
+			<td>
+			<select id="reason{{key}}" name="{{key}}__Check" >
+					   <option  value="---">請選擇</option>
+						<option  value="OCT人員漏檢">OCT人員漏檢</option>
+						<option  value="OCT人員漏標">OCT人員漏標</option>
+						<option  value="來料Defect影響">來料Defect影響</option>
+						<option  value="PFL貼附異常影響">PFL貼附異常影響</option>
+						<option  value="OCT機台誤判">OCT機台誤判</option>
+						<option  value="Laser修錯">Laser修錯</option>
+						<option  value="其他請說明">其他請說明</option>
+			</select>
+			</td>
+
+		{% elif  i in ['說明'] and value[i] == 'NA' %}
+			<td>
+			<input type="text" name="{{key}}__Remarks"  style="width:200px;height:35px;font-size:16px"  value="" placeholder="備註" size="10">
+			</td>
+			
+			
+		{% elif  i in ['說明', '確認'] and value[i] != 'NA' %}
+			<td>{{value[i]}}</td>
+		{% elif  i in ['REWORK_USER_ID', 'OCT1_USER', 'TOOL_ID'] %}
+			<input type="text" class='in_hidden' name="{{key}}__{{i}}" value ="{{value[i]}}" size="2" readonly> 
+	
+		{% elif  i in ['CT1_DEFECT'] %}
+			<td><input type="submit" class='in_sub2' value ="{{value[i]}}" name = "lsrRJCheckCT1__{{value['CHIP_ID']}}"> </td>
+	
+		
+		{% else  %}
+			<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="2" readonly></td>
+		{% endif %}
+			
+	{% endfor %}
+</tr>
+{% endfor %}
+</table>
+<br/>
+<br/><br/>
+<input type='submit' class='in_subDate' name='lsrRJCheck_Upload' value="上傳">
+<br/>
+
+
+
+
+<td>
+
+</td>
+
+
+
+
+<h5>LASER影像</h5>
+<table class = 'redTable' >
+<thead><tr>
+{% for i in df_lsr.head(1)%}
+
+	
+		<th>{{i}}</th>
+
+{% endfor %}
+<tr></thead>
+{% for key,value in df_lsr.iterrows() %}
+<tr>
+	{% for i in df_lsr.head(1)%}
+		{% if  i in ['確認'] and value[i] == 'NA' %}
+			<td>
+			<select id="reason{{key}}" name="{{key}}__Check2" >
+			<option  value="---">請選擇</option>
+			<option  value="OCT人員漏檢">OCT人員漏檢</option>
+			<option  value="OCT人員漏標">OCT人員漏標</option>
+			<option  value="來料Defect影響">來料Defect影響</option>
+			<option  value="PFL貼附異常影響">PFL貼附異常影響</option>
+			<option  value="OCT機台誤判">OCT機台誤判</option>
+			<option  value="Laser修錯">Laser修錯</option>
+			<option  value="其他請說明">其他請說明</option>
+			</select>
+			</td>
+		{% elif  i in ['說明'] and value[i] == 'NA' %}
+			<td>
+			<input type="text" name="{{key}}__Remarks2"  style="width:200px;height:35px;font-size:16px"  value="" placeholder="其他請說明" size="10">
+			</td>
+				
+		{% elif  i in ['說明', '確認'] and value[i] != 'NA' %}
+			<td>{{value[i]}}</td>
+		{% elif value[i]|safe == 'nan'%}	
+			<td></td>
+		{% else %}	
+			<td>{{value[i]|safe}}</td>
+		{% endif %}
+	{% endfor %}
+</tr>
+{% endfor %}
+</table>
+
+
+
+
+
+
+<h5>ADC影像</h5>
+<table class = 'redTable' >
+<thead><tr>
+{% for i in df_adc.head(1)%}
+	{% if  loop.index <= 25 %}<th>{{i}}</th>{% endif %}
+{% endfor %}
+<tr></thead>
+{% for key,value in df_adc.iterrows() %}
+<tr>
+	{% for i in df_adc.head(1)%}<td>{{value[i]|safe}}</td>{% endfor %}
+</tr>
+{% endfor %}
+</table>
+
+
+
+
+
+
+
+{%- endmacro %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+		
+{% macro table_lsrRJCheckCT1(df) -%}
+
+<table class = 'redTable' >
+<thead><tr>
+{% for i in df.head(1)%}
+	<th>{{i}}</th>
+{% endfor %}
+</tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+<tr>
+	{% for i in df.head(1)%}
+	
+		<td>{{value[i]|safe}}</td>
+		
+		
+		
+	{% endfor %}
+</tr>
+{% endfor %}
+</table>
+{%- endmacro %}		
+		
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

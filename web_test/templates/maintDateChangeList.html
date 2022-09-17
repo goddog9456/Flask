@@ -1,0 +1,90 @@
+<style type="text/css">
+	
+
+input.in1{
+background-color: transparent;
+border:0;
+font-size:23px;
+font-family: sans-serif, "微軟正黑體";
+outline:medium;
+}
+h3{
+     font-family: sans-serif, "微軟正黑體";
+     font-size: 25px;
+     color: red;
+     text-align: left;
+	 background-color:white;
+     }
+	 
+table.t2 {
+  font-family: "Times New Roman", Times, serif;
+  border: 2px solid #FFFFFF;
+  width: 40%;
+  font-weight: bold;
+}
+table.t2 td, table.t2 th {
+  border: 1px solid #FFFFFF;
+  padding: 3px 4px;
+  
+}
+table.t2 tbody td {
+  font-size: 20px;
+  
+}
+table.t2 td:nth-child(even) {
+  background: #EBEBEB;
+}
+table.t2 thead {
+  background: #FFFFFF;
+  border-bottom: 2px solid #333333;
+}
+table.t2 thead th {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333333;
+  text-align: left;
+  border-left: 2px solid #333333;
+}
+table.t2 thead th:first-child {
+  border-left: none;
+}
+
+
+input.in_subDate{
+//日期submit;
+background-color: #c0c0c0;
+border-radius:3px;
+cursor:pointer;
+font-weight: bold; 
+font-family: sans-serif, "微軟正黑體";
+width:75px;
+height:40px;
+font-size:20px;
+//outline:medium;
+//color: #1755ff;
+text-align: center;
+padding-left: 0;
+}
+input.in_subDate:active{
+    //position:relative;
+	background-color:#f0f0f0;
+	top:100px;
+}
+input.in_subDate:hover{
+    background:linear-gradient(to bottom, #e0e0e0 5%, #f0f0f0 100%);
+	background-color:#f0f0f0;
+}
+
+</style>
+	<form method='post' role="form" action={{ url_for('userMain') }}>
+	
+		
+		
+		{% import 'maintDateChange.html' as maintDate%}
+		{{  maintDate.maintDateChange(class0, mach0,user, name, shift, last_time,time, mode) }}
+		
+		
+	
+	
+	
+	</form >

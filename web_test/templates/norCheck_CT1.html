@@ -1,0 +1,1097 @@
+
+{% macro LightCheckList(class0, mach0,user, name, auth, shift, time, mode,notify) -%}
+<h3>機台點檢</h3>
+<h2>Mode: <input type="text" name="Mode"  value="{{mode}}" size="8" class='in1' readonly></h2>
+<h2> 人員:<input type="text" name="User"  value="{{user}}" size="8" class='in1'  readonly><input type="text" name="Name"  value="{{name}}" size="6" class='in1'   readonly></h2>
+<h2> 班別:<input type="text" name="Shift"  value="{{shift}}" size="8" class='in1'  readonly><input type="text" name="Auth"  value="{{auth}}" size="8" class='in1'  readonly></h2>
+<h2>站點:<input type="text" name="Class"  value="{{class0}}" size="8" class='in1'   readonly></h2></h2>
+<h2>EQ:<input type="text" name="Machine"  value="{{mach0}}" size="8" class='in1' readonly></h2>
+<h2> 點檢時間:<input type="text" name="time"  value="{{time}}" size="8" class='in1'   readonly></h2>
+
+<script type="text/javascript">
+	function checkLightID_CT1(Obj){
+		var id_base = 'CT1_K1_ID0';
+		var id;
+		var element; 
+		
+		
+		for (var i = 1; i <= 4; i++) {
+			id = id_base + parseInt(i);
+			element = document.getElementById(id);
+			if (element){
+				if(element.value == ""){
+					alert("請記得輸入CSD ID !!");
+					return false;
+				}else if(element.value.length != 7){
+					alert("提醒: ChipID 需為7碼 !!");
+					return false;
+				}
+			}
+		}
+		Obj.form.submit(Obj.name);
+		Obj.disabled=true;				
+	}
+</script>
+
+<table class = 't2'>
+<tr><th>Step</th><th>機台</th><th>點檢位</th><th>檢查方式</th><th>點檢</th><th>備註</th></tr>
+
+
+{% if mach0[3] != 'A'  %}
+<tr><td>A</td><td>MJC</td><td>Pre-Alignment</td><td>1. STOPPER是否損壞或無法轉動<br/>(需於未夾取Panel時檢查，不可有固定位置凹槽或單邊磨秏，不分嚴重輕微皆更換，平均磨為正常)</td>
+<td><input type="radio" name="CT1_A1" value="OK" checked>OK<input type="radio" name="CT1_A1" value="NG">NG<td><input type="text" name="CT1_A1_rem"  value="  " size="20"></td></tr>
+<tr><td>A</td><td>MJC</td><td>Pre-Alignment</td><td>2. STOPPER無法轉動(未夾取Panel時檢查)</td>
+<td><input type="radio" name="CT1_A2" value="OK" checked>OK<input type="radio" name="CT1_A2" value="NG">NG<td><input type="text" name="CT1_A2_rem"  value="  " size="20"></td></tr>
+<tr><td>A</td><td>MJC</td><td>Pre-Alignment</td><td>3. 點檢Panel夾取後，Panel於Stopper，需在白區內</td>
+<td><input type="radio" name="CT1_A3" value="OK" checked>OK<input type="radio" name="CT1_A3" value="NG">NG<td><input type="text" name="CT1_A3_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck1.JPG"</td></tr>
+
+<tr><td>A</td><td>MJC</td><td>Pre-Alignment</td><td>ˋ4. 用手推動滑塊，檢查是否有移動會卡住及彈簧是否斷掉 </td>
+<td><input type="radio" name="CT1_A4" value="OK" checked>OK<input type="radio" name="CT1_A4" value="NG">NG<td><input type="text" name="CT1_A4_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck2.JPG"</td></tr>
+
+<tr><td>B</td><td>MJC</td><td>Pre-Alignment</td><td>1. 上下手臂至放PANEL是否置中(A等於B) </td>
+<td><input type="radio" name="CT1_B1" value="OK" checked>OK<input type="radio" name="CT1_B1" value="NG">NG<td><input type="text" name="CT1_B1_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck3.JPG"</td></tr>
+
+
+<tr><td>B</td><td>MJC</td><td>Up Carrier</td><td>2. Carrier優力膠塊是否受損<br/>(需於未夾取Panel時檢查，不可有固定位置凹槽或單邊磨秏，不分嚴重輕微皆更換，平均磨為正常)<br/>(未夾取Panel時檢查) </td>
+<td><input type="radio" name="CT1_B2" value="OK" checked>OK<input type="radio" name="CT1_B2" value="NG">NG<td><input type="text" name="CT1_B2_rem"  value="  " size="20"></td></tr>
+<tr><td>B</td><td>MJC</td><td>Down Carrier</td><td>3. Carrier優力膠塊是否受損<br/>(需於未夾取Panel時檢查，不可有固定位置凹槽或單邊磨秏，不分嚴重輕微皆更換，平均磨為正常)<br/>(未夾取Panel時檢查) </td>
+<td><input type="radio" name="CT1_B3" value="OK" checked>OK<input type="radio" name="CT1_B3" value="NG">NG<td><input type="text" name="CT1_B3_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck4.JPG"</td></tr>
+
+<tr><td>C</td><td>MJC</td><td>Up Carrier</td><td>1. Carrier的上頂PIN彈簧是否斷裂 </td>
+<td><input type="radio" name="CT1_C1" value="OK" checked>OK<input type="radio" name="CT1_C1" value="NG">NG<td><input type="text" name="CT1_C1_rem"  value="  " size="20"></td></tr>
+<tr><td>C</td><td>MJC</td><td>Down Carrier</td><td>2. Carrier的上頂PIN彈簧是否斷裂 </td>
+<td><input type="radio" name="CT1_C2" value="OK" checked>OK<input type="radio" name="CT1_C2" value="NG">NG<td><input type="text" name="CT1_C2_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck5.JPG"</td></tr>
+
+
+<tr><td>C</td><td>MJC</td><td> Up Carrier</td><td>3. 優力膠底座螺絲重新鎖附測試有無鬆動 </td>
+<td><input type="radio" name="CT1_C3" value="OK" checked>OK<input type="radio" name="CT1_C3" value="NG">NG<td><input type="text" name="CT1_C3_rem"  value="  " size="20"></td></tr>
+<tr><td>C</td><td>MJC</td><td> Down Carrier</td><td>4. 優力膠底座螺絲重新鎖附測試有無鬆動 </td>
+<td><input type="radio" name="CT1_C4" value="OK" checked>OK<input type="radio" name="CT1_C4" value="NG">NG<td><input type="text" name="CT1_C4_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck6.JPG"</td></tr>
+
+<tr><td>D</td><td>MJC</td><td>Workstage</td><td>1. STOPPER & CLAMP是否損壞<br/>(需於未夾取Panel時檢查，不可有固定位置凹槽或單邊磨秏，不分嚴重輕微，更換後觀察，平均磨為正常) </td>
+<td><input type="radio" name="CT1_D1" value="OK" checked>OK<input type="radio" name="CT1_D1" value="NG">NG<td><input type="text" name="CT1_D1_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck7.JPG"</td></tr>
+
+<tr><td>D</td><td>MJC</td><td>Workstage</td><td>2. Workstage框上溝槽是否有玻璃屑<br/>(有，需拍照及點檢機構並MAIL告知ENG，清除後，交接點檢該處3個班，是否仍有玻璃屑) </td>
+<td><input type="radio" name="CT1_D2" value="OK" checked>OK<input type="radio" name="CT1_D2" value="NG">NG<td><input type="text" name="CT1_D2_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck8.JPG"</td></tr>
+
+<tr><td>D</td><td>MJC</td><td>Workstage</td><td>3. 鐵氟龍膠帶是否有受損(Panel接觸面，單邊受損大於2mm且3處以上，直接更換) </td>
+<td><input type="radio" name="CT1_D3" value="OK" checked>OK<input type="radio" name="CT1_D3" value="NG">NG<td><input type="text" name="CT1_D3_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck9.JPG"</td></tr>
+
+<tr><td>D</td><td>MJC</td><td>Workstage</td><td>4. CLAMP作動是否有3段Sensor燈號(夾不到：不亮、正確：亮、沒夾到：不亮) </td>
+<td><input type="radio" name="CT1_D4" value="OK" checked>OK<input type="radio" name="CT1_D4" value="NG">NG<td><input type="text" name="CT1_D4_rem"  value="  " size="20"></td></tr>
+<tr><td>D</td><td>MJC</td><td>Workstage</td><td>5. 用手轉動STOPPER，確認Panel都有承靠在右邊Stopper上 </td>
+<td><input type="radio" name="CT1_D5" value="OK" checked>OK<input type="radio" name="CT1_D5" value="NG">NG<td><input type="text" name="CT1_D5_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck10.JPG"</td></tr>
+
+<tr><td>E</td><td>MJC</td><td>Workstage </td><td>1. 傳片位置確認(STOPPER與PANEL距離)，塑膠尺量測約0.8~2mm </td>
+<td><input type="radio" name="CT1_E1" value="OK" checked>OK<input type="radio" name="CT1_E1" value="NG">NG<td><input type="text" name="CT1_E1_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck11.JPG"</td></tr>
+
+<tr><td>F</td><td>MJC</td><td>Workstage </td><td>1. Carrier撈抓與Stage溝槽是否置中(塑膠尺量測左、右皆需大於2mm) </td>
+<td><input type="radio" name="CT1_F1" value="OK" checked>OK<input type="radio" name="CT1_F1" value="NG">NG<td><input type="text" name="CT1_F1_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck12.JPG"</td></tr>
+
+<tr><td>G</td><td>MJC</td><td>Block</td><td>1. 是否有鎖緊(手去搖動) </td>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck13.JPG"</td></tr>
+<td><input type="radio" name="CT1_G1" value="OK" checked>OK<input type="radio" name="CT1_G1" value="NG">NG<td><input type="text" name="CT1_G1_rem"  value="  " size="20"></td></tr>
+
+
+<tr><td>H</td><td>MJC</td><td>縮針確認</td><td>1. 按壓探針後，再目視確認是否縮針 </td>
+<td><input type="radio" name="CT1_H1" value="OK" checked>OK<input type="radio" name="CT1_H1" value="NG">NG<td><input type="text" name="CT1_H1_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck15.JPG"</td></tr>
+
+<tr><td>I</td><td>MJC</td><td>Workstage</td><td>1. STOPPER與PANEL間，是否可以利用塑膠尺(1mm厚)刷過 </td>
+<td><input type="radio" name="CT1_I1" value="OK" checked>OK<input type="radio" name="CT1_I1" value="NG">NG<td><input type="text" name="CT1_I1_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck16.JPG"</td></tr>
+
+<tr><td>K</td><td>MJC</td><td>Panel 外觀檢</td><td>1. 使用手電筒，於Pre-A處，確認當下Panel(上下臂各兩片)，四邊是否有延裂/破片 </td>
+<td colspan = 2>
+CHIP ID 1 &nbsp;<input type="text" name="CT1_K1_ID01" id="CT1_K1_ID01" value=""  placeholder="請輸入ChipID" size="8" maxlength="7">&nbsp;&nbsp;&nbsp;<input type="text" name="OCT1_K1_rem"  value="" placeholder="備註" size="10"><br/>
+CHIP ID 2 &nbsp;<input type="text" name="CT1_K1_ID02" id="CT1_K1_ID02"  value="" placeholder="請輸入ChipID" size="8" maxlength="7"><br/>
+CHIP ID 3 &nbsp;<input type="text" name="CT1_K1_ID03" id="CT1_K1_ID03"  value="" placeholder="請輸入ChipID" size="8" maxlength="7"><br/>
+CHIP ID 4 &nbsp;<input type="text" name="CT1_K1_ID04" id="CT1_K1_ID04"  value="" placeholder="請輸入ChipID" size="8" maxlength="7"><br/>
+<input type="text" class='in1'  value ="" size="20" readonly>
+</td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck18.JPG"</td></tr>
+
+<tr><td>M</td><td>C/V</td><td>VCR、CT#1、CT#2夾取處</td><td>1. 是否Clamp是否鬆動(柱子沒鎖或電動缸損壞)及優力膠是否可正常轉動 </td>
+<td><input type="radio" name="CT1_M1" value="OK" checked>OK<input type="radio" name="CT1_M1" value="NG">NG<td><input type="text" name="CT1_M1_rem"  value="  " size="20"></td></tr>
+<tr><td>M</td><td>C/V</td><td>VCR、CT#1、CT#2夾取處</td><td>2. 是否有玻璃屑 </td>
+<td><input type="radio" name="CT1_M2" value="OK" checked>OK<input type="radio" name="CT1_M2" value="NG">NG<td><input type="text" name="CT1_M2_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck19.JPG"</td></tr>
+
+<tr><td>N</td><td>ULD</td><td>VCR夾取處</td><td>1. 是否Clamp是否鬆動(柱子沒鎖或電動缸損壞)及優力膠是否可正常轉動 </td>
+<td><input type="radio" name="CT1_N1" value="OK" checked>OK<input type="radio" name="CT1_N1" value="NG">NG<td><input type="text" name="CT1_N1_rem"  value="  " size="20"></td></tr>
+<tr><td>N</td><td>ULD</td><td>VCR夾取處</td><td>2. 是否有玻璃屑 </td>
+<td><input type="radio" name="CT1_N2" value="OK" checked>OK<input type="radio" name="CT1_N2" value="NG">NG<td><input type="text" name="CT1_N2_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck20.JPG"</td></tr>
+
+<tr><td>A</td><td>Robot</td><td>上下FORK吸嘴</td><td>5. 確認吸嘴是否有受損(使用手電筒，手轉吸嘴360度確認)，無論損傷狀況先更換處理 </td>
+<td><input type="radio" name="CT1_A_Robot1" value="OK" checked>OK<input type="radio" name="CT1_A_Robot1" value="NG">NG<td><input type="text" name="CT1_A_Robot1_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck22.JPG"</td></tr>
+
+
+{% else %}
+
+
+<tr><td>{{class0}}</td><td>GPM</td><td>Workstage</td><td>1. STOPPER是否損壞或無法轉動<br/>(未夾取Panel時檢查) </td>
+<td><input type="radio" name="CT1_2_1" value="OK" checked>OK<input type="radio" name="CT1_2_1" value="NG">NG<td><input type="text" name="CT1_2_1_rem"  value="  " size="20"></td></tr>
+<tr><td>{{class0}}</td><td>GPM</td><td>Workstage</td><td>2. 機構範圍是否有玻璃屑<br/>(Pre-Alignment平躺時檢查) </td>
+<td><input type="radio" name="CT1_2_2" value="OK" checked>OK<input type="radio" name="CT1_2_2" value="NG">NG<td><input type="text" name="CT1_2_2_rem"  value="  " size="20"></td></tr>
+
+<tr><td>M</td><td>C/V</td><td>VCR、CT#1、CT#2夾取處</td><td>25. 是否Clamp是否鬆動(柱子沒鎖或電動缸損壞)及優力膠是否可正常轉動 </td>
+<td><input type="radio" name="CT1_M1" value="OK" checked>OK<input type="radio" name="CT1_M1" value="NG">NG<td><input type="text" name="CT1_M1_rem"  value="  " size="20"></td></tr>
+<tr><td>M</td><td>C/V</td><td>VCR、CT#1、CT#2夾取處</td><td>26. 是否有玻璃屑 </td>
+<td><input type="radio" name="CT1_M2" value="OK" checked>OK<input type="radio" name="CT1_M2" value="NG">NG<td><input type="text" name="CT1_M2_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck19.JPG"</td></tr>
+
+<tr><td>N</td><td>ULD</td><td>VCR夾取處</td><td>27. 是否Clamp是否鬆動(柱子沒鎖或電動缸損壞)及優力膠是否可正常轉動 </td>
+<td><input type="radio" name="CT1_N1" value="OK" checked>OK<input type="radio" name="CT1_N1" value="NG">NG<td><input type="text" name="CT1_N1_rem"  value="  " size="20"></td></tr>
+<tr><td>N</td><td>ULD</td><td>VCR夾取處</td><td>28. 是否有玻璃屑 </td>
+<td><input type="radio" name="CT1_N2" value="OK" checked>OK<input type="radio" name="CT1_N2" value="NG">NG<td><input type="text" name="CT1_N2_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck20.JPG"</td></tr>
+
+
+<tr><td>O</td><td>CV</td><td>CV上臂吸附真空處</td><td>29. 用眼睛觀察Panel在吸附真空後，外圍是否有下垂(看真空數值<-40) </td>
+<td><input type="radio" name="CT1_O1" value="OK" checked>OK<input type="radio" name="CT1_O1" value="NG">NG<td><input type="text" name="CT1_O1_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck21.JPG"</td></tr>
+
+
+<tr><td>{{class0}}</td><td>GPM</td><td>Workstage </td><td>8. 清潔Diffuser </td>
+<td><input type="radio" name="CT1_2_8" value="OK" checked>OK<input type="radio" name="CT1_2_8" value="NG">NG<td><input type="text" name="CT1_2_8_rem"  value="  " size="20"></td></tr>
+{% endif %}
+<tr><td></td><td></td><td></td><td></td><td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td><td></td></tr>
+
+</table>
+</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" name="return" class='in_subDate' value="返回" onClick="javascript:history.back()">
+<input type='text' class='in_subDate' name='CheckBtn'  onclick="checkLightID_CT1(this)" value="送出">
+{%- endmacro %}
+
+
+
+
+
+
+
+{% macro ColdRunCheckList(class0, mach0,user, name, auth, shift, time, mode,notify) -%}
+<h3>Cold Run(換線)</h3>
+<h2>Mode: <input type="text" name="Mode"  value="{{mode}}" size="8" class='in1' readonly></h2>
+<h2>人員:<input type="text" name="User"  value="{{user}}" size="8" class='in1'  readonly><input type="text" name="Name"  value="{{name}}" size="6" class='in1'   readonly></h2>
+<h2>班別:<input type="text" name="Shift"  value="{{shift}}" size="8" class='in1'  readonly></h2>
+<h2>站點:<input type="text" name="Class"  value="{{class0}}" size="8" class='in1'   readonly></h2></h2>
+<h2>EQ:<input type="text" name="Machine"  value="{{mach0}}" size="8" class='in1' readonly></h2>
+
+<h2> 點檢時間:<input type="text" name="time"  value="{{time}}" size="8" class='in1'   readonly></h2>
+<h3> {{notify}}</h3> 
+<table class = 't2'>
+<tr>
+	<td>CHIP ID 01</td><td><input type="text" name="Cold_Run_ID01" value="" placeholder="請輸入CHIP ID" required   size="9" maxlength="7" minlength="7" checked></td>
+	<td><input type="radio" name="Cold_Run_ID01_OK" value="OK" checked>OK    <input type="radio" name="Cold_Run_ID01_OK" value="NG">NG</td>
+	<td>備註:<input type="text" name="Cold_Run_ID01_rem"  value="  " size="20"></td>
+</tr>
+<tr>
+	<td>CHIP ID 02</td><td><input type="text" name="Cold_Run_ID02" value="" placeholder="請輸入CHIP ID" required   size="9" maxlength="7" checked></td>
+	<td><input type="radio" name="Cold_Run_ID02_OK" value="OK" checked>OK    <input type="radio" name="Cold_Run_ID02_OK" value="NG">NG</td>
+	<td>備註:<input type="text" name="Cold_Run_ID02_rem"  value="  " size="20"></td>
+
+</tr>
+</table>
+</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" name="return" class='in_subDate' value="返回" onClick="javascript:history.back()">
+<input type='text' class='in_subDate' name='CheckBtn'  onclick="this.form.submit(this.name);this.disabled=true;" value="送出">
+{%- endmacro %}
+
+{% macro CSTLCList(class0, mach0,user, name, auth, shift, time, mode, model0, model1) -%}
+<h3>CST點檢(換線)</h3>
+<h2>Mode: <input type="text" name="Mode"  value="{{mode}}" size="12" class='in1' readonly></h2>
+<h2>人員:<input type="text" name="User"  value="{{user}}" size="8" class='in1'  readonly><input type="text" name="Name"  value="{{name}}" size="6" class='in1'   readonly></h2>
+<h2>班別:<input type="text" name="Shift"  value="{{shift}}" size="8" class='in1'  readonly></h2>
+<h2>站點:<input type="text" name="Class"  value="{{class0}}" size="8" class='in1'   readonly></h2></h2>
+<h2>EQ:<input type="text" name="Machine"  value="{{mach0}}" size="8" class='in1' readonly></h2>
+<h2> 點檢時間:<input type="text" name="time"  value="{{time}}" size="8" class='in1'   readonly></h2>
+
+<input type="submit" class='in_subDate' name="CheckBtn" value="notRun">
+<script type="text/javascript">
+	function checkCSTID_CT1(Obj){
+		var id_base = 'CST_Check_ID0';
+		var id;
+		var element;
+		var id_list = ['CST_LC01_46B1', 'CST_LC02_46B2', 'CST_LC03_46F3', 'CST_LC04_46F4', 'CST_LC05_01B5', 'CST_LC06_01B6', 'CST_LC07_01B7', 'CST_LC08_01F8', 'CST_LC09_PanelBone'];
+		var select_val = document.getElementById("CST_Type").value;
+		if (select_val == "notSelected" ){
+			alert("請記得選擇CST Type !!");
+			return false;	
+		}
+		
+		for (var i = 1; i <= 1; i++) {
+			id = id_base + parseInt(i);
+			element = document.getElementById(id);
+			if (element){
+				if(element.value == ""){
+					alert("請記得輸入CSD ID !!");
+					return false;
+				}else if(element.value.length != 6){
+					alert("提醒: CSD ID 需為6碼 !!");
+					return false;
+				}
+			}
+		}
+		
+		for (var i = 0; i < id_list.length; i++) {
+			element = document.getElementById(id_list[i]);
+			if (element){
+				if(element.value == ""){
+					alert("請記得輸入距離 !!");
+					return false;
+				}
+			}
+			
+		}	
+		Obj.form.submit(Obj.name);
+		Obj.disabled=true;				
+	}
+	 
+</script>
+
+
+
+<table class = 't2'>
+<tr><td>換線前產品: </td><td><input type="text" name="Model0"  value="{{model0}}" size="8" class='in1' readonly></td><td></td></tr>
+<tr><td>換線後產品: </td><td><input type="text" name="Model1"  value="{{model1}}" size="8" class='in1' readonly></td><td></td></tr>
+<tr><td>點檢Type: </td><td><input type="text" value="{{model1[1:3]}}" size="8" class='in1' readonly></td><td></td></tr>
+<tr><td>CST Type: </td>
+<td><select name="CST_Type" id="CST_Type">
+	<option value="notSelected" >---</option>
+	<option value="new">New</option>
+	<option value="old">Old</option>
+</select></td><td></td></tr>
+
+{% for i in ['1'] %}
+	<tr><td>CST ID</td><td><input type="text" name="CST_Check_ID0{{i}}" id="CST_Check_ID0{{i}}" value="" placeholder="請輸入CSD ID"   size="9" maxlength="6" checked></td>
+	<td>備註:<input type="text" name="CST_Check_ID0{{i}}_rem"  value="" size="20"></td>
+	
+	
+	</tr>
+{% endfor %}
+
+<tr><td>Panel外觀是否異常</td>
+	<td><input type="radio" name="CST_Panel_OK" value="OK" checked>OK<input type="radio" name="CST_Panel_OK" value="NG">NG</td>
+	<td>備註:<input type="text" name="CST_Panel_OK_rem"  value="" size="20"></td></tr>
+
+<tr><td>Panel離CST黃色後檔條距離</td><td><input type="text" name="CST_LC09_PanelBone" size='5'> mm</td></tr>
+</table>
+
+</br>
+<table class = 't2' id='cst_table2'>
+
+{% if model1 [1:3] == '50' %}
+	<h2>Panel離CST左右魚骨</h2>
+	
+	<tr>
+	
+		<td>46層(後) 1</td><td>46層(後) 2</td><td>46層(前) 3</td><td>46層(前) 4</td><td>1層(後) 5</td><td>1層(後) 6</td><td>1層(前) 7</td><td>1層(前) 8</td>
+	</tr>
+	
+	<tr>
+		<td><input type="text" name="CST_LC01_46B1" id="CST_LC01_46B1" size='5'> mm</td>
+		<td><input type="text" name="CST_LC02_46B2" id="CST_LC02_46B2" size='5'> mm</td>
+		<td><input type="text" name="CST_LC03_46F3" id="CST_LC03_46F3" size='5'> mm</td>
+		<td><input type="text" name="CST_LC04_46F4" id="CST_LC04_46F4" size='5'> mm</td>
+		<td><input type="text" name="CST_LC05_01B5" id="CST_LC05_01B5" size='5'> mm</td>
+		<td><input type="text" name="CST_LC06_01B6" id="CST_LC06_01B6" size='5'> mm</td>
+		<td><input type="text" name="CST_LC07_01F7" id="CST_LC07_01F7" size='5'> mm</td>
+		<td><input type="text" name="CST_LC08_01F8" id="CST_LC08_01F8" size='5'> mm</td>
+	</tr>
+	{% endif %}
+	
+	
+	
+	</table>
+
+
+</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" name="return" class='in_subDate' value="返回" onClick="javascript:history.back()">
+<input type='text' class='in_subDate' name='CheckBtn'  onclick="checkCSTID_CT1(this)" value="送出">
+
+<table class = 't2' id='cst_table2'>
+<tr><td colspan=3><img src="/static/norCheck_source/ct1_norcheck_cst01.JPG"></td></tr>
+<tr><td colspan=3><img src="/static/norCheck_source/ct1_norcheck_cst02.JPG"></td></tr>
+</table>
+
+{%- endmacro %}
+
+{% macro LightLineChangeList(class0, mach0,user, name, auth, shift, time, mode,notify) -%}
+
+<h3>機台點檢(換線)</h3>
+<h2>Mode: <input type="text" name="Mode"  value="{{mode}}" size="12" class='in1' readonly></h2>
+<h2> 人員:<input type="text" name="User"  value="{{user}}" size="8" class='in1'  readonly><input type="text" name="Name"  value="{{name}}" size="6" class='in1'   readonly></h2>
+<h2> 班別:<input type="text" name="Shift"  value="{{shift}}" size="8" class='in1'  readonly><input type="text" name="Auth"  value="{{auth}}" size="8" class='in1'  readonly></h2>
+<h2>站點:<input type="text" name="Class"  value="{{class0}}" size="8" class='in1'   readonly></h2></h2>
+<h2>EQ:<input type="text" name="Machine"  value="{{mach0}}" size="8" class='in1' readonly></h2>
+<h2> 點檢時間:<input type="text" name="time"  value="{{time}}" size="8" class='in1'   readonly></h2>
+
+<script type="text/javascript">
+	function checkLightID_CT1(Obj){
+		var id_base = 'CT1_K1_ID0';
+		var id;
+		var element; 
+		
+		
+		for (var i = 1; i <= 4; i++) {
+			id = id_base + parseInt(i);
+			element = document.getElementById(id);
+			if (element){
+				if(element.value == ""){
+					alert("請記得輸入CSD ID !!");
+					return false;
+				}else if(element.value.length != 7){
+					alert("提醒: ChipID 需為7碼 !!");
+					return false;
+				}
+			}
+		}
+		Obj.form.submit(Obj.name);
+		Obj.disabled=true;				
+	}
+</script>
+
+<table class = 't2'>
+
+<tr><th>Step</th><th>機台</th><th>點檢位</th><th>檢查方式</th><th>OK/NG</th><th>備註</th></tr>
+
+{% if mach0[3] != 'A'  %}
+<tr><td>A</td><td>MJC</td><td>Pre-Alignment</td><td>1. STOPPER是否損壞或無法轉動<br/>(需於未夾取Panel時檢查，不可有固定位置凹槽或單邊磨秏，不分嚴重輕微皆更換，平均磨為正常)</td>
+<td><input type="radio" name="CT1_A1" value="OK" checked>OK<input type="radio" name="CT1_A1" value="NG">NG<td><input type="text" name="CT1_A1_rem"  value="  " size="20"></td></tr>
+<tr><td>A</td><td>MJC</td><td>Pre-Alignment</td><td>2. STOPPER無法轉動(未夾取Panel時檢查)</td>
+<td><input type="radio" name="CT1_A2" value="OK" checked>OK<input type="radio" name="CT1_A2" value="NG">NG<td><input type="text" name="CT1_A2_rem"  value="  " size="20"></td></tr>
+<tr><td>A</td><td>MJC</td><td>Pre-Alignment</td><td>3. 點檢Panel夾取後，Panel於Stopper，需在白區內</td>
+<td><input type="radio" name="CT1_A3" value="OK" checked>OK<input type="radio" name="CT1_A3" value="NG">NG<td><input type="text" name="CT1_A3_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck1.JPG"</td></tr>
+
+<tr><td>A</td><td>MJC</td><td>Pre-Alignment</td><td>ˋ4. 用手推動滑塊，檢查是否有移動會卡住及彈簧是否斷掉 </td>
+<td><input type="radio" name="CT1_A4" value="OK" checked>OK<input type="radio" name="CT1_A4" value="NG">NG<td><input type="text" name="CT1_A4_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck2.JPG"</td></tr>
+
+<tr><td>B</td><td>MJC</td><td>Pre-Alignment</td><td>1. 上下手臂至放PANEL是否置中(A等於B) </td>
+<td><input type="radio" name="CT1_B1" value="OK" checked>OK<input type="radio" name="CT1_B1" value="NG">NG<td><input type="text" name="CT1_B1_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck3.JPG"</td></tr>
+
+
+<tr><td>B</td><td>MJC</td><td>Up Carrier</td><td>2. Carrier優力膠塊是否受損<br/>(需於未夾取Panel時檢查，不可有固定位置凹槽或單邊磨秏，不分嚴重輕微皆更換，平均磨為正常)<br/>(未夾取Panel時檢查) </td>
+<td><input type="radio" name="CT1_B2" value="OK" checked>OK<input type="radio" name="CT1_B2" value="NG">NG<td><input type="text" name="CT1_B2_rem"  value="  " size="20"></td></tr>
+<tr><td>B</td><td>MJC</td><td>Down Carrier</td><td>3. Carrier優力膠塊是否受損<br/>(需於未夾取Panel時檢查，不可有固定位置凹槽或單邊磨秏，不分嚴重輕微皆更換，平均磨為正常)<br/>(未夾取Panel時檢查) </td>
+<td><input type="radio" name="CT1_B3" value="OK" checked>OK<input type="radio" name="CT1_B3" value="NG">NG<td><input type="text" name="CT1_B3_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck4.JPG"</td></tr>
+
+<tr><td>C</td><td>MJC</td><td>Up Carrier</td><td>1. Carrier的上頂PIN彈簧是否斷裂 </td>
+<td><input type="radio" name="CT1_C1" value="OK" checked>OK<input type="radio" name="CT1_C1" value="NG">NG<td><input type="text" name="CT1_C1_rem"  value="  " size="20"></td></tr>
+<tr><td>C</td><td>MJC</td><td>Down Carrier</td><td>2. Carrier的上頂PIN彈簧是否斷裂 </td>
+<td><input type="radio" name="CT1_C2" value="OK" checked>OK<input type="radio" name="CT1_C2" value="NG">NG<td><input type="text" name="CT1_C2_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck5.JPG"</td></tr>
+
+
+<tr><td>C</td><td>MJC</td><td> Up Carrier</td><td>3. 優力膠底座螺絲重新鎖附測試有無鬆動 </td>
+<td><input type="radio" name="CT1_C3" value="OK" checked>OK<input type="radio" name="CT1_C3" value="NG">NG<td><input type="text" name="CT1_C3_rem"  value="  " size="20"></td></tr>
+<tr><td>C</td><td>MJC</td><td> Down Carrier</td><td>4. 優力膠底座螺絲重新鎖附測試有無鬆動 </td>
+<td><input type="radio" name="CT1_C4" value="OK" checked>OK<input type="radio" name="CT1_C4" value="NG">NG<td><input type="text" name="CT1_C4_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck6.JPG"</td></tr>
+
+<tr><td>D</td><td>MJC</td><td>Workstage</td><td>1. STOPPER & CLAMP是否損壞<br/>(需於未夾取Panel時檢查，不可有固定位置凹槽或單邊磨秏，不分嚴重輕微，更換後觀察，平均磨為正常) </td>
+<td><input type="radio" name="CT1_D1" value="OK" checked>OK<input type="radio" name="CT1_D1" value="NG">NG<td><input type="text" name="CT1_D1_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck7.JPG"</td></tr>
+
+<tr><td>D</td><td>MJC</td><td>Workstage</td><td>2. Workstage框上溝槽是否有玻璃屑<br/>(有，需拍照及點檢機構並MAIL告知ENG，清除後，交接點檢該處3個班，是否仍有玻璃屑) </td>
+<td><input type="radio" name="CT1_D2" value="OK" checked>OK<input type="radio" name="CT1_D2" value="NG">NG<td><input type="text" name="CT1_D2_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck8.JPG"</td></tr>
+
+<tr><td>D</td><td>MJC</td><td>Workstage</td><td>3. 鐵氟龍膠帶是否有受損(Panel接觸面，單邊受損大於2mm且3處以上，直接更換) </td>
+<td><input type="radio" name="CT1_D3" value="OK" checked>OK<input type="radio" name="CT1_D3" value="NG">NG<td><input type="text" name="CT1_D3_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck9.JPG"</td></tr>
+
+<tr><td>D</td><td>MJC</td><td>Workstage</td><td>4. CLAMP作動是否有3段Sensor燈號(夾不到：不亮、正確：亮、沒夾到：不亮) </td>
+<td><input type="radio" name="CT1_D4" value="OK" checked>OK<input type="radio" name="CT1_D4" value="NG">NG<td><input type="text" name="CT1_D4_rem"  value="  " size="20"></td></tr>
+<tr><td>D</td><td>MJC</td><td>Workstage</td><td>5. 用手轉動STOPPER，確認Panel都有承靠在右邊Stopper上 </td>
+<td><input type="radio" name="CT1_D5" value="OK" checked>OK<input type="radio" name="CT1_D5" value="NG">NG<td><input type="text" name="CT1_D5_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck10.JPG"</td></tr>
+
+<tr><td>E</td><td>MJC</td><td>Workstage </td><td>1. 傳片位置確認(STOPPER與PANEL距離)，塑膠尺量測約0.8~2mm </td>
+<td><input type="radio" name="CT1_E1" value="OK" checked>OK<input type="radio" name="CT1_E1" value="NG">NG<td><input type="text" name="CT1_E1_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck11.JPG"</td></tr>
+
+<tr><td>F</td><td>MJC</td><td>Workstage </td><td>1. Carrier撈抓與Stage溝槽是否置中(塑膠尺量測左、右皆需大於2mm) </td>
+<td><input type="radio" name="CT1_F1" value="OK" checked>OK<input type="radio" name="CT1_F1" value="NG">NG<td><input type="text" name="CT1_F1_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck12.JPG"</td></tr>
+
+<tr><td>G</td><td>MJC</td><td>Block</td><td>1. 是否有鎖緊(手去搖動) </td>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck13.JPG"</td></tr>
+<td><input type="radio" name="CT1_G1" value="OK" checked>OK<input type="radio" name="CT1_G1" value="NG">NG<td><input type="text" name="CT1_G1_rem"  value="  " size="20"></td></tr>
+
+<tr><td>G</td><td>MJC</td><td>Block</td><td>2. 是否有多餘block，依量測電壓表確認數量(僅換線點檢確認) </td>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck14.JPG"</td></tr>
+<td><input type="radio" name="CT1_G2" value="OK" checked>OK<input type="radio" name="CT1_G2" value="NG">NG<td><input type="text" name="CT1_G2_rem"  value="  " size="20"></td></tr>
+
+<tr><td>H</td><td>MJC</td><td>縮針確認</td><td>1. 按壓探針後，再目視確認是否縮針 </td>
+<td><input type="radio" name="CT1_H1" value="OK" checked>OK<input type="radio" name="CT1_H1" value="NG">NG<td><input type="text" name="CT1_H1_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck15.JPG"</td></tr>
+
+<tr><td>I</td><td>MJC</td><td>Workstage</td><td>1. STOPPER與PANEL間，是否可以利用塑膠尺(1mm厚)刷過 </td>
+<td><input type="radio" name="CT1_I1" value="OK" checked>OK<input type="radio" name="CT1_I1" value="NG">NG<td><input type="text" name="CT1_I1_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck16.JPG"</td></tr>
+
+<tr><td>K</td><td>MJC</td><td>Panel 外觀檢</td><td>1. 使用手電筒，於Pre-A處，確認當下Panel(上下臂各兩片)，四邊是否有延裂/破片 </td>
+<td colspan = 2>
+CHIP ID 1 &nbsp;<input type="text" name="CT1_K1_ID01" id="CT1_K1_ID01"  placeholder="請輸入ChipID" size="8" maxlength="7">&nbsp;&nbsp;&nbsp;<input type="text" name="OCT1_K1_rem"  value="" placeholder="備註" size="10"><br/>
+CHIP ID 2 &nbsp;<input type="text" name="CT1_K1_ID02" id="CT1_K1_ID02"  placeholder="請輸入ChipID" size="8" maxlength="7"><br/>
+CHIP ID 3 &nbsp;<input type="text" name="CT1_K1_ID03" id="CT1_K1_ID03"  placeholder="請輸入ChipID" size="8" maxlength="7"><br/>
+CHIP ID 4 &nbsp;<input type="text" name="CT1_K1_ID04" id="CT1_K1_ID04"  placeholder="請輸入ChipID" size="8" maxlength="7"><br/>
+<input type="text" class='in1'  value ="" size="20" readonly>
+</td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck18.JPG"</td></tr>
+
+<tr><td>M</td><td>C/V</td><td>VCR、CT#1、CT#2夾取處</td><td>1. 是否Clamp是否鬆動(柱子沒鎖或電動缸損壞)及優力膠是否可正常轉動 </td>
+<td><input type="radio" name="CT1_M1" value="OK" checked>OK<input type="radio" name="CT1_M1" value="NG">NG<td><input type="text" name="CT1_M1_rem"  value="  " size="20"></td></tr>
+<tr><td>M</td><td>C/V</td><td>VCR、CT#1、CT#2夾取處</td><td>2. 是否有玻璃屑 </td>
+<td><input type="radio" name="CT1_M2" value="OK" checked>OK<input type="radio" name="CT1_M2" value="NG">NG<td><input type="text" name="CT1_M2_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck19.JPG"</td></tr>
+
+<tr><td>N</td><td>ULD</td><td>VCR夾取處</td><td>1. 是否Clamp是否鬆動(柱子沒鎖或電動缸損壞)及優力膠是否可正常轉動 </td>
+<td><input type="radio" name="CT1_N1" value="OK" checked>OK<input type="radio" name="CT1_N1" value="NG">NG<td><input type="text" name="CT1_N1_rem"  value="  " size="20"></td></tr>
+<tr><td>N</td><td>ULD</td><td>VCR夾取處</td><td>2. 是否有玻璃屑 </td>
+<td><input type="radio" name="CT1_N2" value="OK" checked>OK<input type="radio" name="CT1_N2" value="NG">NG<td><input type="text" name="CT1_N2_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck20.JPG"</td></tr>
+
+<tr><td>A</td><td>Robot</td><td>上下FORK吸嘴</td><td>5. 確認吸嘴是否有受損(使用手電筒，手轉吸嘴360度確認)，無論損傷狀況先更換處理 </td>
+<td><input type="radio" name="CT1_A_Robot1" value="OK" checked>OK<input type="radio" name="CT1_A_Robot1" value="NG">NG<td><input type="text" name="CT1_A_Robot1_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck22.JPG"</td></tr>
+
+
+{% else %}
+
+
+<tr><td>{{class0}}</td><td>GPM</td><td>Workstage</td><td>1. STOPPER是否損壞或無法轉動<br/>(未夾取Panel時檢查) </td>
+<td><input type="radio" name="CT1_2_1" value="OK" checked>OK<input type="radio" name="CT1_2_1" value="NG">NG<td><input type="text" name="CT1_2_1_rem"  value="  " size="20"></td></tr>
+<tr><td>{{class0}}</td><td>GPM</td><td>Workstage</td><td>2. 機構範圍是否有玻璃屑<br/>(Pre-Alignment平躺時檢查) </td>
+<td><input type="radio" name="CT1_2_2" value="OK" checked>OK<input type="radio" name="CT1_2_2" value="NG">NG<td><input type="text" name="CT1_2_2_rem"  value="  " size="20"></td></tr>
+
+<tr><td>M</td><td>C/V</td><td>VCR、CT#1、CT#2夾取處</td><td>25. 是否Clamp是否鬆動(柱子沒鎖或電動缸損壞)及優力膠是否可正常轉動 </td>
+<td><input type="radio" name="CT1_M1" value="OK" checked>OK<input type="radio" name="CT1_M1" value="NG">NG<td><input type="text" name="CT1_M1_rem"  value="  " size="20"></td></tr>
+<tr><td>M</td><td>C/V</td><td>VCR、CT#1、CT#2夾取處</td><td>26. 是否有玻璃屑 </td>
+<td><input type="radio" name="CT1_M2" value="OK" checked>OK<input type="radio" name="CT1_M2" value="NG">NG<td><input type="text" name="CT1_M2_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck19.JPG"</td></tr>
+
+<tr><td>N</td><td>ULD</td><td>VCR夾取處</td><td>27. 是否Clamp是否鬆動(柱子沒鎖或電動缸損壞)及優力膠是否可正常轉動 </td>
+<td><input type="radio" name="CT1_N1" value="OK" checked>OK<input type="radio" name="CT1_N1" value="NG">NG<td><input type="text" name="CT1_N1_rem"  value="  " size="20"></td></tr>
+<tr><td>N</td><td>ULD</td><td>VCR夾取處</td><td>28. 是否有玻璃屑 </td>
+<td><input type="radio" name="CT1_N2" value="OK" checked>OK<input type="radio" name="CT1_N2" value="NG">NG<td><input type="text" name="CT1_N2_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck20.JPG"</td></tr>
+
+
+<tr><td>O</td><td>CV</td><td>CV上臂吸附真空處</td><td>29. 用眼睛觀察Panel在吸附真空後，外圍是否有下垂(看真空數值<-40) </td>
+<td><input type="radio" name="CT1_O1" value="OK" checked>OK<input type="radio" name="CT1_O1" value="NG">NG<td><input type="text" name="CT1_O1_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck21.JPG"</td></tr>
+
+
+<tr><td>{{class0}}</td><td>GPM</td><td>Workstage </td><td>8. 清潔Diffuser </td>
+<td><input type="radio" name="CT1_2_8" value="OK" checked>OK<input type="radio" name="CT1_2_8" value="NG">NG<td><input type="text" name="CT1_2_8_rem"  value="  " size="20"></td></tr>
+{% endif %}
+<tr><td></td><td></td><td></td><td></td><td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td><td></td></tr>
+
+</table>
+</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" name="return" class='in_subDate' value="返回" onClick="javascript:history.back()">
+<input type='text' class='in_subDate' name='CheckBtn'  onclick="checkLightID_CT1(this)" value="送出">
+{%- endmacro %}
+
+
+
+
+
+{% macro CSTCheckList(class0, mach0,user, name, auth, shift, time, mode,notify) -%}
+<h3>CST點檢</h3>
+
+<h2> 人員:<input type="text" name="User"  value="{{user}}" size="8" class='in1'  readonly><input type="text" name="Name"  value="{{name}}" size="6" class='in1'   readonly></h2>
+<h2> 班別:<input type="text" name="Shift"  value="{{shift}}" size="8" class='in1'  readonly><input type="text" name="Auth"  value="{{auth}}" size="8" class='in1'  readonly></h2>
+<h2>站點:<input type="text" name="Class"  value="{{class0}}" size="8" class='in1'   readonly></h2></h2>
+<h2>EQ:<input type="text" name="Machine"  value="{{mach0}}" size="8" class='in1' readonly></h2>
+
+<h2>點檢時間:<input type="text" name="time"  value="{{time}}" size="8" class='in1'   readonly></h2>
+<h3> {{notify}}</h3> 
+
+<script type="text/javascript">
+	function checkCSTID_CT1(Obj){
+		var id_base = 'CST_Check_ID0';
+		var id;
+		var element; 
+		var select_val = document.getElementById("Mode").value;
+		
+		
+		if (select_val == "notSelected" ){
+			alert("請記得選擇點檢模式 !!");
+			return false;	
+		}
+		for (var i = 1; i <= 2; i++) {
+			id = id_base + parseInt(i);
+			element = document.getElementById(id);
+			if (element){
+				if(element.value == ""){
+					alert("請記得輸入CSD ID !!");
+					return false;
+				}else if(element.value.length != 6){
+					alert("提醒: CSD ID 需為6碼 !!");
+					return false;
+				}
+			}
+		}
+		Obj.form.submit(Obj.name);
+		Obj.disabled=true;				
+	}
+	 
+	function changeMode(Obj){
+		var id_base = 'CST_LineChange_ID0';
+		var table_inner = "<tr><td>Port :</td><td>"
+		table_inner += "<input type='radio' name='CST_Check_ID01_port' value='2' >1"
+		table_inner += "<input type='radio' name='CST_Check_ID01_port' value='2' >2"
+		table_inner += "<input type='radio' name='CST_Check_ID01_port' value='3' >3"
+		table_inner += "<input type='radio' name='CST_Check_ID01_port' value='4' >4</td>"
+		table_inner += "<td>CST ID</td><td><input type='text' name='CST_Check_ID01' id='CST_Check_ID01' value='' placeholder='請輸入CSD ID' size='9' maxlength='6'></td>";
+		var cst_table = document.getElementById("cst_table");
+		var select_mode = document.getElementById("Mode").value;
+		
+		
+		table_inner += "<td><input type='radio' name='CST_Check_ID01_OK' value='OK' checked>OK<input type='radio' name='CST_Check_ID01_OK' value='NG'>NG</td>"
+		table_inner += "<td>備註:<input type='text' name='CST_Check_ID01_rem'  value='' size='20'></td>"
+		table_inner += "</tr>"
+		if (select_mode == 'CST_Fregment_NotHit'){
+			cst_table.innerHTML = table_inner;
+		}else if(select_mode == 'CST_Fregment_Hit'){
+			table_inner += "<tr><td>Port :</td><td>"
+			table_inner += "<input type='radio' name='CST_Check_ID02_port' value='2' >1"
+			table_inner += "<input type='radio' name='CST_Check_ID02_port' value='2' >2"
+			table_inner += "<input type='radio' name='CST_Check_ID02_port' value='3' >3"
+			table_inner += "<input type='radio' name='CST_Check_ID02_port' value='4' >4</td>"
+
+			table_inner += "<td>CST ID</td><td><input type='text' name='CST_Check_ID02' id='CST_Check_ID02' value='' placeholder='請輸入CSD ID' size='9' maxlength='6'></td>";
+			table_inner += "<td><input type='radio' name='CST_Check_ID02_OK' value='OK' checked>OK<input type='radio' name='CST_Check_ID02_OK' value='NG'>NG</td>"
+			table_inner += "<td>備註:<input type='text' name='CST_Check_ID02_rem'  value='' size='20'></td>"
+			table_inner += "</tr>"
+			cst_table.innerHTML = table_inner;
+		}else if(select_mode == 'CST_Maint'){
+			table_inner = "<tr><td>Panel外觀是否異常(CHIPPING、破片)</td><td><input type='radio' name='CST_Maint01' value='OK' checked>OK<input type='radio' name='CST_Maint01' value='NG'>NG</td></tr>"
+			table_inner += "<tr><td>抽出10片查看是否有背汙</td><td><input type='radio' name='CST_Maint02' value='OK' checked>OK<input type='radio' name='CST_Maint02' value='NG'>NG</td></tr>"
+			cst_table.innerHTML = table_inner;
+		}else{
+			table_inner = ""
+			cst_table.innerHTML = table_inner;
+		}
+					
+	}
+	 
+</script>
+
+<select name="Mode" id="Mode" onchange="changeMode(this.selectedIndex)">
+				<option value="notSelected" >---</option>
+				<option value="CST_Fregment_Hit">破片對中</option>
+				<option value="CST_Fregment_NotHit">破片未中</option>
+				<option value="CST_Maint">保養</option>
+</select>
+
+
+<table class = 't2' id='cst_table'>
+
+</table>
+
+
+</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<input type="button" name="return" class='in_subDate' value="返回" onClick="javascript:history.back()">
+<input type='text' class='in_subDate' name='CheckBtn'  onclick="checkCSTID_CT1(this)" value="送出">
+
+{%- endmacro %}
+
+
+{% macro MaintCheckList(class0, mach0,user, name, auth,  shift, time, mode,notify) -%}
+<h3>保養點檢</h3>
+<h2>Mode: <input type="text" name="Mode"  value="{{mode}}" size="8" class='in1' readonly></h2>
+<h2> 人員:<input type="text" name="User"  value="{{user}}" size="8" class='in1'  readonly><input type="text" name="Name"  value="{{name}}" size="6" class='in1'   readonly></h2>
+<h2> 班別:<input type="text" name="Shift"  value="{{shift}}" size="8" class='in1'  readonly><input type="text" name="Auth"  value="{{auth}}" size="8" class='in1'  readonly></h2>
+<h2>站點:<input type="text" name="Class"  value="{{class0}}" size="8" class='in1'   readonly></h2></h2>
+<h2>EQ:<input type="text" name="Machine"  value="{{mach0}}" size="8" class='in1' readonly></h2>
+<script type="text/javascript">
+function checkCSTID(Obj){
+	var id_base = 'Maint_Check_ID0';
+	var id;
+	var element;
+	for (var i = 0; i <= 1; i++) {
+		id = id_base + parseInt(i);
+		element = document.getElementById(id);
+		if (element){
+			if(element.value == ""){
+				alert("請記得輸入CSD ID !!");
+				return false;
+			}else if(element.value.length != 6){
+				alert("提醒: CSD ID 需為6碼 !!");
+				return false;
+			}
+		}
+	}
+	Obj.form.submit(Obj.name);
+	Obj.disabled=true;		
+}
+</script>
+<h2> 點檢時間:<input type="text" name="time"  value="{{time}}" size="8" class='in1'   readonly></h2>
+<h3> {{notify}}</h3> 
+<table class = 't2'>
+<tr><td>CST ID</td><td><input type="text" name="Maint_Check_ID01" id="Maint_Check_ID01" value="" placeholder="請輸入CSD ID" required   size="9" maxlength="6" checked></td>
+<td><input type="radio" name="Maint_Check_ID01_OK" value="OK" checked>OK
+<input type="radio" name="Maint_Check_ID01_OK" value="NG">NG</td>
+
+<td>備註:<input type="text" name="Maint_Check_rem"  value="  " size="20"></td>
+</tr>
+</table>
+</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" name="return" class='in_subDate' value="返回" onClick="javascript:history.back()">
+<input type='text' class='in_subDate' name='CheckBtn'  onclick="checkCSTID(this)" value="送出">
+<input type="submit" name="CheckBtn" value="notRun"> 
+{%- endmacro %}
+
+
+
+
+{% macro ConsumCheckList(class0, mach0,user, name, auth,  shift, time, mode,notify) -%}
+<h3>耗材更換警示</h3>
+<h2>Mode: <input type="text" name="Mode"  value="{{mode}}" size="8" class='in1' readonly></h2>
+<h2> 人員:<input type="text" name="User"  value="{{user}}" size="8" class='in1'  readonly><input type="text" name="Name"  value="{{name}}" size="6" class='in1'   readonly></h2>
+<h2> 班別:<input type="text" name="Shift"  value="{{shift}}" size="8" class='in1'  readonly><input type="text" name="Auth"  value="{{auth}}" size="8" class='in1'  readonly></h2>
+<h2>站點:<input type="text" name="Class"  value="{{class0}}" size="8" class='in1'   readonly></h2></h2>
+<h2>EQ:<input type="text" name="Machine"  value="{{mach0}}" size="8" class='in1' readonly></h2>
+
+<h2> 點檢時間:<input type="text" name="time"  value="{{time}}" size="8" class='in1'   readonly></h2>
+<h3> {{notify}}</h3> 
+<table class = 't2'>
+<tr><th>Step</th><th>機台</th><th>點檢位</th><th>檢查方式</th><th>點檢</th><th>備註</th></tr>
+
+
+{% if mach0[3] != 'A'  %}
+<tr><td>{{class0}}</td><td>MJC</td><td>Stage</td><td>1. STOPPER是否損壞</td>
+<td><input type="radio" name="Consum_StageStopper" value="OK" checked>OK<input type="radio" name="Consum_StageStopper" value="NG">NG<td>備註:<input type="text" name="Consum_StageStopper_rem"  value="" size="20"></td></tr>
+
+<tr><td>{{class0}}</td><td>MJC</td><td>Pre-Alignment</td><td>2. STOPPER是否損壞<br/>(Pre-Alignment平躺時檢查)</td>
+<td><input type="radio" name="Consum_preAStopper" value="OK" checked>OK<input type="radio" name="Consum_preAStopper" value="NG">NG<td>備註:<input type="text" name="Consum_preAStopper_rem"  value="" size="20"></td></tr>
+
+<tr><td>{{class0}}</td><td>MJC</td><td>Up Carrier</td><td>3. Carrier 優力膠塊是否受損 </td>
+<td><input type="radio" name="Consum_UpCarrier" value="OK" checked>OK<input type="radio" name="Consum_UpCarrier" value="NG">NG<td>備註:<input type="text" name="Consum_UpCarrier_rem"  value="" size="20"></td></tr>
+<tr><td>{{class0}}</td><td>MJC</td><td>Down Carrier</td><td>4. Carrier 優力膠塊是否受損 </td>
+<td><input type="radio" name="Consum_DownCarrier" value="OK" checked>OK<input type="radio" name="Consum_DownCarrier" value="NG">NG<td>備註:<input type="text" name="Consum_DownCarrier_rem"  value="" size="20"></td></tr>
+{% else %}
+
+<tr><td>{{class0}}</td><td>GPM</td><td>Stage</td><td>1. STOPPER是否損壞 </td>
+<td><input type="radio" name="Consum_StageStopper" value="OK" checked>OK<input type="radio" name="Consum_StageStopper" value="NG">NG<td>備註:<input type="text" name="Consum_StageStopper_rem"  value="" size="20"></td></tr>
+{% endif %}
+<tr><td></td><td></td><td></td><td></td><td><td></td></tr>
+</table>
+</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" name="return" class='in_subDate' value="返回" onClick="javascript:history.back()">
+<input type='text' class='in_subDate' name='CheckBtn'  onclick="this.form.submit(this.name);this.disabled=true;" value="送出">
+
+{%- endmacro %}
+
+
+
+{% macro MJCAngleList(class0, mach0,user, name, auth,  shift, time, mode,notify) -%}
+<h3>MJC旋轉角度</h3>
+<h2>Mode: <input type="text" name="Mode"  value="{{mode}}" size="8" class='in1' readonly></h2>
+<h2> 人員:<input type="text" name="User"  value="{{user}}" size="8" class='in1'  readonly><input type="text" name="Name"  value="{{name}}" size="6" class='in1'   readonly></h2>
+<h2> 班別:<input type="text" name="Shift"  value="{{shift}}" size="8" class='in1'  readonly><input type="text" name="Auth"  value="{{auth}}" size="8" class='in1'  readonly></h2>
+<h2>站點:<input type="text" name="Class"  value="{{class0}}" size="8" class='in1'   readonly></h2></h2>
+<h2>EQ:<input type="text" name="Machine"  value="{{mach0}}" size="8" class='in1' readonly></h2>
+
+<h2> 點檢時間:<input type="text" name="time"  value="{{time}}" size="8" class='in1'   readonly></h2>
+<h3> {{notify}}</h3> 
+<table class = 't2'>
+
+
+<tr><td><h1>CT1</td><td><h1>Model</td>  
+	<td><select name='Model' >
+		<option value='50Q3' >50Q3</option>
+		<option value='50Q4' >50Q4</option>
+		<option value='43H' >43H</option>
+		<option value='43Q3' >43Q3</option>
+		<option value='Other Model' >其他請先用備註</option>
+	</select>	</td>
+<tr><td><h1>CT1</td><td><h1>角度量測:</td>
+<td><input type="text" class="inDate1" name="MJC_Angle" > </td><td>
+<b>備註: <b><input type="text" class="in_text" name="MJC_Angle_Remarks" >
+<tr><td></td><td></td><td></td><td></td><td><td></td></tr>
+</table>
+</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<input type='submit' class='in_subDate' name='CheckBtn'   value="送出">
+
+{%- endmacro %}
+
+
+
+{% macro showColdRun(df) -%}
+<h3>Cold Run</h3>
+<table class = 't2'>
+<tr>
+<thead>
+<tr><th>    </th>   <th>    EQP      </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['Machine']}}</th>{% endfor %}</tr>
+<tr><th>    </th>   <th>    Date     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['time'][0:10]}}</th>{% endfor %}</tr></tr>
+<tr><th>    </th>   <th>    Time     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['time'][11:]}}</th>{% endfor %}</tr></tr>
+<tr><th>    </th>   <th>    填單人員     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['Name']}}</th>{% endfor %}</tr></tr>
+<tr><td>CST ID 01</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['Cold_Run_ID01']}}" title="{{value['Cold_Run_ID01_rem']}}" size="4" readonly></td>
+{% endfor %}</tr>
+<tr><td>CST ID 02</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['Cold_Run_ID02']}}" title="{{value['Cold_Run_ID02_rem']}}" size="4" readonly></td>
+{% endfor %}</tr>
+
+</table>
+{%- endmacro %}
+
+
+	
+{% macro showCST(df) -%}
+<h3>CST點檢</h3>
+<table class = 't2'>
+<tr>
+<thead>
+<tr><th>    </th>   <th>    EQP      </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['Machine']}}</th>{% endfor %}</tr>
+<tr><th>    </th>   <th>    Date     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['time'][0:10]}}</th>{% endfor %}</tr></tr>
+<tr><th>    </th>   <th>    Time     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['time'][11:]}}</th>{% endfor %}</tr></tr>
+<tr><th>    </th>   <th>    填單人員     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['Name']}}</th>{% endfor %}</tr></tr>
+<tr><td>CST ID 01</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CST_Check_ID01_OK']}}, {{value['CST_Check_ID01']}}, {{value['CST_Check_ID01_rem']}}" size="25" readonly></td>
+{% endfor %}</tr>
+<tr><td>CST ID 02</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CST_Check_ID02_OK']}}, {{value['CST_Check_ID02']}}, {{value['CST_Check_ID02_rem']}}"  size="25" readonly></td>
+{% endfor %}</tr>
+<tr><td>CST ID 03</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CST_Check_ID03_OK']}}, {{value['CST_Check_ID03']}}, {{value['CST_Check_ID03_rem']}}"  size="25" readonly></td>
+{% endfor %}</tr>
+<tr><td>CST ID 04</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CST_Check_ID04_OK']}}, {{value['CST_Check_ID04']}}, {{value['CST_Check_ID04_rem']}}"  size="25" readonly></td>
+{% endfor %}</tr>
+
+<tr><td>Panel外觀是否異常</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CST_Panel']}}"  size="25" readonly></td>
+{% endfor %}</tr>
+
+<tr><td>CST Type</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='' value ="{{value['CST_Type']}}"  size="25" readonly></td>
+{% endfor %}</tr>
+
+<tr><td>換線前產品</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='' value ="{{value['Model0']}}"  size="25" readonly></td>
+{% endfor %}</tr>
+
+<tr><td>換線後產品</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='' value ="{{value['Model1']}}"  size="25" readonly></td>
+{% endfor %}</tr>
+
+
+<tr><td>[46B1]</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='' value ="{{value['CST_LC01_46B1']}}"  size="25" readonly></td>
+{% endfor %}</tr>
+
+<tr><td>[46B2]</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='' value ="{{value['CST_LC02_46B2']}}"  size="25" readonly></td>
+{% endfor %}</tr>
+
+<tr><td>[46F3]</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='' value ="{{value['CST_LC03_46F3']}}"  size="25" readonly></td>
+{% endfor %}</tr>
+
+<tr><td>[46F4]</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='' value ="{{value['CST_LC04_46F4']}}"  size="25" readonly></td>
+{% endfor %}</tr>
+
+<tr><td>[01B5]</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='' value ="{{value['CST_LC05_01B5']}}"  size="25" readonly></td>
+{% endfor %}</tr>
+
+<tr><td>[01B6]</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='' value ="{{value['CST_LC06_01B6']}}"  size="25" readonly></td>
+{% endfor %}</tr>
+
+<tr><td>[01F7]</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='' value ="{{value['CST_LC07_01F7']}}"  size="25" readonly></td>
+{% endfor %}</tr>
+
+<tr><td>[01F8]</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='' value ="{{value['CST_LC08_01F8']}}"  size="25" readonly></td>
+{% endfor %}</tr>
+
+<tr><td>Panel離CST左右魚骨是否符合規定</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='' value ="{{value['CST_LC09_PanelBone']}}"  size="25" readonly></td>
+{% endfor %}</tr>
+
+
+
+</table>
+{%- endmacro %}
+
+{% macro showLight(df) -%}
+<h3>機台點檢</h3>
+<table class = 't2'>
+<thead>
+<tr><th>  </th>     <th></th><th>    EQP      </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['Machine']}}</th>{% endfor %}</tr>
+<tr><th>  </th>     <th></th><th>    Date     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['time'][0:10]}}</th>{% endfor %}</tr></tr>
+<tr><th>  </th>     <th></th><th>    Time     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['time'][11:]}}</th>{% endfor %}</tr></tr>
+<tr><th>  </th>     <th></th><th>    填單人員 </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['Name']}}</th>{% endfor %}</tr></tr>
+
+<tr><th>Step</th><th>機台</th><th>點檢位</th><th><input type="text" class='in0'value ="檢查方式" size="20" readonly></td>
+</th></tr></thead>
+
+
+{% set class0='CT1' %}
+	<tr><td>A</td><td>MJC</td><td>Pre-Alignment</td><td>1. STOPPER是否損壞或無法轉動<br/>(需於未夾取Panel時檢查，不可有固定位置凹槽或單邊磨秏，不分嚴重輕微皆更換，平均磨為正常)</td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_A1']}}" title="{{value['CT1_A1_rem']}}" size="3" readonly></td>
+{% endfor %}</tr>
+	<tr><td>A</td><td>MJC</td><td>Pre-Alignment</td><td>2. STOPPER無法轉動(未夾取Panel時檢查)</td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_A2']}}" title="{{value['CT1_A2_rem']}}" size="3" readonly></td>
+{% endfor %}</tr>
+	<tr><td>A</td><td>MJC</td><td>Pre-Alignment</td><td>3. 點檢Panel夾取後，Panel於Stopper，需在白區內</td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_A3']}}" title="{{value['CT1_A3_rem']}}" size="3" readonly></td>
+{% endfor %}</tr>
+	<tr><td>A</td><td>MJC</td><td>Pre-Alignment</td><td>4. 用手推動滑塊，檢查是否有移動會卡住及彈簧是否斷掉 </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_A4']}}" title="{{value['CT1_A4_rem']}}" size="3" readonly></td>
+{% endfor %}</tr>
+	<tr><td>B</td><td>MJC</td><td>Pre-Alignment</td><td>1. 上下手臂至放PANEL是否置中(A等於B)  </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_B1']}}" title="{{value['CT1_B1_rem']}}" size="3" readonly></td>
+{% endfor %}</tr>
+	<tr><td>B</td><td>MJC</td><td>Up Carrier</td><td>2. Carrier優力膠塊是否受損<br/>(需於未夾取Panel時檢查，不可有固定位置凹槽或單邊磨秏，不分嚴重輕微皆更換，平均磨為正常)<br/>(未夾取Panel時檢查) </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_B2']}}" title="{{value['CT1_B2_rem']}}" size="3" readonly></td>
+{% endfor %}</tr>
+	<tr><td>B</td><td>MJC</td><td>Down Carrier</td><td>3. Carrier優力膠塊是否受損<br/>(需於未夾取Panel時檢查，不可有固定位置凹槽或單邊磨秏，不分嚴重輕微皆更換，平均磨為正常)<br/>(未夾取Panel時檢查) </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_B3']}}" title="{{value['CT1_B3_rem']}}" size="3" readonly></td>
+{% endfor %}</tr>
+	<tr><td>C</td><td>MJC</td><td>Up Carrier</td><td>1. Carrier的上頂PIN彈簧是否斷裂 </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_C1']}}" title="{{value['CT1_C1_rem']}}" size="3" readonly></td>
+{% endfor %}</tr>
+	<tr><td>C</td><td>MJC</td><td>Down Carrier</td><td>2. Carrier的上頂PIN彈簧是否斷裂 </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_C2']}}" title="{{value['CT1_C2_rem']}}" size="3" readonly></td>
+{% endfor %}
+	<tr><td>C</td><td>MJC</td><td>Up Carrier</td><td>3. 優力膠底座螺絲重新鎖附測試有無鬆動 </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_C3']}}" title="{{value['CT1_C3_rem']}}" size="3" readonly></td>
+{% endfor %}
+	<tr><td>C</td><td>MJC</td><td>Down Carrier</td><td>4. 優力膠底座螺絲重新鎖附測試有無鬆動 </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_C4']}}" title="{{value['CT1_C4_rem']}}" size="3" readonly></td>
+{% endfor %}
+<tr><td>D</td><td>MJC</td><td>Workstage </td><td>1. STOPPER & CLAMP是否損壞<br/>(需於未夾取Panel時檢查，不可有固定位置凹槽或單邊磨秏，不分嚴重輕微，更換後觀察，平均磨為正常) </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_D1']}}" title="{{value['CT1_D1_rem']}}" size="3" readonly></td>
+{% endfor %}
+	<tr><td>D</td><td>MJC</td><td>Workstage</td><td>2. Workstage框上溝槽是否有玻璃屑<br/>(有，需拍照及點檢機構並MAIL告知ENG，清除後，交接點檢該處3個班，是否仍有玻璃屑) </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_D2']}}" title="{{value['CT1_D2_rem']}}" size="3" readonly></td>
+{% endfor %}
+	
+	<tr><td>D</td><td>MJC</td><td>Workstage </td><td>3. 鐵氟龍膠帶是否有受損(Panel接觸面，單邊受損大於2mm且3處以上，直接更換) </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_D3']}}" title="{{value['CT1_D3_rem']}}" size="3" readonly></td>
+{% endfor %}
+	<tr><td>D</td><td>MJC</td><td>Workstage</td><td>4. CLAMP作動是否有3段Sensor燈號(夾不到：不亮、正確：亮、沒夾到：不亮) </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_D4']}}" title="{{value['CT1_D4']}}" size="3" readonly></td>
+{% endfor %}
+	<tr><td>D</td><td>MJC</td><td>Workstage</td><td>5. 用手轉動STOPPER，確認Panel都有承靠在右邊Stopper上 </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_D5']}}" title="{{value['CT1_D5_rem']}}" size="3" readonly></td>
+{% endfor %}
+	<tr><td>E</td><td>MJC</td><td>Workstage</td><td>1. 傳片位置確認(STOPPER與PANEL距離)，塑膠尺量測約0.8~2mm </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_E1']}}" title="{{value['CT1_E1_rem']}}" size="3" readonly></td>
+{% endfor %}
+	<tr><td>F</td><td>MJC</td><td>Workstage</td><td>1. Carrier撈抓與Stage溝槽是否置中(塑膠尺量測左、右皆需大於2mm)</td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_F1']}}" title="{{value['CT1_F1_rem']}}" size="3" readonly></td>
+{% endfor %}
+	<tr><td>G</td><td>MJC</td><td>Block</td><td>1. 是否有鎖緊(手去搖動) </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_G1']}}" title="{{value['CT1_G1_rem']}}" size="3" readonly></td>
+{% endfor %}
+	<tr><td>G</td><td>MJC</td><td>Block</td><td>2. 是否有多餘block，依量測電壓表確認數量(僅換線點檢確認) </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_G2']}}" title="{{value['CT1_G2_rem']}}" size="3" readonly></td>
+{% endfor %}
+	<tr><td>H</td><td>ULD</td><td>縮針確認</td><td>1. 按壓探針後，再目視確認是否縮針 </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_H1']}}" title="{{value['CT1_H1_rem']}}" size="3" readonly></td>
+{% endfor %}
+	<tr><td>I</td><td>MJC</td><td>Workstage</td><td>1. STOPPER與PANEL間，是否可以利用塑膠尺(1mm厚)刷過 </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_I1']}}" title="{{value['CT1_I1_rem']}}" size="3" readonly></td>
+{% endfor %}
+	<tr><td>K</td><td>MJC</td><td>Panel 外觀檢</td><td>1. 使用手電筒，於Pre-A處，確認當下Panel(上下臂各兩片)，四邊是否有延裂/破片 </td>
+{% for key,value in df.iterrows() %}
+<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_K1_ID01']}}" title="{{value['CT1_K1_rem']}}" size="3" readonly><br/>
+	<input type="text" class='in0' name='{{key}}' value ="{{value['CT1_K1_ID02']}}" title="{{value['CT1_K1_rem']}}" size="3" readonly><br/>
+	<input type="text" class='in0' name='{{key}}' value ="{{value['CT1_K1_ID03']}}" title="{{value['CT1_K1_rem']}}" size="3" readonly><br/>
+	<input type="text" class='in0' name='{{key}}' value ="{{value['CT1_K1_ID04']}}" title="{{value['CT1_K1_rem']}}" size="3" readonly><br/>
+	</td>
+{% endfor %}
+	<tr><td>M</td><td>C/V</td><td>VCR、CT#1、CT#2夾取處</td><td>1. 是否Clamp是否鬆動(柱子沒鎖或電動缸損壞)及優力膠是否可正常轉動 </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_M1']}}" title="{{value['CT1_M1_rem']}}" size="3" readonly></td>
+{% endfor %}
+	<tr><td>M</td><td>C/V</td><td>VCR、CT#1、CT#2夾取處</td><td>2. 是否有玻璃屑 </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_M2']}}" title="{{value['CT1_M2_rem']}}" size="3" readonly></td>
+{% endfor %}
+	<tr><td>N</td><td>ULD</td><td>VCR夾取處</td><td>1. 是否Clamp是否鬆動(柱子沒鎖或電動缸損壞)及優力膠是否可正常轉動 </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_N1']}}" title="{{value['CT1_N1_rem']}}" size="3" readonly></td>
+{% endfor %}
+	<tr><td>N</td><td>ULD</td><td>VCR夾取處</td><td>2. 是否有玻璃屑</td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_N2']}}" title="{{value['CT1_N2_rem']}}" size="3" readonly></td>
+{% endfor %}
+	<tr><td>A</td><td>Robot</td><td>上下FORK吸嘴</td><td>5. 確認吸嘴是否有受損(使用手電筒，手轉吸嘴360度確認)，無論損傷狀況先更換處理 </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_A_Robot1']}}" title="{{value['CT1_A_Robot1_rem']}}" size="3" readonly></td>
+{% endfor %}
+
+
+
+
+	<tr><td>D</td><td>MJC</td><td>Carrier</td><td>3. 用眼睛觀察Panel在吸附真空後，外圍是否有下垂(看真空數值) </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_2_3']}}" title="{{value['CT1_2_3_rem']}}" size="3" readonly></td>
+{% endfor %}
+	<tr><td>{{class0}}</td><td>CV</td><td>VCR、CT#1、CT#2夾取處</td><td>4. 是否損壞 </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_2_4']}}" title="{{value['CT1_2_4_rem']}}" size="3" readonly></td>
+{% endfor %}
+	<tr><td>{{class0}}</td><td>CV</td><td>VCR、CT#1、CT#2夾取處</td><td>5. 是否有玻璃屑 </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_2_5']}}" title="{{value['CT1_2_5_rem']}}" size="3" readonly></td>
+{% endfor %}
+	<tr><td>{{class0}}</td><td>ULD</td><td>VCR夾取處</td><td>6. 是否損壞 </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_2_6']}}" title="{{value['CT1_2_6_rem']}}" size="3" readonly></td>
+{% endfor %}
+	<tr><td>{{class0}}</td><td>ULD</td><td>VCR夾取處</td><td>7. 是否有玻璃屑 </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_2_7']}}" title="{{value['CT1_2_7_rem']}}" size="3" readonly></td>
+{% endfor %}
+	<tr><td>{{class0}}</td><td>GPM</td><td>Workstage </td><td>8. 清潔Diffuser </td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CT1_2_8']}}" title="{{value['CT1_2_8_rem']}}" size="3" readonly></td>
+{% endfor %}
+<tr><td></td><td></td><td></td><td></td><td><td></td></tr>
+</table>
+
+
+{%- endmacro %}
+
+{% macro showMaint(df) -%}
+<h3>保養點檢</h3>
+<table class = 't2'>
+<tr>
+<thead>
+<tr><th>    </th>   <th>    EQP      </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['Machine']}}</th>{% endfor %}</tr>
+<tr><th>    </th>   <th>    Date     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['time'][0:10]}}</th>{% endfor %}</tr></tr>
+<tr><th>    </th>   <th>    Time     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['time'][11:]}}</th>{% endfor %}</tr></tr>
+<tr><th>    </th>   <th>    填單人員     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['Name']}}</th>{% endfor %}</tr></tr>
+<tr><td>CST ID 01</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	      <td><input type="text" class='in0' name='{{key}}' value ="{{value['Maint_Check_ID01_OK']}}, {{value['Maint_Check_ID01']}}" title="{{value['Maint_Check_ID01_rem']}}" size="8" readonly></td>
+{% endfor %}</tr>
+
+<tr><td>CST ID 02</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	      <td><input type="text" class='in0' name='{{key}}' value ="{{value['Maint_Check_ID02_OK']}}, {{value['Maint_Check_ID02']}}" title="{{value['Maint_Check_ID02_rem']}}" size="8" readonly></td>
+{% endfor %}</tr>
+</table>
+{%- endmacro %}
+

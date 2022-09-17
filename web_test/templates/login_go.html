@@ -1,0 +1,280 @@
+﻿<html>
+
+
+<body style="background-color:#CF9E9E;" >
+<style type="text/css">
+     /*將CSS寫在HTML中*/
+     body{
+     width: 130%;
+     color: BLACK;
+     margin:0 auto;
+     font-family: sans-serif, "微軟正黑體";
+     overflow: auto;
+     }
+     
+	   
+	 table {
+      width: 25%;
+    }
+	 
+	 
+	 
+    #header{
+     background-color: #40292F;
+     padding: 0.05%;
+     }
+
+     #nav{
+     background-color: #40292F;
+     padding: 5px;
+     }
+
+     #aside{ 
+     width: 6.3%;
+     height: 95%;
+     text-align: center;
+     background-color: #E1C4C4;
+     padding:20px 10px;
+     float: left;
+     }
+
+     #section{
+     width: 91%;
+     height: 95%;
+     background-color: 	#FCFCFC;
+     line-height: 1.5em;
+     padding: 20px;
+     float: right;
+     overflow: auto;
+	 
+	 
+	
+
+		
+	}
+	
+     #footer{
+     padding:2%;
+     background-color: #425660;
+     clear: both;
+     }
+  
+     h2{
+     font-family: sans-serif, "微軟正黑體";
+     font-size: 25px;
+     color: #930000;
+     text-align: left;
+     }
+	 
+	 
+	 h1{
+     font-family: sans-serif, "微軟正黑體";
+     font-size: 70px;
+     color: white;
+     text-align: left;
+     }
+     
+     h3{
+     font-family: sans-serif, "微軟正黑體";
+     font-size: 25px;
+     color: red;
+     text-align: left;
+	 background-color:white;
+     }
+	 
+	 h5{
+     font-family: sans-serif, "微軟正黑體";
+     font-size: 40px;
+     color: black;
+     text-align: left;
+	 vertical-align:middle;
+     }
+	 
+	 th {
+			height: 7px;
+		}
+
+	td{
+		width:20%;
+	}
+	table,th,td{ 
+        padding: 5px;
+		border-collapse:separate;
+		border-spacing:20px
+		border: 50px solid red;
+		border-top:5px solid #8F5D00
+	    
+	}
+	
+	input {
+	border-radius: 35px;
+	width: 350px;
+	height: 80px;   
+	vertical-align: middle;
+	font-size:40px;
+	font-family: "Lucida Console", Monaco, monospace;
+	font-weight: bold;
+	padding-left: 20px;
+	
+	}
+	
+	p{
+	font-size: 40px;
+	}
+	
+	.txt01{
+	color: #000000;
+	font-weight: bold;
+	text-align: left;
+	text-transform: capitalize;
+	font-family: sans-serif, "微軟正黑體";
+	//background-color: #ebc5c5;
+	font-size: 40px;
+	padding-left: 100px;
+	}
+button {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    padding: 15px 35px;
+    border: 3px solid #989eab;
+    border-radius: 8px;
+    background: #c0c0c0;
+    background: -webkit-gradient(linear, left top, left bottom, from(#d9e1f4), to(#989eab));
+    background: -moz-linear-gradient(top, #d9e1f4, #989eab);
+    background: linear-gradient(to bottom, #d9e1f4, #989eab);
+    text-shadow: #ffffff 1px 0px 5px;
+    font: normal normal bold 24px times new roman;
+    color: #111111;
+    text-decoration: none;
+	font-size: 40px;
+	padding-left: 100px;
+}
+.button:hover,
+.button:focus {
+    border: 1px solid ##d9e1f4;
+    background: #ffffff;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#b6becd));
+    background: -moz-linear-gradient(top, #ffffff, #b6becd);
+    background: linear-gradient(to bottom, #ffffff, #b6becd);
+    color: #111111;
+    text-decoration: none;
+}
+.button:active {
+    background: #989eab;
+    background: -webkit-gradient(linear, left top, left bottom, from(#989eab), to(#989eab));
+    background: -moz-linear-gradient(top, #989eab, #989eab);
+    background: linear-gradient(to bottom, #989eab, #989eab);
+}
+.button:before{
+    content:  "\0000a0";
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    line-height: 24px;
+    margin: 0 4px -6px -4px;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABIUlEQVRIicXWz0rEMBAG8N+WxYOI+Dh7EvToeS/6MlL2Xbx6EG+CyD6DLL6GiOAfth620TampWkRPxg6yTTzzUzSSaHokAU2qEbKExaz2tm2fjbxiD1c1fYcFLjAexjERnUUq8T8UH2FKnYeYztVnyeY+6LKRiAIzEU0jm05eosgdgazHlsTv5zGxvDMkbDmDLc4SvhqEWwbIkPfxylucJB4p0WSg+aaJd6wrjMJKO2OenZ5UrLEBx78lKtENcf9iAxSeMYxrnGSSvXPMPYkDSpRKovcnjNok8ciRL7GYWT73uRUVEPxijuc46XLx9QSdQVZ6mjX4SuscJmYj/XPjvledgPmB6FJ0NVyJ7XrvhLF9twbrWDX8//t0p/627LB4gu2sneEylDImwAAAABJRU5ErkJggg==") no-repeat left center transparent;
+    background-size: 100% 100%;
+}
+.btn1 {
+	box-shadow:inset 0px 3px 7px 1px #ffffff;
+	background:linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
+	background-color:#f9f9f9;
+	border-radius:8px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	cursor:pointer;
+	color:#666666;
+	font-family:Arial;
+	font-size:40px;
+	font-weight:bold;
+	padding: 15px 35px;
+	text-decoration:none;
+	text-shadow:-3px -4px 27px #ffffff;
+	//padding-left: 50px;
+	//left:800000px
+}
+.btn1:hover {
+	background:linear-gradient(to bottom, #e9e9e9 5%, #f9f9f9 100%);
+	background-color:#e9e9e9;
+}
+.btn1:active {
+	position:relative;
+	top:1px;
+}
+input.in_sub{
+background-color: transparent;
+border:0;
+color: brown;
+width: auto;
+font-size:55px;
+font-family: sans-serif, "Monospace";
+outline:medium
+
+//text-decoration:underline;
+//cursor: url(https://cur.cursors-4u.net/games/gam-12/gam1113.cur), auto !important;
+}
+input.in_sub:hover {
+color:white; /*變換文字顏色*/
+}
+
+input.in_hidden{
+background-color:transparent;
+border:0;
+width: 0px;
+font-size:18px;
+font-family: sans-serif, "Monospace";
+text-indent:-9999px;
+outline:medium;
+}
+	 
+</style>
+	 </br>
+<title>ML7AC2 登入系統</title>
+
+</br></br>
+<h1>&nbsp;&nbsp;&nbsp;ML7AC2 登入系統</h1>
+<h3>&nbsp;&nbsp;{{notify}}</h3>
+<form  method='post' action={{ url_for('userMain') }} style="display: inline;" >
+<br/><br/>
+        <p class='txt01'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;工&nbsp;&nbsp;&nbsp;&nbsp;號&nbsp;&nbsp;:&nbsp;&nbsp;<input type = 'text' name = 'userNum' /></p>
+	<p class='txt01'>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;密&nbsp;&nbsp;&nbsp;&nbsp;碼&nbsp;&nbsp;:&nbsp;&nbsp;<input type = 'password' name = 'pw' /></p>
+    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
+&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+
+<button name='login' value = '{{paras}}' type='submit' class='btn1'>登入</button>
+	<p class='txt01'>目標前往 → 
+	<input type="text" name="sys_name"   class="in_hidden" value="{{sys_name}}" >
+	{% if sys_name == 'ct1adc' %}
+		CT1 ADC確認
+	{% elif sys_name == 'ct1adc' %}
+		
+	{% else  %}
+		不明目標
+	{% endif %}
+&ensp;
+       
+</form>
+<form  method='post' action={{ url_for('register') }} style="display: inline;">
+
+
+</form>	
+	
+<form  method='post' action={{ url_for('register') }} style="display: inline;">
+
+
+</form>	
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+﻿<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>當前機台表單</title>
+</head>
+<body style="background-color:#CF9E9E;" >
+
+
+<div align="center">
+
+
+{% for table in tables %}
+            {{titles[loop.index]}}
+            {{ table|safe }}
+{% endfor %}
+</div>
+</body>
+</html>

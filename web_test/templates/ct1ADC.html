@@ -1,0 +1,187 @@
+
+{% macro table_ct1ADC(ct1ADC,date1, date2) -%}
+<p class='title2'>※ NG RATIO > 20 及 NG片數 > 5時亮紅燈</p>
+
+
+{% if ct1ADC|length == 0 %}
+	<h3 style='color:red;'> 選擇日期無紀錄!! </h3>
+{% endif %}
+
+{% for df in ct1ADC %}
+	<h3> {{df['PRODUCT_CODE'][0]}} </h3>
+	<table class = 'redTable'>
+	
+	<thead><tr>
+	{% for i in df.head(1)%}
+		
+		{% if  loop.index <= 25 %}
+			<th>{{i}}</th>
+		{% endif %}
+	{% endfor %}
+	</tr></thead>
+
+
+	{% for key,value in df.iterrows() %}
+	<tr>   
+		{% for i in df.head(1)%}
+			{# loop.index 號碼從1開始, 1,2,3... #}
+			{% if  i in ['NG片數'] and value[i] > 5 and value['NG RATIO(%)'] > 20 %}<td bgcolor="#FFC1E0">
+			{% else %}<td>	{% endif %} 
+				
+			
+			{% if  i in ['NG片數'] %}
+				<input type="submit" class='in_sub' value ="{{value[i]}}" name = "ct1ADCRaw__{{date1}}__{{date2}}__{{value['PRE_TEST_USER']}}__{{value['PRODUCT_CODE']}}"> </td>
+			
+			{% elif  i in ['BPs(%)', 'OGD(%)', '空白(%)', 'CP(%)'] %}
+				<input type="submit" class='in_sub2' value ="{{value[i]}}" name = "octADCRBSucEQP__{{date1}}__{{date2}}__{{value['PRE_TEST_USER']}}__{{value['PRODUCT_CODE']}}__{{i[:-3]}}"> </td>
+			
+			
+			{% elif  loop.index <= 25 %}
+				{{value[i]}} </td>
+			{% endif %}
+		{% endfor %}
+	</tr>
+	{% endfor %}
+
+	</table>
+	<br/>
+{% endfor %}
+{%- endmacro %}
+
+
+
+
+{% macro table_ct1ADCRaw(df, date1, date2) -%}
+<input type="text" class='in2' name="date1" value ="{{date1}}" readonly size="6">~
+<input type="text" class='in2' name="date2" value ="{{date2}}" readonly size="6">
+<table class = 'redTable' >
+
+<thead><tr>
+{% for i in df.head(1)%}
+	
+	{% if  loop.index <= 25 %}
+		<th>{{i}}</th>
+	{% endif %}
+{% endfor %}
+<tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+<tr>
+	{% for i in df.head(1)%}
+		{% if  i in [ 'TEST_TIME', 'PRE_TEST_TIME','ABBR_NO'] %}
+			<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="15" readonly></td>
+		
+		{% elif  i in ['', 'PRE_DEFECT', 'MODEL_NO'] %}
+			<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="11" readonly></td>
+			
+		{% elif  i in ['PRODUCT_CODE', 'MFG_DAY', 'TOOL_ID', 'CHIPID', 'PRE_TEST_USER', 'DEFECT_CODE_DESC'] %}
+			<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="7" readonly></td>
+		
+		{% elif  i in ['PRE_GRADE', 'GRADE'] %}
+			<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="1" readonly></td>
+		
+		{% elif  'IMG' in i  %}
+			<td>{{value[i]|safe}}</td>
+		
+		{% elif  i in ['確認'] and value[i] == 'NA' %}
+		<td><input type="radio" name="{{key}}__imgCheck" value="R">Real<input type="radio" name="{{key}}__imgCheck" value="F">False</td>
+		
+			
+		{% elif  i in ['說明'] and value[i] == 'NA' %}
+			<td>
+			<input type="text" name="{{key}}__imgCheckRemarks"  style="width:200px;height:35px;font-size:16px"  value="" placeholder="備註請說明" size="10">
+			</td>
+			
+			
+		{% elif  i in ['說明', '確認'] and value[i] != 'NA' %}
+			<td>{{value[i]}}</td>
+
+		
+		{% else  %}
+			<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}"   readonly></td>
+		{% endif %}
+			
+	{% endfor %}
+</tr>
+{% endfor %}
+</table>
+<br/>
+<br/><br/>
+<input type='text' class='in_subDate' name='ct1ADC_Upload'  onclick="this.form.submit(this.name);this.disabled=true;" value="上傳">
+<br/>
+
+
+
+
+
+
+
+
+
+{%- endmacro %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+		
+{% macro table_octADCRBSucEQP(df, tool_id, pc) -%}
+<p class='title1'>{{tool_id}}</p>
+<p class='title1'> {{pc}}</p>
+<table class = 'redTable' >
+<thead><tr>
+{% for i in df.head(1)%}
+	<th>{{i}}</th>
+{% endfor %}
+</tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+<tr>
+	{% for i in df.head(1)%}
+	
+		<td>{{value[i]|safe}}</td>
+		
+		
+		
+	{% endfor %}
+</tr>
+{% endfor %}
+</table>
+{%- endmacro %}		
+		
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
