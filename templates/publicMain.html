@@ -1,0 +1,526 @@
+﻿<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ML7AC2主頁</title>
+    
+    <style type="text/css">
+	@import url(/static/userMain.css);
+	@import url(/static/userMain2.css);
+	
+	body{
+     width: 180%;
+     color: BLACK;
+     margin:0 auto;
+     font-family: sans-serif, "微軟正黑體";
+     overflow: auto;
+     }
+     
+	
+	#section{
+     width: 88%;
+     height: 1000%;
+     background-color: 	#FCFCFC;
+     line-height: 1.5em;
+     padding: 60px; //20;
+     float: right;
+     overflow: auto;
+	}
+	
+	#aside{ 
+     width: 7.5%;
+     height: 350%;
+     text-align: center;
+     background-color: #E1C4C4;
+     padding:20px 10px;
+     float: left;
+    }
+	
+input.in1{
+background-color: transparent;
+border:0;
+font-size:23px;
+font-family: sans-serif, "Monospace";
+outline:medium;
+}
+input.green{
+background-image:url({{ url_for('static', filename='Green.gif')}}); 
+width:45px; 
+height:40px; 
+border:0;
+text-indent:-9999px;
+
+}input.yellow{
+background-image:url({{ url_for('static', filename='Yellow.gif')}}); 
+width:45px; 
+height:40px; 
+border:0;
+text-indent:-9999px;
+
+}input.red{
+background-image:url({{ url_for('static', filename='Red.gif')}}); 
+width:45px; 
+height:40px; 
+border:0;
+text-indent:-9999px;
+}input.redng{
+background-image:url({{ url_for('static', filename='Red_NG.gif')}}); 
+width:45px; 
+height:40px; 
+border:0;
+text-indent:-9999px;
+size:50px;
+}
+
+table.t1 {
+  border: 1px solid #FFFFFF;
+  width: 40%;
+}
+table.t1 td, table.t1 th {
+  border: 10px solid #FFFFFF;
+  padding: 3px 4px;
+}
+
+	 
+table.t2 {
+  font-family: "Times New Roman", Times, serif;
+  border: 2px solid #FFFFFF;
+  width: 40%;
+}
+table.t2 td, table.t2 th {
+  border: 1px solid #FFFFFF;
+  padding: 3px 4px;
+}
+table.t2 tbody td {
+  font-size: 13px;
+}
+table.t2 td:nth-child(even) {
+  background: #EBEBEB;
+}
+table.t2 thead {
+  background: #FFFFFF;
+  border-bottom: 2px solid #333333;
+}
+table.t2 thead th {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333333;
+  text-align: left;
+  border-left: 2px solid #333333;
+}
+table.t2 thead th:first-child {
+  border-left: none;
+}
+
+input.inAside{
+//同h2 input版;
+background-color: transparent;
+border:0;
+
+font-weight: bold; 
+font-family: sans-serif, "微軟正黑體";
+font-size:20px;
+outline:medium;
+color: #930000;
+text-align: left;
+cursor: url(https://cur.cursors-4u.net/games/gam-12/gam1113.cur), auto !important;
+padding-left: 0;
+}
+input.inAside:hover {
+color:white; /*變換文字顏色*/
+}
+
+
+input.inAside_s{
+//同h2 input 縮小版;
+background-color: transparent;
+border:0;
+
+font-weight: bold; 
+font-family: sans-serif, "微軟正黑體";
+font-size:16px;
+outline:medium;
+color: #930000;
+text-align: left;
+cursor: url(https://cur.cursors-4u.net/games/gam-12/gam1113.cur), auto !important;
+padding-left: 0;
+}
+input.inAside_s:hover {
+color:white; /*變換文字顏色*/
+}
+
+
+.title1{
+     font-family: sans-serif, "微軟正黑體";
+     font-size: 30px;
+     color: #930000;
+     text-align: left;
+	 font-weight:bold;
+	 
+}
+
+.title1RED{
+     font-family: sans-serif, "微軟正黑體";
+     font-size: 30px;
+     color: red;
+     text-align: left;
+	 font-weight:bold;
+	 
+}
+.title2{
+	// 小型標題
+     font-family: sans-serif, "微軟正黑體";
+     font-size: 24px;
+     color: black;
+     text-align: left;
+	 font-weight:bold;
+	 
+}
+
+input.inDate1{
+
+//日期
+background-color: #c0c0c0;
+border-radius:3px;
+cursor:pointer;
+font-weight: bold; 
+font-family: sans-serif, "微軟正黑體";
+width:200px;
+height:50px;
+font-size:25px;
+text-align: center;
+padding-left: 0;
+}
+
+
+input.in0{
+background-color:transparent;
+border:0;
+font-size:18px;
+font-family: sans-serif, "Monospace";
+outline:medium;
+}
+input.in_sub{
+background-color: transparent;
+border:0;
+color: #1755ff;
+font-size:23px;
+font-family: sans-serif, "Monospace";
+outline:medium;
+text-decoration:underline;
+cursor: url(https://cur.cursors-4u.net/games/gam-12/gam1113.cur), auto !important;
+}
+input.in_sub:hover {
+color:white; /*變換文字顏色*/
+}
+
+input.in_sub2{
+//submit連結樣式;
+background-color: transparent;
+border:0;
+
+font-weight: bold; 
+font-family: sans-serif, "微軟正黑體";
+font-size:20px;
+outline:medium;
+color: #1755ff;
+text-align: left;
+cursor: url(https://cur.cursors-4u.net/games/gam-12/gam1113.cur), auto !important;
+padding-left: 0;
+}
+input.in_sub2:hover {
+color:white; /*變換文字顏色*/
+}
+
+
+input.in_subDate{
+//日期submit;
+background-color: #c0c0c0;
+border-radius:3px;
+cursor:pointer;
+font-weight: bold; 
+font-family: sans-serif, "微軟正黑體";
+width:75px;
+height:40px;
+font-size:20px;
+//outline:medium;
+//color: #1755ff;
+text-align: center;
+padding-left: 0;
+}
+input.in_subDate:active{
+    //position:relative;
+	background-color:#f0f0f0;
+	top:100px;
+}
+input.in_subDate:hover{
+    background:linear-gradient(to bottom, #e0e0e0 5%, #f0f0f0 100%);
+	background-color:#f0f0f0;
+}
+
+.txt_title {
+font-family: Verdana, Geneva, sans-serif;
+font-size: 27px;
+letter-spacing: 2.6px;
+word-spacing: 2.8px;
+color: #380808;
+font-weight: 400;
+text-decoration: none solid rgb(68, 68, 68);
+font-style: normal;
+font-variant: small-caps;
+text-transform: capitalize;
+}
+
+.btn28G {
+  -webkit-border-radius: 6;
+  -moz-border-radius: 6;
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 1px 3px #666666;
+  -moz-box-shadow: 0px 1px 3px #666666;
+  box-shadow: 0px 1px 3px #666666;
+  font-family: Georgia;
+  color: #ffffff;
+  font-size: 28px;
+  background: #40947c;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btn28G:hover {
+  background: #33b08b;
+  text-decoration: none;
+}
+
+
+select {
+/*移除箭頭樣式*/
+ // appearance:none;
+  //-moz-appearance:none;
+ // -webkit-appearance:none;
+
+  /*改變右邊箭頭樣式*/
+  //background: url("https://dotblogsfile.blob.core.windows.net/user/%E7%8D%85%E5%93%A5%E5%93%A5%E4%B8%89%E6%97%A5%E4%B8%8D%E5%AF%ABcode%E9%9D%A2%E7%9B%AE%E5%8F%AF%E6%86%8E/7dd02339-3d56-492a-9b9e-be0dbde2458e/1502789549_90663.png") no-repeat right center transparent;
+  
+  border:0px;
+  //width:8%;
+  height:50px;
+  padding-left:2px;
+  padding-right:80px;
+  background-color:#e0e0e0;
+  //color:black;
+  font-size: 20px;
+  font-weight: bold; 
+  font-family: sans-serif, "微軟正黑體";
+}
+
+select.sel1 {
+/*移除箭頭樣式*/
+  appearance:none;
+  -moz-appearance:none;
+  -webkit-appearance:none;
+
+  /*改變右邊箭頭樣式*/
+  //background: url("https://dotblogsfile.blob.core.windows.net/user/%E7%8D%85%E5%93%A5%E5%93%A5%E4%B8%89%E6%97%A5%E4%B8%8D%E5%AF%ABcode%E9%9D%A2%E7%9B%AE%E5%8F%AF%E6%86%8E/7dd02339-3d56-492a-9b9e-be0dbde2458e/1502789549_90663.png") no-repeat right center transparent;
+  
+  border:0px;
+  width:5%;
+  height:34px;
+  padding-left:2px;
+  padding-right:40px;
+  background-color:#F6F7F7;
+  color:gray;
+  font-size: 20px;
+  font-weight: bold; 
+  font-family: sans-serif, "微軟正黑體";
+}
+
+
+table.redTable{
+  //float:left
+  font-family: "Lucida Console", Monaco, monospace;
+  border: 2px solid #3A0303;
+  background-color: #EEE7DB;
+  width: 18%;
+  text-align: center;
+  border-collapse: collapse;
+}
+table.redTable td, table.redTable th {
+  border: 1px solid #AAAAAA;
+  padding: 4px 4px;
+  word-wrap:break-word;
+}
+table.redTable tbody td {
+  font-size: 20px;
+  font-weight: bold;
+}
+table.redTable tr:nth-child(even) {
+  //background: #F5B4B4;
+  background: white;
+}
+table.redTable thead {
+  background: #5E0202;
+  background: -moz-linear-gradient(top, #864141 0%, #6e1b1b 66%, #5E0202 100%);
+  background: -webkit-linear-gradient(top, #864141 0%, #6e1b1b 66%, #5E0202 100%);
+  background: linear-gradient(to bottom, #864141 0%, #6e1b1b 66%, #5E0202 100%);
+}
+table.redTable thead th {
+  font-size: 19px;
+  font-weight: bold;
+  color: #FFFDFD;
+  text-align: center;
+  border-left: 1px solid #FFFFFF;
+}
+table.redTable thead th:first-child {
+  border-left: none;
+}
+
+table.redTable tfoot {
+  font-size: 8px;
+  font-weight: bold;
+  color: #FFFFFF;
+  background: #A40808;
+}
+table.redTable tfoot td {
+  font-size: 10px;
+  
+}
+table.redTable tfoot .links {
+  text-align: right;
+}
+table.redTable tfoot .links a{
+  display: inline-block;
+  background: #FFFFFF;
+  color: #A40808;
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+
+.chk1{
+  //border:5px;
+  border: 2px dotted #0000ff;
+  width:1%;
+  height:23px;
+  border-radius: 8px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
+}
+
+
+.txt2{
+	font-size: 23px;
+	font-family: sans-serif, "微軟正黑體";
+	//color: #ba421e;
+	//text-shadow: rgba(23, 14, 11, 0.61) 6px 9px 14px;
+	
+	}
+
+</style>
+  </head>
+
+<body>
+
+  <header id="header">
+    <h1></h1>
+  </header>
+  
+  <nav id="nav">
+    <h1>&emsp;ML7AC2</h1>
+  </nav>
+  <form method='post' role="form" action="{{ url_for('publicMain') }}" >
+  <aside id="aside">
+    
+	 <script type="text/javascript">
+	 
+	
+	
+    function show01(){
+		var sect = document.getElementById("section");
+		var sectInn= '<h3>開始更新資料...</h3>';
+	    history.go(0);
+	
+		sect.innerHTML += sectInn;
+		
+     }
+	 
+
+	 
+     </script>
+	 
+	 <h1>目前登入 </h1>
+
+	 <input type="text" name="user"  value="{{ user }}" size="8" class='in1'   readonly>
+
+	 <input type="text" name="name"  value="{{ name }}" size="8" class='in1'   readonly>
+
+	 <input type="text" name="shift"  value="{{ shift }}" size="8" class='in1'   readonly>
+
+	 <input type="text" name="auth"  value="{{ auth }}" size="8" class='in5'  readonly>
+	 <h2 class='bdtxt'  onclick="show01()">資料更新</h2>
+	 
+	 <h2><input type="submit" name="ct1Summ"  value="" size="8" class='inAside'   readonly></h2>
+     <h2><input type="submit" name="ct1Summ2"  value="" size="8" class='inAside'   readonly></h2>
+	 <h2><input type="submit" name="pcsCheck"  value="PCS MOVE數監測" size="8" class='inAside'   readonly></h2>
+	 <h2><input type="submit" name="ct1Summ2"  value=" L7AH1 Monitor" size="8" class='inAside'   readonly></h2>
+  </aside>
+  
+  
+  <section id="section">
+   
+		
+    {% if sectShow == 'ct1Summ'  %}
+    <p class='title1'>CT1 共缺Summary</p>
+	{% import 'ct1Summ.html' as form %}
+		{{  form.table_ct1Summ(ct1_summ) }}
+	
+	
+	{# L7AH1 Monitor 第一層  #}
+	{% elif sectShow == 'ct1Summ2'  %}
+    <p class='title1'>L7AH1 Monitor</p>
+	<input type="date" class='inDate1' name="ct1Summ2_date1" value='{{ct1_summ2_date12[0]}}' size='7'>&nbsp;&nbsp;~&nbsp;&nbsp;
+	<input type="date" class='inDate1' name="ct1Summ2_date2" value='{{ct1_summ2_date12[1]}}' size='7'>&nbsp;
+	{# 與左側選單同name(L7AH1 Monitor)  #}
+	<button type='submit' name='ct1Summ2'>Submit</button></br></br>
+	{% import 'ct1Summ.html' as form %}
+		{{  form.table_ct1Summ(ct1_summ2) }}
+	{# L7AH1 Monitor 第二層  #}
+	{% elif sectShow == 'ct1_summ2_chipid'  %}
+		<p class='title1'>ChipID Check</p>
+		{% import 'l7ah1.html' as form %}
+			{{  form.table_ct1Summ_chipid(ct1_summ2_chipid, imgLinks, l7ah1_imgs) }}
+		
+	
+	{# pcsCheck 片數報表  #}
+	{% elif sectShow == 'pcsCheck'  %}
+	<p class='title1'>PCS MOVE監測</p>
+	<h5>MFG Date&nbsp;&nbsp; ↓</h5>
+	<input type="date" class='inDate1' name="pcsCheck_date" value='{{pcsCheck_date}}' size='7' min="2017-09-02" >
+	&nbsp;&nbsp;
+	<button type='submit' class='inDate1' name='pcsCheck'>Submit</button>&nbsp;&nbsp;&nbsp;
+	<button type='submit' class='inDate1' name='pcsCheck' value='download'>csv下載</button></br></br></br>
+		{% import 'pcsCheck.html' as form %}
+		{{  form.table_pcsCheck(pcs_check) }}
+	   
+	
+	{% endif %}
+	
+	
+	
+	
+	
+	
+	
+	{% if mainBol == 'Y'  %}
+    <p class='title1'>保養日期更新</p>
+	{% import 'maintDateChange.html' as maintDate%}
+		{{  maintDate.maintDateChange(class0, mach0,user, name, shift, time, mode,notify) }}
+		
+	{% endif %}
+   </form>
+
+
+  </section>
+  
+  <footer id="footer">
+    <h1>系統開發中...這是footer</h1>
+  </footer>
+
+</body>
+</html>

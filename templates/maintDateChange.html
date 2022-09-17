@@ -1,0 +1,74 @@
+{% macro maintDateChange(class0, mach0,user, name, shift, last_time, time, mode) -%}
+<h3>保養日期更新</h3>
+<h2> 人員:<input type="text" name="User"  value="{{user}}" size="8" class='in1'  readonly><input type="text" name="Name"  value="{{name}}" size="6" class='in1'   readonly></h2>
+<h2> 班別:<input type="text" name="Shift"  value="{{shift}}" size="8" class='in1'  readonly></h2>
+<h2>站點:<input type="text" name="Class"  value="{{class0}}" size="8" class='in1'   readonly></h2></h2>
+<h2>EQ:<input type="text" name="Machine"  value="{{mach0}}" size="8" class='in1' readonly></h2>
+<h2>Date:<input type="text" name="last_time"  value="{{last_time}}" size="8" class='in1' readonly></h2>
+
+<h3> {{notify}}</h3> 
+
+
+<script type="text/javascript">
+function checkMaint(Obj){
+	var id_base = 'Maint_Check0';
+	var id;
+	var element;
+	for (var i = 1; i <= 3; i++) {
+		name0 = id_base + parseInt(i) + '_OK';
+		element = document.getElementsByName(name0);
+		if (element){
+			//alert(element[j].checked);
+			if(element[0].checked || element[1].checked){ 
+				continue;
+			}else{
+				alert(parseInt(i)+". 項目未填寫，請重新確認!!")
+				return
+				//alert(element[j].value+parseInt(i)); 
+			} 
+		}
+	}
+	Obj.form.submit(Obj.name);
+	Obj.disabled=true;		
+}
+</script>
+
+
+<br/>
+<table class = 't2'>
+<tr><td>保養日期更新</td>
+<td><input type="date" name="Date" value="{{time}}"></td>
+
+<td>備註:<input type="text" name="Remarks"  value="" size="20"></td>
+</tr>
+<tr><td>1. 部門系統是否已更新</td>
+<td><input type="radio" name="Maint_Check01_OK" value="OK" >OK
+<input type="radio" name="Maint_Check01_OK" value="NG">NG</td>
+<td>備註:<input type="text" name="Maint_Check01_rem"  value="" size="20"></td>
+</tr>
+
+<tr><td>2.  PM Plan是否更新完成<br/><a href="http://autceda.corpnet.auo.com/dashboard/sites/L7A/show/L7AC1_CELL_PM_PLAN/SUMMARY?title=CELL%20PM%20PLAN&layers=1&layers=107&" target=_blank>PM連結請點我</a></td>
+<td><input type="radio" name="Maint_Check02_OK" value="OK" >OK
+<input type="radio" name="Maint_Check02_OK" value="NG">NG</td>
+<td>備註:<input type="text" name="Maint_Check02_rem"  value="" size="20"></td>
+</tr>
+
+<tr><td>3. EPMS3.0 系統，是否簽核</td>
+<td><input type="radio" name="Maint_Check03_OK" value="OK" >OK
+<input type="radio" name="Maint_Check03_OK" value="NG">NG</td>
+<td>備註:<input type="text" name="Maint_Check03_rem"  value="" size="20"></td>
+</tr>
+</table>
+
+
+
+
+</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<input type="button" class='in_subDate' name="return" value="返回" onClick="javascript:history.back()">
+<input type='text' class='in_subDate' name='MaintDateChangeBtn'  onclick="checkMaint(this)" value="送出" readonly="readonly">
+{%- endmacro %}

@@ -1,0 +1,451 @@
+
+{% macro table_lsrCJScrapped(df, original_col, defs_list, boxes_list, select_box, select_holdNote, hdCount_list, total_count) -%}
+
+<script language="JavaScript">
+function chkall(input1,input2)
+{
+    var objForm = document.forms[input1];
+    var objLen = objForm.length;
+    for (var iCount = 0; iCount < objLen; iCount++)
+    {
+        if (input2.checked == true)
+        {
+            if (objForm.elements[iCount].type == "checkbox")
+            {
+                objForm.elements[iCount].checked = true;
+            }
+        }
+        else
+        {
+            if (objForm.elements[iCount].type == "checkbox")
+            {
+                objForm.elements[iCount].checked = false;
+            }
+        }
+    }
+}
+</script>
+<script language="JavaScript" type="text/javascript">
+   function PopupPic(sPicURL) { 
+	 window.open( "static/popup.htm?"+sPicURL,"","resizable=1,height=1000,width=1000"); 
+   } 
+   var newN = 0;
+   function newTR() {
+		newN0 = '手動'+String(newN)
+		newN += 1
+		//alert("yyyyy!!");
+		var table0 = document.getElementById("cjTable");
+		var html0;
+		var row0 = table0.insertRow(2);
+		var cell0 = row0.insertCell(0);
+		var cell1 = row0.insertCell(1);
+		var cell2 = row0.insertCell(2);
+		
+		var cell3 = row0.insertCell(3);
+		
+		var cell4 = row0.insertCell(4);
+		var cell5 = row0.insertCell(5);
+		var cell6 = row0.insertCell(6);
+		var cell7 = row0.insertCell(7);
+		var cell8 = row0.insertCell(8);
+		var cell9 = row0.insertCell(9);
+		var cell10 = row0.insertCell(10);
+		var cell11 = row0.insertCell(11);
+		var cell12 = row0.insertCell(12);
+		var cell13 = row0.insertCell(13);
+		var cell14 = row0.insertCell(14);
+		cell0.innerHTML=newN0;
+		html0 = "<input type=text name='" + newN0 + "__TFT_CHIP_ID' class='in_text'>";
+		cell2.innerHTML=html0;
+		
+		cell3.innerHTML=html0;
+		html0 = "<input type=text name='" + newN0 + "__DEFECT_CODE' class='in_text' size=12>";
+		cell3.innerHTML=html0;
+		html0 = "<input type=text name='" + newN0 + "__HOLD_NOTE' class='in_text' >";
+		cell14.innerHTML=html0;
+		
+		
+		html0 = "<select id='cfFix-eqp' name='" + newN0 + "__cjFix_eqp' >";
+		html0 += '<option value="0">---</option>';
+		html0 += '<option value="0">---</option>';
+		html0 += '<option value="CCLRA100">CCLRA100</option>';
+		html0 += '<option value="CCLRA200">CCLRA200</option>';
+		html0 += '<option value="CCLRB100">CCLRB100</option>';
+		html0 += '<option value="CCLRA702">CCLRA702</option>';
+		html0 += '<option value="CCLRA703">CCLRA703</option>';
+		html0 += '<option value="CCLRB802">CCLRB802</option>';
+		html0 += '<option value="CCLRB803">CCLRB803</option>';
+		html0 += '<option value="CCLRB900">CCLRB900</option>';
+		html0 += '</select>';
+		row0.insertCell(15).innerHTML=html0;
+		var html1 = "<input type='radio' name='" + newN0 + "__cjFix_ok' value='OK' >OK";
+		
+		html1 += "<input type='radio' name='" + newN0 + "__cjFix_ok' value='NG'>NG";
+		row0.insertCell(16).innerHTML=html1;
+		
+		
+		html0 = "<select style='width:180px' id='valueTFT_CHIP_ID__cjFix-method' name='" + newN0 + "__cjFix_method' >"
+		html0 += '<option value="0">---</option>';
+		html0 += '<option value="維修後OK">維修後OK</option>';
+		html0 += '<option value="維修後NG">維修後NG</option>';
+		html0 += '<option value="隔離Defect">隔離Defect</option>';
+		html0 += '<option value="補打Welding">補打Welding</option>';
+		html0 += '<option value="借線修">借線修</option>';
+		html0 += '<option value="CUT單驅">CUT單驅</option>';
+		html0 += '<option value="BL">BL</option>';
+		html0 += '<option value="修R1">修R1</option>';
+		html0 += '<option value="修R2">修R2</option>';
+		html0 += '<option value="同側2條">同側2條</option>';
+		html0 += '<option style="font-size:18px;" value="HO Data:4000~7000 直接出貨">HO Data:4000~7000 直接出貨</option>';
+
+					
+		html0 += '<option value="Another">其他</option>';
+		html0 += '</select>';
+		html0 += '</br></br>備註:';
+		html0 += "<input type='text' name='" + newN0 + "__cjFix_anotherMethod' value='' placeholder='其他修法填寫' >";
+		row0.insertCell(17).innerHTML=html0;
+		//alert("ok!!");
+   }
+</script>
+
+
+
+<h3>hold片數 (點數字可跳往資料，追加條件可先於下方項目先選擇後再按數字)</h3>
+<table class = 'redTable' >
+<thead><tr><th>3~5 天</th><th>5~7 天</th><th>7~10 天</th><th>10~20 天</th><th>20 天↑</th><th>Total</th></tr></thead>
+<tr>
+<td><input type="submit" class='in_sub' value ="{{hdCount_list[0]}}" name = "lsrCJScrapped_03"></td>
+<td><input type="submit" class='in_sub' value ="{{hdCount_list[1]}}" name = "lsrCJScrapped_05"></td>
+<td><input type="submit" class='in_sub' value ="{{hdCount_list[2]}}" name = "lsrCJScrapped_07"></td>
+<td><input type="submit" class='in_sub' value ="{{hdCount_list[3]}}" name = "lsrCJScrapped_10"></td>
+<td><input type="submit" class='in_sub' value ="{{hdCount_list[4]}}" name = "lsrCJScrapped_20"></td>
+<td><input type="submit" class='in_sub' value ="{{total_count}}" name = "lsrCJScrapped"></td>
+</tr>
+</table>	
+</br></br>
+
+
+
+
+{% if  df|length != -1  %}
+	<table><tr>
+	<td><p class="title2_BLK">請選擇Hold Note:</p>
+	<select name="select_holdNote" >
+		<option value="ALL">全部</option>
+		{% for hn in ['CPD', 'RQRM', 'CJ']%}
+			<option value="{{hn}}" {% if hn == select_holdNote %} selected="selected" {% endif %}>{{hn}}</option>
+		{% endfor %}		
+	</select></td>
+	<td>&ensp;&ensp;&ensp;&ensp;</td><td>&ensp;&ensp;&ensp;&ensp;</td><td>&ensp;&ensp;&ensp;&ensp;</td>
+	<td><p class="title2_BLK">請選擇box:</p>
+	<select name="select_box" >
+		<option value="ALL">全部</option>
+		{% for box in boxes_list%}
+			
+			<option value="{{box}}" {% if box ==  select_box%} selected="selected"{%endif%}>{{box}}</option>
+		{% endfor %}		
+	</select></td>
+	</tr></table>
+	</br>
+
+
+	<table class='t2'>
+	<thead><tr><th colspan="5"><p class="title2_BLK">請勾選指定Defect:</p></th></tr>
+	<tr><td>&ensp;&ensp;&ensp;&ensp;</td></tr>
+	<tr><td><input type="checkbox" value="全部選取&取消" onclick="chkall('formMain',this)" name="allchk"><b class='txt2'> 全部選取or取消</b><td>
+	</tr>
+
+	
+	<tr>
+
+	{% for i in original_col%}
+		{# loop.index 號碼從1開始, 1,2,3... #}
+		{% if  1   %}
+			<td><input type="checkbox"  name="cjchk_{{i}}" value="Y" {% if i in defs_list %} checked{%endif%}><b class='txt2'> {{i}}</b>
+			</td>
+		{% endif %}
+		{% if  loop.index in [5,10, 15, 20, 25, 30, 35]   %}
+			</tr><tr>
+		{% endif %}
+
+
+	{% endfor %}
+
+	</tr><table>
+
+	</br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='submit' class='in_subDate' name='lsrCJScrapped' value="過濾"></button>
+	</br>
+		
+	<p class='title1'>1. 因資料量較大，按下上傳後請靜候</p>
+	<p class='title1'>2. 點擊圖片便能放大看圖</p>
+	<p class='title1'>3. 每日07:00更新資料</p>
+	<input type="button"  class='in_subDate' value ="手動Key-in" name="newTR222" onclick="newTR()"  >
+	
+	<br/><br/>
+	{#   待修理
+	<input type='submit' class='in_subDate' name='lsrCJScrapped2' value="手動Key-in" >
+
+	<input type='submit' class='in_subDate' name='lsrCJScrapped_history' value="紀錄查詢" > &nbsp;&nbsp;&nbsp;&nbsp;
+	<input type='text' class='in_subDate' name='lsrCJScrapped_Upload'  onclick="this.form.submit(this.name);this.disabled=true;" value="上傳">	
+	</br></br>
+	#}  
+	<table class = 'redTable' id='cjTable'>
+	<thead><tr>
+	{% for i in df.head(1)%}
+		{# loop.index 號碼從1開始, 1,2,3... #}
+		{% if i == 'REWORK_SIGNAL_NO'%}
+		 <th>維修坐標data</th>
+		{% elif i == 'REWORK_GATE_NO'%}
+		 <th>維修坐標gate</th>
+		{% elif i == 'EQP_ID'%}
+		 <th>維修機台</th>
+		{% elif i == 'TEST_EQP_ID'%}
+		 <th>覆判機台</th>
+		{% elif i == 'TEST_USER_ID'%}
+		 <th>覆判人員</th>
+		{% elif i == 'POSITION'%}
+		 <th>Hold貨位置</th>
+		{% elif i in ['CHIP', 'START_DATE']%}
+		{% elif  loop.index >= 1 and i[0:3] != 'IMG' and loop.index <= 120  %}
+		<th>{{i}}</th>
+		
+		{% endif %}
+	{% endfor %}
+
+	<th>CJ補修機台</th>
+	<th>是否可救回</th>
+	<th>修法</th>
+	<tr></thead>
+
+
+	{% for key,value in df.iterrows() %}
+	<tr>
+		{% for i in df.head(1)%}
+			{# loop.index 號碼從1開始, 1,2,3... #}
+			{% if i== 'IMG_A' %}
+				<tr>
+			{% elif i== 'IMG_O' %}
+				</tr><tr>			
+			{% elif i== 'ZZZZZZZZZ' %}
+				</tr>	
+			{% endif  %}
+			
+			
+			
+			
+			
+			{% if i in ['CHIP', 'START_DATE']%}
+			
+			{% elif  i == 'HOLD_DATE' %}
+			 <td>{{value[i]}}天前</td>
+			{% elif  i == 'HOLD_NOTE' %}
+				<td>{{value[i]}}</td>
+				<td><select id="cfFix-eqp" name="{{value['TFT_CHIP_ID']}}__cjFix_eqp" >
+			
+					<option value="0">---</option>
+					<option value="CCLRA100">CCLRA100</option>
+					<option value="CCLRA200">CCLRA200</option>
+					<option value="CCLRB100">CCLRB100</option>
+					<option value="CCLRA702">CCLRA702</option>
+					<option value="CCLRA703">CCLRA703</option>
+					<option value="CCLRB802">CCLRB802</option>
+					<option value="CCLRB803">CCLRB803</option>
+					<option value="CCLRB900">CCLRB900</option>
+				</select></td>
+
+				
+				
+				
+				<script>
+				//好像暫無作用
+				function change_method(index){
+					//站台的陣列
+				//這裡放系所的陣列(有順序性，對應各學院的資料)
+				
+				
+				var method = document.getElementById(`{{value['TFT_CHIP_ID']}}__cjFix-method`);
+				var td = document.getElementById(aaa);
+				if (index == 11){
+					aaa = document.getElementById("aaa");
+					aaa.innerHTML="<h2>"+method+"</h2>";
+					//method.innerHTML=`<h1>hiiii</h1>`;
+				}
+				
+				}
+				</script>	
+				
+				<td>
+					<input type="radio" class='in_radio' name="{{value['TFT_CHIP_ID']}}__cjFix_ok" value="OK" id="{{value['TFT_CHIP_ID']}}__cjFix_OK" >
+						<label for="{{value['TFT_CHIP_ID']}}__cjFix_OK" ><b class="title2_BLK">OK</b></label>    
+					<input type="radio" class='in_radio' name="{{value['TFT_CHIP_ID']}}__cjFix_ok" value="NG" id="{{value['TFT_CHIP_ID']}}__cjFix_NG">
+						<label for="{{value['TFT_CHIP_ID']}}__cjFix_NG" ><b class="title2_BLK">NG</b></label>   
+				</td>
+				
+				
+				 
+				<td id= "{{value['TFT_CHIP_ID']}}__method">
+				<select style="width:180px" id="{{value['TFT_CHIP_ID']}}__cjFix-method" name="{{value['TFT_CHIP_ID']}}__cjFix_method" onchange="change_method(this.selectedIndex)" >
+					<option value="0">---</option>
+					<option value="維修後OK">維修後OK</option>
+					<option value="維修後NG">維修後NG</option>
+					<option value="隔離Defect">隔離Defect</option>
+					<option value="補打Welding">補打Welding</option>
+					<option value="借線修">借線修</option>
+					<option value="CUT單驅">CUT單驅</option>
+					<option value="BL">BL</option>
+					<option value="修R1">修R1</option>
+					<option value="修R2">修R2</option>
+					<option value="同側2條">同側2條</option>
+					<option value="HO Data:4000~7000 直接出貨" style="font-size:18px;">HO Data:4000~7000 直接出貨</option>
+					<option value="Another">其他</option>
+				
+				</select>
+				</br></br>備註:
+				<input type="text" style="height:40px;font-size:18px;" name="{{value['TFT_CHIP_ID']}}__cjFix_anotherMethod" value="" placeholder="其他修法填寫" >
+				</td>
+			
+			{% elif  i in ['TEST_TIME'] and value[i] is not none %}	
+				<td>{{value[i][:10]}}<br/>{{value[i][10:]}}
+			{% elif  loop.index >= 1 and i[0:3] != 'IMG' and loop.index <= 120 %}
+			<td>{{value[i]}}
+							{#<input type="submit" class='in1' value ="{{value[i]}}" name = "{{i}}__{{key}}"> #}
+			{% elif  i[0:3] == 'IMG' %}
+				
+				<td>
+				{% if value[i]== '.tif' %}
+					<a href="{{ imgs }}">image{{loop.index}}</a>
+					
+				{% elif value[i] == 'NI' %}
+					
+				{% elif  value[i] == 'NG'%}
+					
+				{% elif value[i] is none%}
+						
+				{% elif value[i][-4:]== '.jpg' %}
+					<a href="javascript:PopupPic('{{ value[i] }}')">	<img align="center" width='100' height='100' src="{{ value[i] }}" onerror="this.parentNode.removeChild(this)"></a>  
+				{% else %}
+				{% endif  %}
+				
+			
+			{% endif %}
+			</td>	
+		{% endfor %}
+	</tr>
+	{% endfor %}
+	</table>
+{% else %}
+	<p class='title1'>1. 因資料量較大，按下上傳後請靜候數秒</p>
+	<p class='title1'>2. 點擊圖片便能放大看圖</p>
+	<p class='title1'>3. 每日07:00更新資料</p>
+{% endif %}
+{%- endmacro %}
+
+
+
+
+{# 維修紀錄  架構雷同  #}
+
+{% macro table_lsrCJScrapped_history(df, date1, date2) -%}
+
+<button type='submit' class='in_subDate' value="lsrCJScrapped_history_{{date1}}_{{date2}}" name='csvDownload'>資料下載</button>
+
+</br></br>
+<table class = 'redTable'>
+<thead><tr>
+{% for i in df.head(1)%}
+	{# loop.index 號碼從1開始, 1,2,3... #}
+	{% if i == 'REWORK_SIGNAL_NO'%}
+	 <th>維修坐標data</th>
+	{% elif i == 'REWORK_GATE_NO'%}
+	 <th>維修坐標gate</th>
+	{% elif i == 'EQP_ID'%}
+	 <th>維修機台</th>
+	{% elif i == 'TEST_EQP_ID'%}
+	 <th>覆判機台</th>
+	{% elif i == 'TEST_USER_ID'%}
+	 <th>覆判人員</th>
+	{% elif i == 'POSITION'%}
+	 <th>Hold貨位置</th>
+	
+	{% elif  loop.index >= 1 and i[0:3] != 'IMG' and loop.index <= 12  %}
+	
+	
+	<th>{{i}}</th>
+	
+	{% endif %}
+{% endfor %}
+<th>CJ補修機台</th>
+<th>是否可救回</th>
+<th>修法</th>
+<th>修片人員</th>
+<th>修片時間</th>
+<tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+<tr>
+	{% for i in df.head(1)%}
+		{# loop.index 號碼從1開始, 1,2,3... #}
+		{% if i== 'IMG_A' %}
+			<tr>
+		{% elif i== 'IMG_O' %}
+			</tr><tr>			
+		{% elif i== 'ZZZZZZZZZ' %}
+			</tr>	
+		{% endif  %}
+		
+		
+		
+		
+		<td> 
+		{% if  i in ['TEST_TIME'] and value[i] is not none %}		
+			{{value[i][:10]}}<br/>{{value[i][10:]}}
+		{% elif  loop.index >= 1 and i[0:3] != 'IMG' and loop.index <= 12 %}
+		{{value[i]}}
+						{#<input type="submit" class='in1' value ="{{value[i]}}" name = "{{i}}__{{key}}"> #}
+		
+		{% elif  i=='CHIP' %}
+		{{ value['cjFix_eqp'] }}</td>
+		<td>{{ value['cjFix_ok'] }}</td>
+		<td>
+		{{ value['cjFix_method'] }}</br>
+		{{ value['cjFix_anotherMethod'] }}
+		</td>
+		<td>
+		{{ value['FIXED_NAME'] }}
+		</td>
+		
+		
+		<td>{{ value['FIXED_DATE'] }}
+		{% elif  i[0:3] == 'IMG' %}
+			
+			
+			{% if value[i]== '.tif' %}
+				<a href="{{ imgs }}">image{{loop.index}}</a>
+				
+			{% elif value[i] == 'NI' %}
+				
+			{% elif  value[i] == 'NG'%}
+				
+			{% elif value[i] is none%}
+						
+			{% elif value[i][-4:]== '.jpg' %}
+				<a href="{{ value[i] }}"><img align="center" width='160' height='120' src="{{ value[i] }}" onerror="this.parentNode.removeChild(this)"></a>  
+			
+			{% endif  %}
+			
+				
+			
+		{% endif %}
+		</td>
+	{% endfor %}
+	
+
+</tr>
+{% endfor %}
+</table>
+{%- endmacro %}
+
+
+

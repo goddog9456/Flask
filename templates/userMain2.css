@@ -1,0 +1,74 @@
+
+
+table.t3 {
+  font-family: "Times New Roman", Times, serif;
+  border: 2px solid #FFFFFF;
+  width: 40%;
+}
+table.t3 td, table.t3 th {
+  border: 1px solid #FFFFFF;
+  padding: 3px 4px;
+}
+table.t3 tbody td {
+  font-size: 18px;
+}
+table.t3 td:nth-child(even) {
+  background: #EBEBEB;
+}
+table.t3 thead {
+  background: #FFFFFF;
+  border-bottom: 2px solid #333333;
+}
+table.t3 thead th {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333333;
+  text-align: left;
+  border-left: 2px solid #333333;
+}
+table.t3 thead th:first-child {
+  border-left: none;
+}	
+
+
+
+input.in1{
+background-color:transparent;
+border:0;
+font-size:23px;
+font-family: sans-serif, "Monospace";
+outline:medium;
+}
+
+
+
+input.green{
+background-image:url({{ url_for('static', filename='Green.gif')}}); 
+width:45px; 
+height:40px; 
+border:0;
+text-indent:-9999px;
+}input.yellow{
+background-image:url({{ url_for('static', filename='Yellow.gif')}}); 
+width:45px; 
+height:40px; 
+border:0;
+text-indent:-9999px;
+}input.red{
+background-image:url({{ url_for('static', filename='Red.gif')}}); 
+width:45px; 
+height:40px; 
+border:0;
+text-indent:-9999px;
+}input.redng{
+background-image:url({{ url_for('static', filename='Red_NG.gif')}}); 
+width:45px; 
+height:40px; 
+border:0;
+text-indent:-9999px;
+size:50px;
+}
+
+
+
+

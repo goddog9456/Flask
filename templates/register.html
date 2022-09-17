@@ -1,0 +1,189 @@
+﻿<html>
+
+
+<body style="background-color:#CF9E9E;" >
+<style type="text/css">
+     /*將CSS寫在HTML中*/
+     body{
+     width: 130%;
+     color: BLACK;
+     margin:0 auto;
+     font-family: sans-serif, "微軟正黑體";
+     overflow: auto;
+     }
+     
+	   
+	 table {
+      width: 25%;
+    }
+	 
+	 
+	 
+    #header{
+     background-color: #40292F;
+     padding: 0.05%;
+     }
+
+     #nav{
+     background-color: #40292F;
+     padding: 5px;
+     }
+
+     #aside{ 
+     width: 6.3%;
+     height: 95%;
+     text-align: center;
+     background-color: #E1C4C4;
+     padding:20px 10px;
+     float: left;
+     }
+
+     #section{
+     width: 91%;
+     height: 95%;
+     background-color: 	#FCFCFC;
+     line-height: 1.5em;
+     padding: 20px;
+     float: right;
+     overflow: auto;
+	 
+	 
+	
+
+		
+	}
+	
+     #footer{
+     padding:2%;
+     background-color: #425660;
+     clear: both;
+     }
+  
+     h2{
+     font-family: sans-serif, "微軟正黑體";
+     font-size: 25px;
+     color: #930000;
+     text-align: left;
+     }
+	 h1{
+     font-family: sans-serif, "微軟正黑體";
+     font-size: 50px;
+     color: white;
+     text-align: middle;
+     }
+     
+
+	 
+	 h5{
+     font-family: sans-serif, "微軟正黑體";
+     font-size: 40px;
+     color: black;
+     text-align: left;
+     }
+	 
+	 
+	 h3{
+     font-family: sans-serif, "微軟正黑體";
+     font-size: 25px;
+     color: red;
+     text-align: middle;
+	 background-color:white;
+     }
+	 
+	 th {
+			height: 7px;
+		}
+
+	td{
+		width:20%;
+	}
+	table,th,td{ 
+        padding: 5px;
+		border-collapse:separate;
+		border-spacing:20px
+		border: 50px solid red;
+		border-top:5px solid #8F5D00
+	    
+	}
+	p{
+	font-size: 40px;
+	}
+	input {
+	border-radius: 50px;
+	width: 200px;
+	height: 50px;  }
+	
+	
+button {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    padding: 8px 11px;
+    border: 1px solid #989eab;
+    border-radius: 10px;
+    background: #d9e1f4;
+    background: -webkit-gradient(linear, left top, left bottom, from(#d9e1f4), to(#989eab));
+    background: -moz-linear-gradient(top, #d9e1f4, #989eab);
+    background: linear-gradient(to bottom, #d9e1f4, #989eab);
+    text-shadow: #ffffff 1px 0px 5px;
+    font: normal normal bold 24px times new roman;
+    color: #111111;
+    text-decoration: none;
+}
+.button:hover,
+.button:focus {
+    border: 1px solid ##d9e1f4;
+    background: #ffffff;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#b6becd));
+    background: -moz-linear-gradient(top, #ffffff, #b6becd);
+    background: linear-gradient(to bottom, #ffffff, #b6becd);
+    color: #111111;
+    text-decoration: none;
+}
+.button:active {
+    background: #989eab;
+    background: -webkit-gradient(linear, left top, left bottom, from(#989eab), to(#989eab));
+    background: -moz-linear-gradient(top, #989eab, #989eab);
+    background: linear-gradient(to bottom, #989eab, #989eab);
+}
+.button:before{
+    content:  "\0000a0";
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    line-height: 24px;
+    margin: 0 4px -6px -4px;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABIUlEQVRIicXWz0rEMBAG8N+WxYOI+Dh7EvToeS/6MlL2Xbx6EG+CyD6DLL6GiOAfth620TampWkRPxg6yTTzzUzSSaHokAU2qEbKExaz2tm2fjbxiD1c1fYcFLjAexjERnUUq8T8UH2FKnYeYztVnyeY+6LKRiAIzEU0jm05eosgdgazHlsTv5zGxvDMkbDmDLc4SvhqEWwbIkPfxylucJB4p0WSg+aaJd6wrjMJKO2OenZ5UrLEBx78lKtENcf9iAxSeMYxrnGSSvXPMPYkDSpRKovcnjNok8ciRL7GYWT73uRUVEPxijuc46XLx9QSdQVZ6mjX4SuscJmYj/XPjvledgPmB6FJ0NVyJ7XrvhLF9twbrWDX8//t0p/627LB4gu2sneEylDImwAAAABJRU5ErkJggg==") no-repeat left center transparent;
+    background-size: 100% 100%;
+}
+
+	 
+     </style>
+<title>ML7AC2 註冊系統</title>
+
+<div align="center">
+<h1> ML7AC2 註冊系統</h1>
+<h3>{{notify}}</h3>
+<form  method='post' action={{ url_for('register') }} style="display: inline;">
+        <p><b>個人工號:&emsp;&emsp;&emsp;&emsp;</b><input type = 'text' name = 'userNum' /></p>
+	<p><b>   密碼:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</b><input type = 'password' name = 'pw1' /></p>
+        <p><b>   請再輸入一次密碼:</b><input type = 'password' name = 'pw2' /></p>
+    
+	
+
+	<button type='submit' name='regOK' value='registerOK'>資料送出</button>
+</form>
+<form  method='post' action={{ url_for('login') }} style="display: inline;">
+
+<button type='submit' name='goLogin' value='goLogin'>返回登入</button>
+
+</form>
+</div>
+
+
+
+</body>
+</html>

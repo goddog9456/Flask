@@ -1,0 +1,175 @@
+
+{% macro table_octDP2BP(df) -%}
+
+<table class = 'redTable' align="left">
+
+<thead><tr>
+{% for i in df.head(1)%}
+	
+	{% if  loop.index <= 15 %}
+		<th>{{i}}</th>
+	{% endif %}
+{% endfor %}
+<tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+<tr>
+	{% for i in df.head(1)%}
+		{# loop.index 號碼從1開始, 1,2,3... #}
+		{% if  i in ['RB'] and value[i] >= 5 %}<td bgcolor="#FFC1E0">{% else %}<td>	{% endif %} 
+			
+			
+			
+		{% if  i in ['RB'] %}
+			<input type="submit" class='in_sub' value ="{{value[i]}}" name = "octDP2BPRaw__{{value['TOOL_ID']}}__{{value['PRODUCT_CODE']}}"> </td>
+		{% elif  loop.index <= 15 %}
+			{{value[i]}}</td>
+		{% endif %}
+	{% endfor %}
+</tr>
+{% endfor %}
+
+</table>
+
+{%- endmacro %}
+
+
+{% macro table_octDP2BPRaw(df, tool_id, pc, df_aoi, df_adc, df_ct1) -%}
+<h3>TOOL_ID:  <input type="text" class='in1' name="TOOL_ID" value ="{{tool_id}}" size="6" readonly></h3>
+<h3>PRODUCT_CODE: <input type="text" class='in1' name="PRODUCT_CODE" value ="{{pc}}" size="8" readonly></h3>
+<table class = 'redTable' >
+<thead><tr>
+{% for i in df.head(1)%}
+	
+	{% if  loop.index <= 15 and loop.index >= 2%}
+		<th>{{i}}</th>
+	{% endif %}
+{% endfor %}
+<tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+<tr>
+	{% for i in df.head(1)%}
+	
+		{# loop.index 號碼從1開始, 1,2,3... #}	
+		{% if  i in ['X_ERROR'] %}
+			<td bgcolor="#FFE6FF"><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="1" readonly></td>
+		{% elif i in ['Y_ERROR'] %}
+			<td bgcolor="#E6CAFF"><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="1" readonly></td>
+			
+		{% elif i in ['CHIP_ID'] and value['ID_CNT'] > 1 %}
+			<td rowspan={{value['ID_CNT']}}><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="6" readonly></td>
+		{% elif i in ['CHIP_ID'] and value['ID_CNT'] == 0%}
+					<input type="text"  name="{{key}}__{{i}}" style="width:0; height:0; border:0; text-indent:-9999px;" value ="{{value[i]}}">
+		
+		{% elif  i in [ 'TEST_TIME', 'OCT_DEFECT', 'CT1_MODEL'] %}
+		<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="14" readonly></td>
+			
+		{% elif  i in ['CHIP_ID', 'OCT_DEFECT'] %}
+		<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}" size="6" readonly></td>
+				
+		{% elif  loop.index <= 15  and loop.index >= 2%}
+		<td><input type="text" class='in1' name="{{key}}__{{i}}" value ="{{value[i]}}"  readonly style='width:100%'></td>
+			
+			
+		{% endif %}	
+		
+		
+	{% endfor %}
+</tr>
+{% endfor %}
+</table></br></br>
+<b class='title1'>確認結果:</b>
+<select  name="octDP2BP_OK" >
+   <option  value="---">請選擇</option>
+	<option  value="OK">OK</option>
+	<option  value="NG">NG</option>
+</select><br/><br/>
+<b class='title1'>異常說明: <input type="text" name="octDP2BP_OK_rem"  style="width:300px;height:35px;font-size:20px"  value="" size="20">
+</b>
+
+</br></br></br>
+<input type='text' class='in_subDate' name='octDP2BP_Upload'  onclick="this.form.submit(this.name);this.disabled=true;" value="上傳">
+
+
+<h5>AOI影像</h5>
+<table class = 'redTable' >
+<thead><tr>
+{% for i in df_aoi.head(1)%}
+	{% if  loop.index <= 25 %}<th>{{i}}</th>{% endif %}
+{% endfor %}
+<tr></thead>
+{% for key,value in df_aoi.iterrows() %}
+<tr>
+	{% for i in df_aoi.head(1)%}<td>{{value[i]|safe}}</td>{% endfor %}
+</tr>
+{% endfor %}
+</table>
+
+
+
+
+<h5>ADC影像</h5>
+<table class = 'redTable' >
+<thead><tr>
+{% for i in df_adc.head(1)%}
+	{% if  loop.index <= 25 %}<th>{{i}}</th>{% endif %}
+{% endfor %}
+<tr></thead>
+{% for key,value in df_adc.iterrows() %}
+<tr>
+	{% for i in df_adc.head(1)%}<td>{{value[i]|safe}}</td>{% endfor %}
+</tr>
+{% endfor %}
+</table>
+
+
+<h5>CT1影像</h5>
+<table class = 'redTable' >
+<thead><tr>
+{% for i in df_ct1.head(1)%}
+	{% if  loop.index <= 25 %}<th>{{i}}</th>{% endif %}
+{% endfor %}
+<tr></thead>
+{% for key,value in df_ct1.iterrows() %}
+<tr>
+	{% for i in df_ct1.head(1)%}<td>{{value[i]|safe}}</td>{% endfor %}
+</tr>
+{% endfor %}
+</table>
+{%- endmacro %}
+
+
+
+
+		
+		
+		
+		
+		
+		
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

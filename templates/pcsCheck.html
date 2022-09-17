@@ -1,0 +1,145 @@
+{% macro table_pcsCheck(pcs_check) -%}
+<h3>● 日班</h3>
+<table class = 'redTable'>
+<thead><tr>
+{% for i in pcs_check.head(1)%}
+	{# loop.index 號碼從1開始, 1,2,3... #}
+	{% if loop.index >=4 and loop.index <=51 %}
+	<th>{{i[0:2]}}:{{ (i[3:5]) |string}}</th>
+	{% elif loop.index in [1, 3] %}
+	<th>{{i}}</th>
+	{% endif %}
+{% endfor %}
+<tr></thead>
+{% for key,value in pcs_check.iterrows() %}
+{% set idx = 0 %}
+
+<tr>
+	{% for i in value %}
+	
+	{# if 值為-1則不顯示 #}
+	{% if i == -1  and loop.index <= 51%}<td> </td>
+	{% elif loop.index in [1, 3] %}<td><input type="submit" class='in1' value ="{{i}}" ></td>  
+	{% elif loop.index == 2 %}
+	{% elif loop.index <= 51 %}
+		{% if i <23 %} <td bgcolor="#FFC1E0" bordercolor='red'> {% else %}  <td> {% endif %}   
+		<input type="submit" class='in1' value ="{{i|int}}" ></td>  
+	{% endif %}
+		
+	{#  備份用<input type="submit" class='in1' value ="{{i|int}}" > #}
+	 
+	{% endfor %}	
+</tr>
+{% endfor %}
+</table>
+
+{#  -------------------夜班表格----------------------- #}
+</br></br>
+<h3>● 夜班</h3>
+<table class = 'redTable'>
+<thead><tr>
+{% for i in pcs_check.head(1)%}
+	{# loop.index 號碼從1開始, 1,2,3... #}
+	{% if loop.index >=4 and loop.index >= 52 %}
+	<th>{{i[0:2]}}:{{ (i[3:5]) |string}}</th>
+	{% elif loop.index in [1, 3] %}
+	<th>{{i}}</th>
+	{% endif %}
+{% endfor %}
+<tr></thead>
+
+{% for key,value in pcs_check.iterrows() %}
+{% set idx = 0 %}
+
+<tr>
+	{% for i in value %}
+	
+	{# if 值為-1則不顯示 #}
+	{% if i == -1  and loop.index >= 52%}<td> </td>
+	{% elif loop.index in [1, 3] %}<td><input type="submit" class='in1' value ="{{i}}" ></td>  
+	{% elif loop.index == 2 %}
+	{% elif loop.index >= 52 %}
+		{% if i <23 %} <td bgcolor="#FFC1E0" bordercolor="red" > {% else %}  <td> {% endif %}   
+		<input type="submit" class='in1' value ="{{i|int}}" ></td>  
+	{% endif %}
+		
+	{#  備份用<input type="submit" class='in1' value ="{{i|int}}" > #}
+	 
+	{% endfor %}	
+</tr>
+{% endfor %}
+</table>
+
+
+
+
+{%- endmacro %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% macro table_pcsCheck2(pcs_check) -%}
+</br>
+<table class = 'redTable'>
+
+
+{% for key,value in pcs_check.iterrows() %}
+{% set idx = 0 %}
+<thead><tr>
+{% for i in pcs_check.head(1)%}
+	{# loop.index 號碼從1開始, 1,2,3... #}
+	{% if loop.index >=3 and loop.index <=50%}
+	<th>{{i[0:2]}}:{{ (i[3:5]) |string}}</th>
+	{% elif loop.index <=2 %}
+	<th>{{i}}</th>
+	{% endif %}
+{% endfor %}
+<tr></thead>
+<tr>
+	{% for i in value %}
+	{% if loop.index == 51 %}
+	</tr><thead><tr><td></td><td></td>
+		{% for i in pcs_check.head(1)%}
+			{% if loop.index >=51 %}
+			<th>{{i[0:2]}}:{{ (i[3:5]) |string}}</th>
+			{% endif %}
+			
+		{% endfor %}
+		</tr></thead><tr><td></td><td></td>
+	{% endif %}
+	
+	{# if 值為-1則不顯示 #}
+	{% if i == -1 %}<td>N/A</td>
+	{% elif loop.index < 3 %}<td><input type="submit" class='in1' value ="{{i}}" ></td>  
+	{% else %}<td><input type="submit" class='in1' value ="{{i|int}}" ></td>  {% endif %}
+		
+	{#  <input type="submit" class='in1' value ="{{i|int}}" > #}
+	 
+	{% endfor %}
+	
+	
+     
+		
+</tr>
+{% endfor %}
+</table>
+{%- endmacro %}
+

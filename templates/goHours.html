@@ -1,0 +1,185 @@
+
+{# 當前版本 #}
+{% macro table_goHours(df, date) -%}
+<input type="date" class='inDate1' name="goHours_date" value='{{date}}' size='7'>
+&nbsp;&nbsp;
+<button type='submit' class='inDate1' name='goHours'>送出</button>&nbsp;&nbsp;&nbsp;
+</br>
+<p class='title2'>1. 同Line相差超過10% → 紅燈</p>
+<p class='title2'>2. 單一機台 < 88% → 粉紅燈 ; &nbsp;&nbsp;&nbsp;< 82% → 紅燈;</p>
+<p class='title2'>3. 舊系統GO RATIO未計算Grade X & 3 ，請以此數值為主</p>
+</br>
+<table class = 'redTable'>
+<thead><tr>
+{% for i in df.head(1)%}
+	{# loop.index 號碼從1開始, 1,2,3... #}
+	{% if  i[0] != 'C' %}
+	<th>{{i}}</th>
+	{% endif %}
+{% endfor %}
+<tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+<tr>
+	{% for i in df.head(1)%}
+		{% if i == 'MFG_DAY' %}
+			<td><input type="text" class='in1' value ="{{value[i][0:10]}}" size="7"></td>
+		{% elif i == 'EQP' %}
+			<td><input type="text" class='in1' value ="{{value[i][2:]}}" size="6"></td>
+		{% elif  i == '平均' or (i[0] != 'C' and value[i] == ' - ')%}
+			<td>{{value[i]}}</td>
+		{% elif  i[0] != 'C' and value[i] != ' - ' and value['EQP'][-1] != '0' %}
+			{% if value[i]|int >= 1000 and loop.index >= 3 and value[i] != ' - '%}
+				<td bgcolor="#ff0000">
+				<input type="submit" class='in_sub' value ="{{value[i]|int-1000}}" name = "goHours__{{value['MFG_DAY'][0:10]}}__{{value['EQP']}}__{{i}}__{{value['C_'+i]}}"></td>
+			{% elif value[i]|int < 82 and loop.index >= 3 and value[i] != ' - '%}
+				<td bgcolor="#ff0000">
+				<input type="submit" class='in_sub' value ="{{value[i]|int}}" name = "goHours__{{value['MFG_DAY'][0:10]}}__{{value['EQP']}}__{{i}}__{{value['C_'+i]}}"></td>
+			{% elif value[i]|int < 88 and loop.index >= 3 and value[i] != ' - '%}
+				<td bgcolor="#FFC1E0">
+				<input type="submit" class='in_sub' value ="{{value[i]|int}}" name = "goHours__{{value['MFG_DAY'][0:10]}}__{{value['EQP']}}__{{i}}__{{value['C_'+i]}}"></td>
+		
+			
+			{% else %}
+				<td>
+				<input type="submit" class='in_sub' value ="{{value[i]|int}}" name = "goHours__{{value['MFG_DAY'][0:10]}}__{{value['EQP']}}__{{i}}__{{value['C_'+i]}}"></td>
+		
+			{% endif %} 
+			
+			
+		{% endif %}
+	{% endfor %}
+</tr>
+{% endfor %}
+</table>
+
+
+{# 片數表格 #}
+</br></br></br>
+<p class='title1'> 片數: </p>
+</br>
+<table class = 'redTable'>
+<thead><tr>
+{% for i in df.head(1)%}
+	{# loop.index 號碼從1開始, 1,2,3... #}
+	{% if  i[0] == 'C' %}
+		<th >{{i[2:]}}</th>
+	{% elif loop.index <=2 %}
+		<th>{{i}}</th>
+	{% endif %}
+{% endfor %}
+<tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+<tr>
+	{% for i in df.head(1)%}
+		
+		{% if  i[0] == 'C'  %}
+			<td><input type="submit" class='in1' value ="{{value[i]|int}}" size="3"></td>
+		{% elif i == 'MFG_DAY' %}
+			<td><input type="text" class='in1' value ="{{value[i][0:10]}}" size="7"></td>
+		{% elif i == 'EQP' %}
+			<td><input type="text" class='in1' value ="{{value[i][2:]}}" size="6"></td>
+		{% endif %}
+	{% endfor %}
+</tr>
+{% endfor %}
+</table>
+{%- endmacro %}
+
+
+{# 第二層表格 #}
+{% macro table_goHours_raw(df,hour) -%}
+</br>
+
+{# NOT G 組成的表格 #}
+<table class = 'redTable'>
+<thead><tr>
+{% for i in df.head(1)%}
+	{# loop.index 號碼從1開始, 1,2,3... #}
+	{% if  loop.index > 4 and loop.index <= 8%}
+	<th>{{i}}</th>
+	{% endif %}
+{% endfor %}
+<tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+<tr>
+	{% for i in df.head(1)%}
+		{% if  loop.index > 4  and value['NG_COUNT'] != 0 and loop.index < 8%}
+			<td>{{value[i]}}</td> 
+			{# <td><input type="text" class='in1' value ="{{value[i]}}" size="12"></td>  #}
+		
+		{% elif loop.index == 8 and value['NG_COUNT']!= 0%}
+		<td><input type="submit" class='in_sub' value ="{{value[i]}}"  name="ct1Summ__{{value['MFG_DAY']}}+{{hour}}__{{value['MODEL_NO']}}__{{value['TEST_USER']}}__{{value['DEFECT_CODE_DESC']}}"  size="3"></td>
+		
+		{% endif %}
+	{% endfor %}
+</tr>
+{% endfor %}
+</table>
+
+</br></br></br>
+<p class='title1'> Raw Data :   </p>
+</br>
+<table class = 'redTable'>
+<thead><tr>
+{% for i in df.head(1)%}
+	{# loop.index 號碼從1開始, 1,2,3... #}
+	{% if  loop.index <= 5 %}
+		<th>{{i}}</th>
+	{% endif %}
+{% endfor %}
+
+<tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+<tr>
+	
+		
+	
+		 <td> {{value['MODEL_NO']}}</td>
+		 <td> {{value['TEST_USER']}}</td>
+		 <td> {{value['CHIPID']}}</td>
+		 <td> {{value['TEST_TIME']}}</td> 
+		 <td> {{value['DEFECT_CODE_DESC']}}</td>
+	 {#
+	 <td> <input type="text" class='in1' name='X__{{key}}' value ="{{value[5]}}" size="3" readonly></td>
+	 <td> <input type="text" class='in1' name='Y__{{key}}' value ="{{value[6]}}" size="3" readonly></td>
+	 <td> <input type="text" class='in1' name='PATTERN_CODE__{{key}}' value ="{{value[7]}}" size="4" readonly></td>
+	 #}
+	 
+		
+		
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</tr>
+{% endfor %}
+</table>
+
+
+
+
+
+
+
+{%- endmacro %}
+
+
+
+
+

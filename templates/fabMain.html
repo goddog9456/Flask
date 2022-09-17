@@ -1,0 +1,2097 @@
+﻿<html>
+
+  <head>
+	<script
+    src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+	
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+
+	
+	
+	
+	
+	
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>ML7AC2 Fab</title>
+    
+    <style type="text/css">
+	@import url(/static/userMain.css);
+	@import url(/static/userMain2.css);
+	
+	body{
+     width: 200%;
+     color: BLACK;
+     margin:0 auto;
+     font-family: sans-serif, "微軟正黑體";
+     overflow: auto;
+     }
+     
+	
+	#aside{
+     width: 70%;
+     height: auto;
+     background-color: 	#FCFCFC;
+     line-height: 1.5em;
+     padding: 60px; //20;
+     //float: left;
+     overflow: auto;
+	 text-align: left;
+	}
+	
+	#section{ 
+     width: 7.5%;
+     height: 350%;
+     text-align: center;
+     background-color: #E1C4C4;
+     padding:20px 10px;
+     float: left;
+    }
+
+	#nav{
+	
+	width: auto;
+	height: 7%;
+	}
+	
+	
+	
+input.in1{
+background-color: transparent;
+border:0;
+font-size:18px;
+font-family: sans-serif, "微軟正黑體";
+outline:medium;
+font-weight: bold;
+width:auto
+}
+
+
+input.in2{
+background-color: transparent;
+border:0;
+font-size:24px;
+font-family: sans-serif, "微軟正黑體";
+outline:medium;
+font-weight: bold;
+width:auto;
+}
+
+
+
+input.green{
+background-image:url({{ url_for('static', filename='Green.gif')}}); 
+width:45px; 
+height:40px; 
+border:0;
+text-indent:-9999px;
+background-repeat: round;
+background-size:cover;
+}
+
+input.yellow{
+background-image:url({{ url_for('static', filename='Yellow.gif')}}); 
+width:45px; 
+height:40px; 
+border:0;
+text-indent:-9999px;
+background-repeat: no-repeat;
+background-size:cover;
+
+}input.red{
+background-image:url({{ url_for('static', filename='Red.gif')}}); 
+width:45px; 
+height:40px; 
+border:0;
+text-indent:-9999px;
+background-repeat: no-repeat;
+background-size:cover;
+}input.redng{
+background-image:url({{ url_for('static', filename='Red_NG.gif')}}); 
+width:45px; 
+height:40px; 
+border:0;
+text-indent:-9999px;
+size:50px;
+background-repeat: no-repeat;
+background-size:cover;
+}
+
+table.t1 {
+  border: 1px solid #FFFFFF;
+  width: 45%;
+}
+table.t1 td, table.t1 th {
+  border: 10px solid #FFFFFF;
+  padding: 3px 4px;
+}
+
+	 
+table.t2 {
+  font-family: "Times New Roman", Times, serif;
+  border: 2px solid #FFFFFF;
+  //width: 47%;
+  width: auto;
+  cellpadding: 1px dashed #EBEBEB;
+  margin-right: 50px;
+}
+table.t2 td, table.t2 th {
+  border: 3px dashed #EBEBEB;
+  padding: 3px 4px;
+}
+table.t2 tbody td {
+  font-size: 13px;
+}
+table.t2 td:nth-child(odd) {
+  background: #EBEBEB;
+}
+table.t2 thead {
+  background: #FFFFFF;
+  border-bottom: 2px solid #333333;
+}
+table.t2 thead th {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333333;
+  text-align: left;
+  border-left: 2px solid #333333;
+  background: #D9B3B3;
+}
+table.t2 thead th:first-child {
+  border-left: none;
+}
+
+
+table.t3 {
+  font-family: "Times New Roman", Times, serif;
+  border: 2px solid #FFFFFF;
+  width: 50%;
+}
+table.t3 td, table.t2 th {
+  border: 1px solid #FFFFFF;
+  padding: 3px 4px;
+}
+table.t3 tbody td {
+  font-size: 13px;
+}
+table.t3 td:nth-child(even) {
+  background: #EBEBEB;
+}
+table.t3 thead {
+  background: #FFFFFF;
+  border-bottom: 2px solid #333333;
+}
+table.t3 thead th {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333333;
+  //text-align: left;
+  border-left: 2px solid #333333;
+}
+table.t3 thead th:first-child {
+  border-left: none;
+}
+
+input.inAside{
+//同h2 input版;
+background-color: transparent;
+border:0;
+
+font-weight: bold; 
+font-family: sans-serif, "微軟正黑體";
+font-size:20px;
+outline:medium;
+color: #930000;
+text-align: left;
+cursor: url(https://cur.cursors-4u.net/games/gam-12/gam1113.cur), auto !important;
+padding-left: 0;
+}
+input.inAside:hover {
+color:white; /*變換文字顏色*/
+}
+
+
+input.inAside_s{
+//同h2 input 縮小版;
+background-color: transparent;
+border:0;
+
+font-weight: bold; 
+font-family: sans-serif, "微軟正黑體";
+font-size:16px;
+outline:medium;
+color: #930000;
+text-align: left;
+cursor: url(https://cur.cursors-4u.net/games/gam-12/gam1113.cur), auto !important;
+padding-left: 0;
+}
+input.inAside_s:hover {
+color:white; /*變換文字顏色*/
+}
+
+button.inAside{
+	//同h2 button版;
+	background-color: transparent;
+	border:0;
+
+	font-weight: bold; 
+	font-family: sans-serif, "微軟正黑體";
+	font-size:20px;
+	outline:medium;
+	color: #930000;
+	text-align: left;
+	cursor: url(https://cur.cursors-4u.net/games/gam-12/gam1113.cur), auto !important;
+	padding-left: 0;
+}
+button.inAside:hover {
+	color:white; /*變換文字顏色*/
+}
+
+
+.title1{
+     font-family: sans-serif, "微軟正黑體";
+     font-size: 30px;
+     color: #930000;
+     text-align: left;
+	 font-weight:bold;
+	 
+}
+
+.title1RED{
+     font-family: sans-serif, "微軟正黑體";
+     font-size: 30px;
+     color: red;
+     text-align: left;
+	 font-weight:bold;
+	 
+}
+.title2{
+	// 小型標題
+     font-family: sans-serif, "微軟正黑體";
+     font-size: 24px;
+     color: black;
+     text-align: left;
+	 font-weight:bold;
+	 
+}
+
+.title2_BLK{
+	// 小型黑標題
+     font-family: sans-serif, "微軟正黑體";
+     font-size: 24px;
+     color: black;
+     text-align: left;
+	 font-weight:bold;
+	 
+}
+
+
+.title3{
+	// 小型標題
+     font-family: sans-serif, "微軟正黑體";
+     font-size: 36px;
+     color: black;
+     text-align: left;
+	 font-weight:bold;
+	 
+}
+
+
+input.inDate1{
+
+//日期
+background-color: #c0c0c0;
+border-radius:3px;
+cursor:pointer;
+font-weight: bold; 
+font-family: sans-serif, "微軟正黑體";
+width:200px;
+height:50px;
+font-size:25px;
+text-align: center;
+padding-left: 0;
+}
+
+.in_radio{
+    //margin-right: 5px;
+    cursor: url(https://cur.cursors-4u.net/games/gam-12/gam1113.cur), auto !important;
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+    position: relative;
+	content: "✓";
+	
+}
+
+
+.in_radio:checked:before{
+    //content: "✓";
+    //display: inline-block;
+    position: absolute;
+    //top: -2px;
+    //left: 3px;
+    width: 60px;
+    height: 60px;
+    font-weight: 400;
+	//background-color: red;
+	color: red;
+	font-size: 50px
+    z-index: 1;
+	
+}
+
+
+
+
+
+input.in0{
+background-color:transparent;
+border:0;
+font-size:18px;
+font-family: sans-serif, "Monospace";
+outline:medium;
+}
+
+
+
+
+input.in_hidden{
+background-color:transparent;
+border:0;
+font-size:18px;
+font-family: sans-serif, "Monospace";
+text-indent:-9999px;
+outline:medium;
+}
+
+
+button.in_sub{
+background-color: transparent;
+border:0;
+color: #1755ff;
+font-size:23px;
+font-family: sans-serif, "Monospace";
+outline:medium;
+text-decoration:underline;
+cursor: url(https://cur.cursors-4u.net/games/gam-12/gam1113.cur), auto !important;
+
+}
+button.in_sub:hover {
+color:white; /*變換文字顏色*/
+}
+
+input.in_sub{
+background-color: transparent;
+border:0;
+color: #1755ff;
+font-size:23px;
+font-family: sans-serif, "Monospace";
+outline:medium;
+text-decoration:underline;
+cursor: url(https://cur.cursors-4u.net/games/gam-12/gam1113.cur), auto !important;
+
+}
+input.in_sub:hover {
+color:white; /*變換文字顏色*/
+}
+
+input.in_sub2{
+//submit連結樣式;
+background-color: transparent;
+border:0;
+
+
+
+
+
+
+
+
+
+
+
+font-weight: bold; 
+font-family: sans-serif, "微軟正黑體";
+font-size:20px;
+outline:medium;
+color: brown;
+text-align: left;
+text-decoration:underline;
+cursor: url(https://cur.cursors-4u.net/games/gam-12/gam1113.cur), auto !important;
+padding-left: 0;
+}
+input.in_sub2:hover {
+color:white; /*變換文字顏色*/
+}
+
+
+input.in_subDate{
+//日期submit;
+background-color: #c0c0c0;
+border-radius:5px;
+cursor:pointer;
+font-weight: bold; 
+font-family: sans-serif, "微軟正黑體";
+width:auto;
+//height:50px;
+//width:115px;
+//font-size:22px;
+width:auto;
+height:40px;
+font-size:26px;
+//outline:medium;
+//color: #1755ff;
+text-align: center;
+padding-left: 0;
+}
+input.in_subDate:active{
+    //position:relative;
+	background-color:#f0f0f0;
+	top:100px;
+}
+input.in_subDate:hover{
+    background:linear-gradient(to bottom, #e0e0e0 5%, #f0f0f0 100%);
+	background-color:#f0f0f0;
+}
+
+
+button.in_subDate{
+//日期submit;
+background-color: #c0c0c0;
+border-radius:3px;
+cursor:pointer;
+font-weight: bold; 
+font-family: sans-serif, "微軟正黑體";
+width:auto;
+height:50px;
+font-size:26px;
+//outline:medium;
+//color: #1755ff;
+text-align: center;
+padding-left: 0;
+}
+button.in_subDate:active{
+    //position:relative;
+	background-color:#f0f0f0;
+	top:100px;
+}
+button.in_subDate:hover{
+    background:linear-gradient(to bottom, #e0e0e0 5%, #f0f0f0 100%);
+	background-color:#f0f0f0;
+}
+
+
+input.in_text{
+//input text;
+background-color: #f5f5f5;
+border-radius:3px;
+//cursor:pointer;
+font-weight: bold; 
+font-family: sans-serif, "微軟正黑體";
+width:180px;
+height:30px;
+font-size:20px;
+//outline:medium;
+//color: #1755ff;
+//text-align: center;
+padding-left: 0;
+}
+
+
+
+.txt_title {
+font-family: Verdana, Geneva, sans-serif;
+font-size: 27px;
+letter-spacing: 2.6px;
+word-spacing: 2.8px;
+color: #380808;
+font-weight: 400;
+text-decoration: none solid rgb(68, 68, 68);
+font-style: normal;
+font-variant: small-caps;
+text-transform: capitalize;
+}
+
+.btn28G {
+  -webkit-border-radius: 6;
+  -moz-border-radius: 6;
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 1px 3px #666666;
+  -moz-box-shadow: 0px 1px 3px #666666;
+  box-shadow: 0px 1px 3px #666666;
+  font-family: Georgia;
+  color: #ffffff;
+  font-size: 28px;
+  background: #40947c;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btn28G:hover {
+  background: #33b08b;
+  text-decoration: none;
+}
+
+
+select {
+/*移除箭頭樣式*/
+ // appearance:none;
+  //-moz-appearance:none;
+ // -webkit-appearance:none;
+
+  /*改變右邊箭頭樣式*/
+  //background: url("https://dotblogsfile.blob.core.windows.net/user/%E7%8D%85%E5%93%A5%E5%93%A5%E4%B8%89%E6%97%A5%E4%B8%8D%E5%AF%ABcode%E9%9D%A2%E7%9B%AE%E5%8F%AF%E6%86%8E/7dd02339-3d56-492a-9b9e-be0dbde2458e/1502789549_90663.png") no-repeat right center transparent;
+  
+  border:0px;
+  width:auto;
+  height:50px;
+  padding-left:2px;
+  padding-right:35px;
+  background-color:#e0e0e0;
+  //color:black;
+  font-size: 20px;
+  font-weight: bold; 
+  font-family: sans-serif, "微軟正黑體";
+}
+
+select.sel1 {
+/*移除箭頭樣式*/
+  appearance:none;
+  -moz-appearance:none;
+  -webkit-appearance:none;
+
+  /*改變右邊箭頭樣式*/
+  //background: url("https://dotblogsfile.blob.core.windows.net/user/%E7%8D%85%E5%93%A5%E5%93%A5%E4%B8%89%E6%97%A5%E4%B8%8D%E5%AF%ABcode%E9%9D%A2%E7%9B%AE%E5%8F%AF%E6%86%8E/7dd02339-3d56-492a-9b9e-be0dbde2458e/1502789549_90663.png") no-repeat right center transparent;
+  
+  border:0px;
+  //width:5%;
+  width:auto;
+  height:34px;
+  padding-left:2px;
+  padding-right:40px;
+  background-color:#F6F7F7;
+  color:gray;
+  font-size: 20px;
+  font-weight: bold; 
+  font-family: sans-serif, "微軟正黑體";
+}
+
+
+
+table.redTable{
+  //float:left
+  font-family: "Lucida Console", Monaco, monospace;
+  border: 2px solid #3A0303;
+  background-color: #EEE7DB;
+  // 整體表格寬度
+  //width: 20%;
+  width: auto;
+  text-align: center;
+  border-collapse: collapse;
+  height:auto
+}
+table.redTable td {
+  border: 1px solid #AAAAAA;
+  padding: 4px 4px;
+  word-wrap:break-word;
+  width: auto;
+}
+table.redTable thead th {
+  font-size: 19px;
+  font-weight: bold;
+  width: auto;
+  color: #FFFDFD;
+  text-align: center;
+  border-left: 1px solid #FFFFFF;
+  background: #5E0202;
+ 
+}
+
+
+table.redTable th{
+  font-size: 14px;
+  //border: 1px solid #AAAAAA;
+  //padding: 4px 4px;
+  word-wrap:break-word;
+  width: auto;
+  font-weight: bold;
+  background:#CE9E9E;
+  height:0.3px;
+}
+
+table.redTable tbody td {
+  font-size: 20px;
+  font-weight: bold;
+  font-family: sans-serif, "微軟正黑體";
+}
+table.redTable tr:nth-child(even) {
+  //background: #F5B4B4;
+  background: white;
+}
+table.redTable thead {
+  background: #5E0202;
+  background: -moz-linear-gradient(top, #864141 0%, #6e1b1b 66%, #5E0202 100%);
+  background: -webkit-linear-gradient(top, #864141 0%, #6e1b1b 66%, #5E0202 100%);
+  background: linear-gradient(to bottom, #864141 0%, #6e1b1b 66%, #5E0202 100%);
+}
+
+table.redTable thead th:first-child {
+  border-left: none;
+}
+
+table.redTable tfoot {
+  font-weight: bold;
+  color: #FFFFFF;
+  background: #A40808;
+}
+table.redTable tfoot td {
+  font-size: 10px;
+  
+}
+table.redTable tfoot .links {
+  text-align: right;
+}
+table.redTable tfoot .links a{
+  display: inline-block;
+  background: #FFFFFF;
+  color: #A40808;
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+
+
+
+
+
+
+table.redTable2{
+  //float:left
+  font-family: "Lucida Console", Monaco, monospace;
+  border: 2px solid #3A0303;
+  background-color: #EEE7DB;
+  // 整體表格寬度
+  width: auto%;
+  text-align: center;
+  border-collapse: collapse;
+  margin-right: 40px;
+}
+table.redTable2 td, table.redTable th {
+  border: 1px solid #AAAAAA;
+  padding: 4px 4px;
+  word-wrap:break-word;
+}
+table.redTable2 tbody td {
+  font-size: 20px;
+  font-weight: bold;
+  font-family: sans-serif, "微軟正黑體";
+}
+table.redTable2 tr:nth-child(even) {
+  //background: #F5B4B4;
+  background: white;
+}
+table.redTable2 thead {
+  background: #5E0202;
+  background: -moz-linear-gradient(top, #864141 0%, #6e1b1b 66%, #5E0202 100%);
+  background: -webkit-linear-gradient(top, #864141 0%, #6e1b1b 66%, #5E0202 100%);
+  background: linear-gradient(to bottom, #864141 0%, #6e1b1b 66%, #5E0202 100%);
+}
+table.redTable2 thead th {
+  font-size: 19px;
+  font-weight: bold;
+  color: #FFFDFD;
+  text-align: center;
+  border-left: 1px solid #FFFFFF;
+}
+table.redTable2 thead th:first-child {
+  border-left: none;
+}
+
+.chk1{
+  //border:5px;
+  border: 2px dotted #0000ff;
+  width:1%;
+  height:23px;
+  border-radius: 8px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
+}
+
+
+.txt2{
+	font-size: 23px;
+	
+	//color: #ba421e;
+	//text-shadow: rgba(23, 14, 11, 0.61) 6px 9px 14px;
+	
+	}
+
+</style>
+  </head>
+
+<body>
+
+
+  
+  <nav id="nav">
+    <h1>&emsp;ML7AC2</h1>
+  </nav>
+  <script language="javascript">
+
+		var checkSubmitFlg = false;
+		function checkSubmit(){
+		if(checkSubmitFlg ==true){ return false; //當表單被提交過一次後checkSubmitFlg將變為true,根據判斷將無法進行提交。
+		}
+		checkSubmitFlg ==true;
+		return true;
+		}
+	</script >
+  <form method='post' name="form1" role="form" action="{{ url_for('fabMain') }}" onsubmit="return checkSubmit();" id="formMain">
+  
+  <section id="section">
+    
+	<script type="text/javascript">
+	 
+	
+	 
+	 function clear(){
+		window.location.reload();
+     }
+	 
+	 
+    function show01(){
+		var sect = document.getElementById("section");
+		var sectInn= '<h3>開始更新資料...</h3>';
+	    history.go(0);
+	
+		sect.innerHTML += sectInn;
+		
+     }
+	// 點檢系統 觸發三站點選項
+	function showNoramlCheck(){
+		//history.go(0);
+		//window.location.replace(location.href);
+		//window.location.assign("http://10.96.70.126:6799/userMain");
+		var sect = document.getElementById("section");
+		var sectInn= "<table class='t1'><tr>"
+		sectInn += "<td><h1><input type='submit' name='showNorCheck'  value='CT1' size='10' class='inAside'   readonly></h1></td>";
+	    sectInn += "<td><h1><input type='submit' name='showNorCheck'  value='OCT' size='10' class='inAside'   readonly></h1></td>";
+		sectInn += "<td><h1><input type='submit' name='showNorCheck'  value='LASER' size='10' class='inAside'   readonly></h1></td>";
+	    sectInn += "</tr></table>"
+		sect.innerHTML = sectInn;
+		//showNorCT1()
+	}
+	//環安點檢選項
+	function showESCheck(){
+		//history.go(0);
+		//window.location.replace(location.href);
+		//window.location.assign("http://10.96.70.126:6799/userMain");
+		var sect = document.getElementById("section");
+		var sectInn= "<table class='t2'><tr>"
+		sectInn += "<td><h1><input type='submit' name='ESCheck'  value='環安點檢' size='7' class='inAside'   readonly></h1></td>";
+	    sectInn += "<td><h1><input type='submit' name='ESCheck'  value='公佈欄' size='7' class='inAside'   readonly></h1></td>";
+		//sectInn += "<td><h1><input type='submit' name='showNorCheck'  value='LASER' size='10' class='inAside'   readonly></h1></td>";
+	    sectInn += "</tr></table>"
+		sect.innerHTML = sectInn;
+		//showNorCT1()
+	}
+	
+	
+	// 秀出點檢表單 js版 已無使用
+	function LightCheck(obj){
+		var sect = document.getElementById("section");
+		var mach = obj.id
+		var sectInn = '<h2> EQ:' + mach + '</h2>'
+		sectInn += `{% import 'norCheck.html' as form %}`;
+		sectInn += `{{ form.OCTLightCheckList(class0, mach0,user, name, shift, time, mode,notify) }}`
+	    sect.innerHTML = sectInn;
+	}
+	
+	//動到"site-list"這select元素後呼叫此方法
+    function changeStatus(index){
+			//站台的陣列
+		//這裡放系所的陣列(有順序性，對應各學院的資料)
+		var status_list=new Array();
+		status_list[0]=['None'];
+		status_list[1]=['點燈機點檢','Cold_Run' ,'CST點檢'];
+		status_list[2]=['點燈機點檢','清潔點檢','CST點檢' ,'保養點檢'];  
+		status_list[3]=['清潔點檢','CST點檢'];
+        var Sinner="";
+		
+        for(var i=0;i<status_list[index].length;i++){
+		
+			
+			Sinner=Sinner+`<option value="`+status_list[index][i]+`"  >`+status_list[index][i]+`</option>`;
+        }
+	
+        var mach_listelect = document.getElementById("check-list");
+        mach_listelect.innerHTML=Sinner;
+    }
+	
+	
+	function changeEQP(index){
+			//站台的陣列
+		//這裡放系所的陣列(有順序性，對應各學院的資料)
+		var status_list=new Array();
+		status_list[0]=['None'];
+		status_list[1]=['CGL1082','CGL1083', 'CGL2082','CGL2083', 'CGL3082','CGL3083', 'CGL4082','CGL4083', 'CGL5082','CGL5083', 'CGL6082','CGL6083', 'CGL7082','CGL7083', 'CGL8082','CGL8083', 'CGL9072','CGL9073', 'CGLA072','CGLA073'];
+		status_list[2]=['OCT100', 'OCT200', 'OCT300', 'OCT400', 'OCT502', 'OCT503', 'OCT602', 'OCT603', 'OCT702', 'OCT703', 'OCTA00', 'OCTB00', 'OCTC00', 'COM100', 'CTS100', 'CTS200', 'CTS300', 'CTS400', 'CTS500', 'CTS600', 'CTS900', 'CTSA00', 'CTSB00'];  
+		status_list[3]=['LRA700','LRA800','LRB800','LRB900'];
+        var Sinner="";
+        for(var i=0;i<status_list[index].length;i++){
+            Sinner=Sinner+'<option  value="' +status_list[index][i]+'">'+status_list[index][i]+'</option>';
+        }
+  
+        var mach_listelect = document.getElementById("mach-list");
+        mach_listelect.innerHTML=Sinner;
+    }
+	
+    </script>
+	 
+	 <h1>目前登入 </h1>
+	 <input type="text" name="user"  value="{{ user }}" size="8" class='in1'   readonly>
+	 <input type="text" name="shift"  value="{{ shift }}" size="8" class='in1'   readonly>
+	 <input type="text" name="name"  value="{{ name }}" size="8" class='in1'   readonly>
+	 
+	 <input type="text" name="auth"  value="{{ auth }}" size="8" class='in1'  readonly>
+	
+	<h3 align=LEFT>  ▌ CT1</h3>
+	 
+	<br/>
+    <h3 align=LEFT>  ▌ OCT Defect異常Monitor</h3>
+	<h3 align=LEFT>  ▌ OCT自動化良率Monitor</h3>	
+		
+		
+
+	<h3 align=LEFT>  ▌ LASER</h3>
+		<h2><button type="submit" name="lsrPointCheck"  value="left" size="8" class='inAside'   readonly> &nbsp;&nbsp;LASER標點確認</button></h2>
+	
+	<h3 align=LEFT>  ▌ 其他</h3>
+		
+	<h3 align=LEFT>  ▌ 測試中</h3>
+	
+  </section>
+  
+  <aside id="aside">
+	{% if sectShow == 'uploadOK' %}	
+		<p class='title1'> 送出成功!!!</p>
+	{# 機台點檢系統 #}
+	{% elif sectShow == 'lsrPointCheck' %}	
+	
+		<p class='title1'>LASER 標點確認</p>
+		<h5>Chip ID&nbsp;&nbsp;↓</h5>
+		<textarea style='font-size:30px;' name="lsrPointCheck_chipids" rows="1" cols="15" >{{chipids}}</textarea>
+		
+		<br/><br/>
+		<button type='submit' class='in_subDate' name='lsrPointCheck'  value="search">搜尋</button>
+		
+	
+		<br/><br/>
+		{% import 'lsrPointCheck.html' as form %}
+			{{  form.df2redTable(df_octPoint) }}
+	
+	{% elif sectShow == 'showNorCheck'  %}
+	<script>showNoramlCheck()</script>
+	{% import 'norCheck.html' as form %}
+	{{ form.table_Norcheck_main01(nor_check,site,user) }}
+	
+	{% elif sectShow == 'ESCheck'  %}
+	<script>showESCheck()</script>
+	{% import 'ESCheck.html' as form %}
+	{{ form.table_ESCheck(ESCheck) }}
+	
+	{# 保養系統 #}
+	{% elif sectShow == 'maint'  %}
+		{% import 'form2.html' as form %}
+		{{ form.table_maint4(maint_list,min_Done) }}
+	
+  
+	{# 人事系統 #}
+	{% elif sectShow == 'hr'  %}
+		<p class='title1'>人事系統</p>
+		{% import 'hr.html' as form %}
+		{{  form.hr(df_table) }}
+	{% elif sectShow == 'hr_newEmpolyee'  %}
+		<p class='title1'>人事系統 - 新增人員</p>
+		{% import 'hr.html' as form %}
+		{{  form.hr_newEmpolyee(auth) }}
+	{% elif sectShow == 'hr_changeShift'  %}
+		<p class='title1'>人事系統 - 變更班別</p>
+		{% import 'hr.html' as form %}
+		{{  form.hr_changeShift(df_table,df_indiv, auth, upload_ans) }}   
+	{% elif sectShow == 'hr_leave'  %}
+		<p class='title1'>人事系統 - 請假系統</p>
+		{% import 'hr.html' as form %}
+		{{  form.hr_leave() }}
+	{% elif sectShow == 'hr_leaveTimeout'  %}
+		<p class='title1'>人事系統 - 請假逾時</p>
+		{% import 'hr.html' as form %}
+		{{  form.hr_leaveTimeout() }}
+	{% elif sectShow == 'hr_overwork'  %}
+		<p class='title1'>人事系統 - 加班系統</p>
+		{% import 'hr.html' as form %}
+		{{  form.hr_overwork() }}	
+		
+    
+	{# CT1 Yield Summary  #}	
+    {% elif sectShow == 'ct1Summ'  %}
+		<p class='title1'>[CT1] Yield Summary</p>
+		<h5><input type="date" class='inDate1' name="ct1Summ_date1" value='{{date1}}' size='7'>&nbsp;&nbsp;~&nbsp;
+		<input type="date" class='inDate1' name="ct1Summ_date2" value='{{date2}}' size='7'>&nbsp;
+		&emsp;&emsp;<input type='submit' class='in_subDate' name='yieldSumm' value="送出"></br></br>
+		{#<input type="text" name='yieldSumm'></br></br>
+		&emsp;&emsp;<input type='text' class='in_subDate' name='yieldSumm'  onclick="this.form.submit(this.name);this.disabled=true;" value="送出">
+		#}
+		{% import 'ct1Summ.html' as form %}
+			{{  form.table_ct1YieldSumm(ct1_summ, original_col, drop_col) }}
+	
+	
+	{% elif sectShow == 'goHours' %}
+		<p class='title1'>[CT1] 每小時GO Ratio</p>
+		<h5>MFG Date&nbsp;&nbsp; ↓</h5>
+		
+		{% import 'goHours.html' as form %}
+		{{  form.table_goHours(df_goHours, date) }}
+	
+	{# 每小時GO Ratio 第二層  #}
+	{% elif sectShow == 'goHoursRaw' %}
+	
+		<p class='title1'>not G組成</p>
+		{% import 'goHours.html' as form %}
+		{{  form.table_goHours_raw(df_goHours_raw, hour) }}
+
+	{% elif sectShow == 'ct1MachDiff' %}
+		<p class='title1'>[CT1] 機差系統</p>
+		<h5>Date&nbsp;&nbsp; ↓</h5>
+		<h5><input type="date" class='inDate1' name="date1" value='{{date1}}' size='7'  >&nbsp;&nbsp;~&nbsp;
+		<input type="date" class='inDate1' name="date2" value='{{date2}}' size='7'  >&nbsp;
+		&nbsp;&nbsp;
+		<input type='submit' class='in_subDate' name='ct1MachDiff' value='送出'>&nbsp;&nbsp;&nbsp;
+		</br>
+		
+		{% if isNight == True%}
+		<h3><input type="checkbox"  class="chk1" name="isNight" value="Y"  checked>只顯示夜班
+		{% else %}
+		<h3><input type="checkbox" class="chk1" name="isNight" value="Y">只顯示夜班
+		{% endif %}
+		
+		
+		</br>
+		{% import 'machDiff.html' as form %}
+		{{  form.table_machDiff(df_machDiff) }}
+	
+	{% elif sectShow == 'ct1SameDef' %}
+	<p class='title1'>[CT1] 共缺 Summary : </p>
+	<h5>MFG Date&nbsp;&nbsp; ↓</h5>
+	
+		&nbsp;&nbsp;
+		<input type='submit' class='in_subDate' name='ct1SameDef' value='送出'>&nbsp;&nbsp;&nbsp;
+		</br>
+		<h5>※ 資料為每小時撈取一次，非即時資料<br/>
+		{% import 'ct1SameDef.html' as form %}
+			{{  form.table_ct1SameDef(df_ct1SameDef) }}
+			
+			
+	{# CT1良率共用 第二層  #}
+	{% elif sectShow == 'ct1_chipidRaw'  %}
+		<p class='title1'>ChipID Check</p>
+		<input type='text' class='in_hidden' name='now0' value='{{now0}}'>&nbsp;&nbsp;&nbsp;
+		{% import 'ct1Summ.html' as form %}
+			{{  form.table_ct1Summ_chipid(ct1_summ2_chipid, imgLinks, df_check) }}
+	
+	
+	
+	{# CT1觸發 查詢系統  #}
+	{% elif sectShow == 'ct1IDS'  %}
+		<p class='title1'>CT1觸發 查詢系統</p>
+		<h5>Chip ID&nbsp;&nbsp;↓</h5>
+		<textarea style='font-size:30px;' name="ct1IDS_chipids" rows="10" cols="35" >{{txt0}}</textarea>
+		
+		<h5>Defect選擇: </h5>
+		<table class="t2">
+
+		<tr>
+			<td><input type="radio" class='in_radio' name="{{sectShow}}_defect"  value="OTHER GLASS DEFECT" {% if defect == 'OTHER GLASS DEFECT' %}  checked{%endif%}></td> 
+			<td><b class='title3'>OGD </b></td> 
+			<td><input type="radio" class='in_radio' name="{{sectShow}}_defect" value= "V-OPEN" {% if defect == 'V-OPEN' %}  checked{%endif%}></td> 
+			<td><b class='title3'>V-OPEN  </b></td> 
+			<td><input type="radio" class='in_radio' name="{{sectShow}}_defect" value= "H-OPEN" {% if defect == 'H-OPEN' %}  checked{%endif%}></td> 
+			<td><b class='title3'>H-OPEN  </b></td> 
+		</tr>	
+		<tr>	
+			
+			<td><input type="radio" class='in_radio' name="{{sectShow}}_defect" value= "V-OPEN-BL" {% if defect == 'V-OPEN-BL' %}  checked{%endif%}></td> 
+			<td><b class='title3'>V-OPEN-BL</b></td> 
+			<td><input type="radio" class='in_radio' name="{{sectShow}}_defect" value= "AROUND GAP MURA" {% if defect == 'AROUND GAP MURA' %}  checked{%endif%}></td> 
+			<td><b class='title3'>AGM</b></td> 
+		</tr>
+					
+		</table>
+		<br/><br/>
+		<input type='submit' class='in_subDate' name='ct1IDS'  value="搜尋">
+		{% import 'ct1IDS.html' as form %}
+			{{  form.table_ct1chipids(ct1IDS, imgLinks, df_check) }}
+		
+		
+	    
+	{# CT1 AGM查詢  #}
+	{% elif sectShow == 'ct1AGMSearch'  %}
+		<p class='title1'>CT1 AGM查詢</p>
+		<h5>Chip ID&nbsp;&nbsp;↓</h5>
+		<textarea style='font-size:30px;' name="ct1AGMSearch_chipids" rows="12" cols="50" >{{txt0}}</textarea>
+		
+		<h5>Defect選擇: </h5><input type="checkbox" class='in_subDate' name="OTHER GLASS DEFECT"  checked><b class='title3'>OGD <b class='title3'> 
+		<input type="checkbox" class='in_subDate' name="V-OPEN" checked ><b class='title3'>V-OPEN <b class='title3'>
+		
+		<br/>
+		<input type='submit' class='in_subDate' name='ct1AGMSearch'  value="搜尋">
+		
+		{#
+		{% import 'ct1IDS.html' as form %}
+			{{  form.table_ct1Summ_chipid(ct1IDS, imgLinks) }}
+		
+	    #}
+		 	 
+
+	
+	{# CT1 Judger Area查詢  #}
+	{% elif sectShow == 'ct1JudgerArea'  %}
+		<p class='title1'>CT1 Judger Area查詢</p>
+		<h5>Chip ID&nbsp;&nbsp;↓</h5>
+		<textarea style='font-size:30px;' name="ct1JudgerArea_chipids" rows="12" cols="50" >{{txt0}}</textarea>
+		<input type='submit' class='in_subDate' name='ct1JudgerArea'  value="搜尋">
+		
+		{#
+		{% import 'ct1IDS.html' as form %}
+			{{  form.table_ct1Summ_chipid(ct1IDS, imgLinks) }}
+		
+	    #}
+		 
+	
+	
+		 
+	
+	{# L7AH1 Monitor 第一層  #}
+	{% elif sectShow == 'ct1Summ2'  %}
+		<p class='title1'>L7AH1 Monitor</p>
+		<h5><input type="date" class='inDate1' name="ct1Summ2_date1" value='{{ct1_summ2_date12[0]}}' size='7'>&nbsp;&nbsp;~&nbsp;
+		<input type="date" class='inDate1' name="ct1Summ2_date2" value='{{ct1_summ2_date12[1]}}' size='7'>&nbsp;
+		{# 與左側選單同name(L7AH1 Monitor)  #}
+		<input type='submit' name='ct1Summ2' value='送出'></br></br>
+		{% import 'ct1Summ.html' as form %}
+			{{  form.table_ct1Summ(ct1_summ2) }}
+	{# L7AH1 Monitor 第二層  #}
+	{% elif sectShow == 'ct1_summ2_chipid'  %}
+		<p class='title1'>ChipID Check</p>
+		{% import 'l7ah1.html' as form %}
+			{{  form.table_ct1Summ_chipid(ct1_summ2_chipid, imgLinks, l7ah1_imgs) }}
+		
+	{# pcsCheck 片數報表  #}
+	{% elif sectShow == 'pcsCheck'  %}
+		<p class='title1'>PCS MOVE監測</p>
+		<h5>MFG Date&nbsp;&nbsp; ↓</h5>
+		<input type="date" class='inDate1' name="pcsCheck_date" value='{{pcsCheck_date}}' size='7' min="2021-09-02" >
+		&nbsp;&nbsp;
+		<input type='submit' class='in_subDate' name='pcsCheck' value='送出'>&nbsp;&nbsp;&nbsp;
+		<button type='submit' class='in_subDate' name='pcsCheck' value='download'>csv下載</button></br></br></br>
+		{% import 'pcsCheck.html' as form %}
+		{{  form.table_pcsCheck(pcs_check) }}
+	  
+	{% elif sectShow == 'ct1ADC' %}
+		
+		<h5>Date&nbsp;&nbsp; ↓</h5>
+		<h5><input type="date" class='inDate1' name="ct1ADC_date1" value='{{date1}}' size='7'  >&nbsp;&nbsp;~&nbsp;
+		<input type="date" class='inDate1' name="ct1ADC_date2" value='{{date2}}' size='7'  >
+		<input type='submit' class='in_subDate' name='ct1ADC' value='送出'>	
+		<p class='title1'> [CT1] ADC 確認</p>
+		{% import 'ct1ADC.html' as form %}
+		{{ form.table_ct1ADC(df_ct1ADC, date1, date2) }}
+	
+	{% elif sectShow == 'ct1ADCRaw' %}
+		<h5>CT1 ADC確認 => Raw Data</h5>
+		   
+		{% import 'ct1ADC.html' as form %}
+		{{ form.table_ct1ADCRaw(df_ct1ADCRaw, date1, date2) }}
+
+	
+	
+	{# 點檢紀錄查詢  #}
+	
+	
+	
+	
+	
+	{% elif sectShow == 'showNormalCheckRecord'  %}
+	<p class='title1'> 日常點檢 查詢系統(by Date)</p>
+
+	<h5>MFG DAY&nbsp;&nbsp; ↓</h5>
+	<input type="date" class='inDate1' name="showNormalCheckRecord_date" value="{{submit_list[0]}}" size='7'  >
+	
+	<h5>請選擇站點:</h5>
+    	<select id="site-list" name="site" onchange="changeStatus(this.selectedIndex)" >
+		{# {%if submit_list[1]==0%}selected="selected"{%endif%} #}
+			<option value="0" {%if submit_list[1]|int==0%}selected="selected"{% endif %}>---</option>
+			<option value="1" {%if submit_list[1]|int==1%}selected="selected"{% endif %}>CT1</option>
+			<option value="2" {%if submit_list[1]|int==2%}selected="selected"{% endif %}>OCT</option>
+			<option value="3" {%if submit_list[1]|int==3%}selected="selected"{% endif %}>LASER</option>
+		</select>
+	
+	
+	
+	
+    <h5>點檢項目:</h5>
+    	<select id="check-list" name="mode" ></select>
+	<input type='submit' class='in_subDate' name='showNormalCheckRecord' value='送出'>&nbsp;&nbsp;&nbsp;
+
+	
+	<script>
+	//changeStatus({{submit_list[1]}});
+	var status_list=new Array();
+		status_list[0]=['None'];
+		status_list[1]=['點燈機點檢','Cold_Run' ,'CST點檢', '---'];
+		status_list[2]=['點燈機點檢','清潔點檢','CST點檢' ,'保養點檢'];  
+		status_list[3]=['清潔點檢','CST點檢'];
+        var Sinner="";
+        for(var i=0;i<status_list[{{submit_list[1][0]}}].length;i++){
+		
+			
+			Sinner=Sinner+`<option value="`+status_list[{{submit_list[1][0]}}][i]+`"         >`+status_list[{{submit_list[1]|int}}][i]+`</option>`;
+    
+		}
+	
+        var mach_listelect = document.getElementById("check-list");
+        mach_listelect.innerHTML=Sinner;
+	</script>
+	</br></br>
+		{% if check_record|length == 0 and submit_list[2]|int != -1 %}
+			<h2>查無資料!!!</h2>
+		{% elif mode[0] == 'CT1' and mode[1] == 'Normal'  %}
+			{% import 'norCheck_CT1.html' as form %}
+			{{ form.showLight(check_record) }}
+		{% elif mode[0] == 'CT1' and mode[1] == 'CST'  %}
+			{% import 'norCheck_CT1.html' as form %}
+			{{ form.showCST(check_record) }}
+		{% elif mode[0] == 'CT1' and mode[1] == 'Cold_Run'  %}
+			{% import 'norCheck_CT1.html' as form %}
+			{{ form.showColdRun(check_record) }}
+
+		{% elif mode[0] == 'OCT' and mode[1] == 'Normal'  %}
+			{% import 'norCheck_OCT.html' as form %}
+			{{ form.showLight(check_record) }}	
+		{% elif mode[0] == 'OCT' and mode[1] == 'CST'  %}
+			{% import 'norCheck_OCT.html' as form %}
+			{{ form.showCST(check_record) }}
+		{% elif mode[0] == 'OCT' and mode[1] == 'Clear'  %}
+			{% import 'norCheck_OCT.html' as form %}
+			{{ form.showClear(check_record) }}
+		{% elif mode[0] == 'OCT' and mode[1] == 'Maint'  %}
+			{% import 'norCheck_OCT.html' as form %}
+			{{ form.showMaint(check_record) }}
+			
+		{% elif mode[0] == 'LASER' and mode[1] == 'Clear'  %}
+			{% import 'norCheck_LSR.html' as form %}
+			{{ form.showClear(check_record) }}
+		{% elif mode[0] == 'LASER' and mode[1] == 'CST'  %}
+			{% import 'norCheck_LSR.html' as form %}
+			{{ form.showCST(check_record) }}
+		{% endif %}
+	
+	
+	{% elif sectShow == 'showNormalCheckRecord2' %}
+	<p class='title1'> 日常點檢 查詢系統(by EQP)</p>
+	
+	<h5>MFG DAY&nbsp;&nbsp; ↓</h5>
+	<input type="date" class='inDate1' name="showNormalCheckRecord2_date1" value='{{submit_list2[0]}}' size='7'  >&nbsp;&nbsp;~&nbsp;&nbsp;
+	<input type="date" class='inDate1' name="showNormalCheckRecord2_date2" value='{{submit_list2[1]}}' size='7'  >&nbsp;
+
+	<h5>請選擇站點:</h5>
+    	<select id="site-list2" name="site" onchange="changeEQP(this.selectedIndex)">
+			<option value="0" {%if submit_list2[2]|int==0%}selected="selected"{% endif %}>---</option>
+			<option value="1" {%if submit_list2[2]|int==1%}selected="selected"{% endif %}>CT1</option>
+			<option value="2" {%if submit_list2[2]|int==2%}selected="selected"{% endif %}>OCT</option>
+			<option value="3" {%if submit_list2[2]|int==3%}selected="selected"{% endif %}>LASER</option>
+		</select>
+    <h5>EQP:</h5>
+    	<select id="mach-list" name="eqp"></select>
+	<script>changeEQP({{submit_list2[2]}});</script>
+	<input type='submit' class='in_subDate' name='showNormalCheckRecord2' value='送出'>&nbsp;&nbsp;&nbsp;
+	</br></br>
+		
+		{% if submit_list2[3]|int != 0 %}
+			<h2></h2>
+		
+		{% elif mode[0] == 'CT1' %}
+			{% import 'norCheck_CT1.html' as form %}
+			{{ form.showLight(check_record_Light) }}</br>
+			{{ form.showColdRun(check_record_Clear) }}</br>
+			{{ form.showCST(check_record_CST) }}</br>
+		{% elif mode[0] == 'OCT' %}
+			{% import 'norCheck_OCT.html' as form %}
+			{{ form.showLight(check_record_Light) }}</br>	
+			{{ form.showCST(check_record_CST) }}</br>
+			{{ form.showClear(check_record_Clear) }}</br>
+			{{ form.showMaint(check_record_Maint) }}</br>
+			
+		{% elif mode[0] == 'LASER'  %}
+			{% import 'norCheck_LSR.html' as form %}</br>
+			{{ form.showClear(check_record_Clear) }}</br>
+			{{ form.showCST(check_record_CST) }}</br>
+		{% endif %}
+	
+	
+	
+	{# OCT OLD Monitor #}
+	{% elif sectShow == 'octOLD' %}
+		<p class='title1'> [OCT] OLD Monitor</p>
+		<h5>Date&nbsp;&nbsp; ↓</h5>
+		<input type="date" class='inDate1' name="octOLD_date1" value='{{date1}}' size='7'  >&nbsp;&nbsp;~&nbsp;&nbsp;
+		<input type="date" class='inDate1' name="octOLD_date2" value='{{date2}}' size='7'  >
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b class='title2'>&nbsp;■ 班別:&nbsp; </b>
+		<select  name="octOLD_shift"  class='sel1'>
+			<option value="All"  {%if old_shift == 'All'%}selected="selected"{% endif %}>全部</option>
+			<option value="D"    {%if old_shift == 'D'%}selected="selected"{% endif %}>日班</option>
+			<option value="N"    {%if old_shift == 'N'%}selected="selected"{% endif %}>夜班</option>
+		</select>
+		
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type='submit' class='in_subDate' name='octOLD' value='送出'>&nbsp;&nbsp;&nbsp;
+		</br></br></br>
+		<table class="t2"><tr><td>
+		<strong><font size="4" color="red">
+		<p> Sampling(CT1判G，到OCT第一次判片) --> OLD 片數 > 2 pcs</p>
+		<p> First(CT1判非GO的，到OCT第一次判片)-->片數> 5 pcs</p> 
+		<p>(扣除PRE_DEFECT為H-OPEN, H-LINE, OGD, OAD, X-SHORT,H-BAND MURA)</p>
+		</font></strong></td>
+		
+		<td>
+		<h3>1. 確認片數為異常片數一半
+		<h3>2. 使用正常片確認機台點燈畫面是否正常
+		<h3>3. 取異常片至其他機台交叉測試(最少2片)
+		<h3>4. 需確認PAD及線路有無刮傷炸傷(必須使用Loupe或OM檢)
+		<h3>5. 異常片數>10pcs and Ratio>10% 留片通知ENG及停機
+		</td></tr></table>
+		
+		</br></br>
+		{% import 'octOLD.html' as form %}</br>
+		<p class='title2'>○ Sampling Yield </p>
+		{{ form.table_octOLD1(octOLD_sy, 2) }}
+		<table align="left"><tr><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td></tr></table>
+		{{ form.table_octOLD2(octOLD_sy_raw, 2) }}</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+		</br></br>
+		<p class='title2'>────────────────────────────────────────────────────────────────────────────────────────────────</p>
+		<p class='title2'>○ First Yield </p>
+		{{ form.table_octOLD1(octOLD_fy, 5) }}
+		<table align="left"><tr><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td></tr></table>
+		{{ form.table_octOLD2(octOLD_fy_raw, 5) }}</br>
+	
+	
+	{% elif sectShow == 'octOLDRaw' %}
+		<p class='title1'>  OCT Defect異常Monitor => Raw Data :</p>
+		</br></br>
+		{% import 'octOLD.html' as form %}</br>
+		{{ form.table_octOLDRaw(octOLD_raw, octaoi_list, octadc_list, ct1img_list, ct1_subImgsList, ct1_areaImgsList , ct1_othersImgsList) }}
+	
+	{#  OCT PAD CORROSION Monitor #}
+	{% elif sectShow == 'octPADCOR' %}
+		<p class='title1'> [OCT] PAD CORROSION Monitor</p>
+		<h5>Date&nbsp;&nbsp; ↓</h5>
+		<input type="date" class='inDate1' name="octPADCOR_date1" value='{{date1}}' size='7'  >&nbsp;&nbsp;~&nbsp;&nbsp;
+		<input type="date" class='inDate1' name="octPADCOR_date2" value='{{date2}}' size='7'  >
+		
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type='submit' class='in_subDate' name='octPADCOR' value='送出'>&nbsp;&nbsp;&nbsp;
+		</br></br>
+		<table class="t2"><tr><td>
+		<strong><font size="5" color="red">
+		<p> 大於5片，機台停機</p>
+		
+		</font></strong></td>
+		
+		<td>
+		
+		</td></tr></table>
+		</br>
+		{% import 'octOLD.html' as form %}</br>
+		<p class='title2'> </p>
+		{{ form.table_octPADCOR(octPADCOR1, octPADCOR2) }}
+		<table align="left"><tr><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td></tr></table>
+	{% elif sectShow == 'octOGD' %}
+		<p class='title1'> [OCT] OTHER GLASS DEFECT Monitor</p>
+		<h5>Date&nbsp;&nbsp; ↓</h5>
+		<input type="date" class='inDate1' name="octOGD_date1" value='{{date1}}' size='7'  >&nbsp;&nbsp;~&nbsp;&nbsp;
+		<input type="date" class='inDate1' name="octOGD_date2" value='{{date2}}' size='7'  >
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b class='title2'>&nbsp;■ 班別:&nbsp; </b>
+		<select  name="octOGD_shift"  class='sel1'>
+			<option value="All"  {%if sql_shift == 'All'%}selected="selected"{% endif %}>全部</option>
+			<option value="D"    {%if sql_shift == 'D'%}selected="selected"{% endif %}>日班</option>
+			<option value="N"    {%if sql_shift == 'N'%}selected="selected"{% endif %}>夜班</option>
+		</select>
+		</br></br>
+		<input type="checkbox" class="chk1" name="octOGD_chk" value="Y"> <b class='txt2'>Show CT1 & OCT 比對資料</b>
+		
+		
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type='submit' class='in_subDate' name='octOGD' value='送出'>&nbsp;&nbsp;&nbsp;
+		</br></br>
+			
+		<table class="t2"><tr><td>
+		<strong><font size="4" color="red">
+		<p> 取片至其他機台確認 RULE :</p>
+		<p> 回查 CT1 Defect 非 OTHER ALIGN DEFECT、 OTHER GLASS DEFECT 、 V-Line、V-OPEN 、 V-OPEN-BL者</p> 
+		<p> 片數 > 3 PCS、P46 :First --> 片數> 5 pcs , >平均 Ratio 2%</p>
+		</font></strong></td>
+		
+		<td>
+		<h3>1.確認片數為異常片數一半
+		<h3>2.使用正常片確認機台點燈畫面是否正常
+		<h3>3.需確認PAD及線路有無刮傷炸傷<font color="red">(必須使用Loupe或OM檢)</font>
+		<h3>4.異常片數>10pcs and Ratio>10% 留片通知ENG及停機
+		</td></tr></table>
+		</br></br>
+
+		{% import 'octOGDOAPD.html' as form %}</br>
+		<p class='title2'>○ Sampling Yield </p>
+		{{ form.table_octOGDOAPD1(octOGD_sy, 2) }}
+		<table align="left"><tr><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td></tr></table>
+		{{ form.table_octOGDOAPD2_2(octOGD_sy_raw, 2) }} </br></br></br></br></br></br></br></br></br></br></br>
+		</br></br></br></br></br></br></br></br></br></br>
+		<p class='title2'>────────────────────────────────────────────────────────────────────────────────────────────────</p>
+		<p class='title2'>○ First Yield </p>
+		{{ form.table_octOGDOAPD1(octOGD_fy, 5) }}
+		<table align="left"><tr><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td></tr></table>
+		{{ form.table_octOGDOAPD2(octOGD_fy_raw, 5) }}</br></br></br></br></br></br></br></br></br>
+		{% if isCT1data %}
+			</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+			</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+			</br></br></br></br></br>
+			<p class='title2'>────────────────────────────────────────────────────────────────────────────────────────────────</p>
+			<p class='title2'>○ CT1 & OCT 比對資料 </p>	
+			{{ form.table_oct_ct1eqp(octOGD_ct1eqp) }}
+			<table align="left"><tr><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td></tr></table>
+
+			{{ form.table_oct_ct1eqp(octOGD_ct1def) }}
+		{% endif %}
+	
+	
+	
+	{% elif sectShow == 'octOAPD' %}
+		<p class='title1'> [OCT] OTHER APPEAR DEFECT Monitor</p>
+		<h5>Date&nbsp;&nbsp; ↓</h5>
+		<input type="date" class='inDate1' name="octOAPD_date1" value='{{date1}}' size='7'  >&nbsp;&nbsp;~&nbsp;&nbsp;
+		<input type="date" class='inDate1' name="octOAPD_date2" value='{{date2}}' size='7'  >
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b class='title2'>&nbsp;■ 班別:&nbsp; </b>
+		<select  name="octOAPD_shift"  class='sel1'>
+			<option value="All"  {%if sql_shift == 'All'%}selected="selected"{% endif %}>全部</option>
+			<option value="D"    {%if sql_shift == 'D'%}selected="selected"{% endif %}>日班</option>
+			<option value="N"    {%if sql_shift == 'N'%}selected="selected"{% endif %}>夜班</option>
+		</select>
+		</br></br>
+		<input type="checkbox" class="chk1" name="octOAPD_chk" value="Y"> <b class='txt2'>Show CT1 & OCT 比對資料</b>
+		
+		
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type='submit' class='in_subDate' name='octOAPD' value='送出'>&nbsp;&nbsp;&nbsp;
+		</br></br>
+		
+		
+		<table class="t2"><tr><td>
+		<strong><font size="4" color="red">
+		<p> 片數 > 3 PCS、P46 :First --> 片數> 5 pcs , >平均 Ratio 2%</p>
+		<p> 回查 CT1 Defect 非 OTHER ALIGN DEFECT、 OTHER GLASS DEFECT 、 V-Line、V-OPEN 、 V-OPEN-BL者</p> 
+		</font></strong></td>
+		
+		<td>
+		
+		<h3>1.確認片數為異常片數一半
+		<h3>2.使用正常片確認機台點燈畫面是否正常
+		<h3>3.需確認PAD及線路有無刮傷炸傷<font color="red">(必須使用Loupe或OM檢)</font>
+		<h3>4.異常片數>10pcs and Ratio>10% 留片通知ENG及停機
+		</td></tr></table>
+		</br></br>
+
+		{% import 'octOGDOAPD.html' as form %}</br>
+		<p class='title2'>○ Sampling Yield </p>
+		{{ form.table_octOGDOAPD1(octOGD_sy, 2) }}
+		<table align="left"><tr><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td></tr></table>
+		{{ form.table_octOGDOAPD2_2(octOGD_sy_raw, 2) }}</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+		</br></br></br></br></br></br></br></br></br></br>
+		<p class='title2'>────────────────────────────────────────────────────────────────────────────────────────────────</p>
+		<p class='title2'>○ First Yield </p>
+		{{ form.table_octOGDOAPD1(octOGD_fy, 5) }}
+		<table align="left"><tr><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td></tr></table>
+		{{ form.table_octOGDOAPD2(octOGD_fy_raw, 5) }}</br>
+		{% if isCT1data %}
+			</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+			</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+			</br></br></br></br></br>
+			<p class='title2'>────────────────────────────────────────────────────────────────────────────────────────────────</p>
+			<p class='title2'>○ CT1 & OCT 比對資料 </p>	
+			{{ form.table_oct_ct1eqp(octOGD_ct1eqp) }}
+			<table align="left"><tr><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td></tr></table>
+
+			{{ form.table_oct_ct1eqp(octOGD_ct1def) }}
+		{% endif %}
+	
+	
+
+	{% elif sectShow == 'octAD' %}
+		<p class='title1'> [OCT] ABNORMAL DISPLAY Monitor</p>
+		<h5>Date&nbsp;&nbsp; ↓</h5>
+		<input type="date" class='inDate1' name="octAD_date1" value='{{date1}}' size='7'  >&nbsp;&nbsp;~&nbsp;&nbsp;
+		<input type="date" class='inDate1' name="octAD_date2" value='{{date2}}' size='7'  >
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b class='title2'>&nbsp;■ 班別:&nbsp; </b>
+		<select  name="octAD_shift"  class='sel1'>
+			<option value="All"  {%if sql_shift == 'All'%}selected="selected"{% endif %}>全部</option>
+			<option value="D"    {%if sql_shift == 'D'%}selected="selected"{% endif %}>日班</option>
+			<option value="N"    {%if sql_shift == 'N'%}selected="selected"{% endif %}>夜班</option>
+		</select>
+		</br></br>
+		<input type="checkbox" class="chk1" name="octAD_chk" value="Y"> <b class='txt2'>Show CT1 & OCT 比對資料</b>
+		
+		
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type='submit' class='in_subDate' name='octAD' value='送出'>&nbsp;&nbsp;&nbsp;
+		</br></br>
+
+		<table class="t2"><tr><td>
+		<strong><font size="5" color="red">
+		<p> Check Sampling --> A.D 片數 > 2 pcs</p>
+		<p> First --> 片數 5 pcs , >平均 Ratio 2%</p> 
+		</font></strong></td>
+		
+		<td>
+		
+		</td></tr></table>
+		</br>
+		{% import 'octOGDOAPD.html' as form %}</br>
+		<p class='title2'>○ Sampling Yield </p>
+		{{ form.table_octOGDOAPD1(octOGD_sy, 2) }}
+		<table align="left"><tr><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td></tr></table>
+		{{ form.table_octOGDOAPD2_2(octOGD_sy_raw, 2) }}</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+		</br></br>
+		<p class='title2'>────────────────────────────────────────────────────────────────────────────────────────────────</p>
+		<p class='title2'>○ First Yield </p>
+		{{ form.table_octOGDOAPD1(octOGD_fy, 5) }}
+		<table align="left"><tr><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td></tr></table>
+		{{ form.table_octOGDOAPD2(octOGD_fy_raw, 5) }}</br>
+		{% if isCT1data %}
+			</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+			</br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br></br>
+			</br></br></br></br></br>
+			<p class='title2'>────────────────────────────────────────────────────────────────────────────────────────────────</p>
+			<p class='title2'>○ CT1 & OCT 比對資料 </p>	
+			{{ form.table_oct_ct1eqp(octOGD_ct1eqp) }}
+			<table align="left"><tr><td>&nbsp;&nbsp;&nbsp;</td><td>&nbsp;&nbsp;&nbsp;</td></tr></table>
+
+			{{ form.table_oct_ct1eqp(octOGD_ct1def) }}
+		{% endif %}
+		
+	{% elif sectShow == 'octDP2BP' %}
+		<p class='title1'> [OCT] CT1 DP to OCT BP Monitor</p>
+		<h5>Date&nbsp;&nbsp; ↓</h5>
+		<input type="date" class='inDate1' name="octDP2BP_date1" value='{{date1}}' size='7'  >&nbsp;&nbsp;~&nbsp;&nbsp;
+		<input type="date" class='inDate1' name="octDP2BP_date2" value='{{date2}}' size='7'  >
+		<input type='submit' class='in_subDate' name='octDP2BP' value='送出'>		
+		<p>PS : 單一機台 ≧ 5 pcs,請確認機台狀況 </p> 
+		{% import 'octDP2BP.html' as form %}</br>
+		{{ form.table_octDP2BP(octDP2BP) }}
+	
+	{% elif sectShow == 'octDP2BPRaw' %}
+		<p class='title1'> 座標比對 :</p>
+		
+		{% import 'octDP2BP.html' as form %}
+		{{ form.table_octDP2BPRaw(octDP2BPRaw, tool_id, pc, df_aoi, df_adc, df_ct1) }}
+	
+	{% elif sectShow == 'octADCRBSuc' %}
+		<h5>Date&nbsp;&nbsp; ↓</h5>
+		<input type="date" class='inDate1' name="octADCRBSuc_date1" value='{{date1}}' size='7'  >&nbsp;&nbsp;~&nbsp;&nbsp;
+		<input type="date" class='inDate1' name="octADCRBSuc_date2" value='{{date2}}' size='7'  >
+		<input type='submit' class='in_subDate' name='octADCRBSuc' value='送出'>	
+		<p class='title1'> [OCT] ADC RB標點失敗率</p>
+		{% import 'octADCRBSuc.html' as form %}
+		{{ form.table_octADCRBSuc(octADCRBSuc, date1, date2) }}
+	{% elif sectShow == 'octADCRBSucRaw' %}
+		<h5>[OCT] ADC RB標點失敗率 =>　Raw Data</h5>
+		
+		{% import 'octADCRBSuc.html' as form %}
+		{{ form.table_octADCRBSucRaw(octADCRBSucRaw, df_adc, date1, date2, tool_id, pc, def_col) }}	
+		
+	{% elif sectShow == 'octADCRBSucEQP' %}
+		<h5>[OCT] ADC RB標點失敗率 => CT1 機台分布(%)</h5>
+		
+		{% import 'octADCRBSuc.html' as form %}
+		{{ form.table_octADCRBSucEQP(octADCRBSucEQP, tool_id, pc) }}
+	
+	{% elif sectShow == 'octADCRBRej' %}
+		<h5>Date&nbsp;&nbsp; ↓</h5>
+		<input type="date" class='inDate1' name="octADCRBRej_date1" value='{{date1}}' size='7'  >&nbsp;&nbsp;~&nbsp;&nbsp;
+		<input type="date" class='inDate1' name="octADCRBRej_date2" value='{{date2}}' size='7'  >
+		<input type='submit' class='in_subDate' name='octADCRBRej' value='送出'>	
+		<p class='title1'>[OCT]ADC RB覆判成功率</p>
+		{% import 'octADCRBRej.html' as form %}
+		{{ form.table_octADCRBRej(octADCRBRej, date1, date2) }}
+	{% elif sectShow == 'octADCRBRejRaw0' %}
+		<h5>[OCT]ADC RB覆判成功率 => Defects Data</h5>
+		
+		{% import 'octADCRBRej.html' as form %}
+		{{ form.table_octADCRBRejRaw0(octADCRBRej, date1, date2) }}	
+	
+	
+	
+	{% elif sectShow == 'octADCRBRejRaw' %}
+		<h5>[OCT]ADC RB覆判成功率 => Raw Data</h5>
+		
+		{% import 'octADCRBRej.html' as form %}
+		{{ form.table_octADCRBRejRaw(octADCRBRejRaw, df_adc, date1, date2) }}	
+		
+	{% elif sectShow == 'octADCRBRejEQP' %}
+		<h5>[OCT]ADC RB覆判成功率 => CT1 機台分布(%)</h5>
+		
+		{% import 'octADCRBRej.html' as form %}
+		{{ form.table_octADCRBRejEQP(octADCRBRejEQP, tool_id, pc) }}
+	{% elif sectShow == 'octADCRBSamp' %}
+		<h5>Date&nbsp;&nbsp; ↓</h5>
+		<input type="date" class='inDate1' name="octADCRBSamp_date1" value='{{date1}}' size='7'  >&nbsp;&nbsp;~&nbsp;&nbsp;
+		<input type="date" class='inDate1' name="octADCRBSamp_date2" value='{{date2}}' size='7'  >
+		<input type='submit' class='in_subDate' name='octADCRBSamp' value='送出'>	
+		<p class='title1'>[OCT]ADC RB Sampling Ratio</p>
+		{% import 'octADCRBSamp.html' as form %}
+		{{ form.table_octADCRBSamp(octADCRBSamp, date1, date2) }}
+	{% elif sectShow == 'octADCRBSampRaw' %}
+		<h5>[OCT]ADC RB Sampling Ratio => Raw Data</h5>
+		
+		{% import 'octADCRBSamp.html' as form %}
+		{{ form.table_octADCRBSampRaw(octADCRBSampRaw, df_adc, date1, date2) }}	
+	
+	{% elif sectShow == 'octAOIGO' %}
+		<h5>Date&nbsp;&nbsp; ↓</h5>
+		<input type="date" class='inDate1' name="{{sectShow}}_date1" value='{{date1}}' size='7'  >&nbsp;&nbsp;~&nbsp;&nbsp;
+		<input type="date" class='inDate1' name="{{sectShow}}_date2" value='{{date2}}' size='7'  >
+		<input type='submit' class='in_subDate' name='{{sectShow}}' value='送出'>	
+		<p class='title1'>[OCT]AOI GO Ratio & Right Kill</p>
+		{% import 'octAOIGO.html' as form %}
+		{{ form.table_monitor(octAOIGO, date1, date2) }}
+		
+	{% elif sectShow == 'octAOIRKRaw1' %}
+		<h5>[OCT]AOI GO Ratio => Right Kill Raw Data</h5>
+		
+		{% import 'octAOIGO.html' as form %}
+		{{ form.table_monitorRAW1(octAOIRKRaw1) }}	
+	
+	
+	{% elif sectShow == 'octAOIGORaw1' %}
+		<h5>[OCT]AOI GO Ratio => Group Data</h5>
+		
+		{% import 'octAOIGO.html' as form %}
+		{{ form.table_monitorRAW1(octAOIGORaw1) }}	
+	{% elif sectShow == 'octAOIGORaw2' %}
+		<h5>[OCT]AOI GO Ratio => Raw Data</h5>
+		
+		{% import 'octAOIGO.html' as form %}
+		{{ form.table_monitorRAW2(octAOIGORaw2, df_aoi) }}	
+	
+	{% elif sectShow == 'octAOISamp' %}
+		<h5>Date&nbsp;&nbsp; ↓</h5>
+		<input type="date" class='inDate1' name="{{sectShow}}_date1" value='{{date1}}' size='7'  >&nbsp;&nbsp;~&nbsp;&nbsp;
+		<input type="date" class='inDate1' name="{{sectShow}}_date2" value='{{date2}}' size='7'  >
+		<input type='submit' class='in_subDate' name='{{sectShow}}' value='送出'>	
+		<p class='title1'>[OCT]AOI Sampling Ratio</p>
+		{% import 'octAOISamp.html' as form %}
+		{{ form.table_monitor(octAOISamp, date1, date2) }}
+	{% elif sectShow == 'octAOISampRaw' %}
+		<h5>[OCT]AOI Sampling Ratio => Raw Data</h5>
+		
+		{% import 'octAOISamp.html' as form %}
+
+		{{ form.table_monitorRAW(octAOISampRaw, df_aoi, date1, date2) }}	
+
+	{% elif sectShow == 'octADCShift' %}
+		<h5>Date&nbsp;&nbsp; ↓</h5>
+		<input type="date" class='inDate1' name="{{sectShow}}_date1" value='{{date1}}' size='7'  >&nbsp;&nbsp;~&nbsp;&nbsp;
+		<input type="date" class='inDate1' name="{{sectShow}}_date2" value='{{date2}}' size='7'  >
+		<input type='submit' class='in_subDate' name='{{sectShow}}' value='送出'>	
+		<p class='title1'>[OCT]ADC Shift Monitor</p>
+		{% import 'octADCShift.html' as form %}
+		{{ form.table_monitor(octADCShift, date1, date2) }}
+	{% elif sectShow == 'octADCShiftRaw' %}
+		<h5>[OCT]ADC Shift Monitor => Raw Data</h5>
+		
+		{% import 'octADCShift.html' as form %}
+		{{ form.table_monitorRAW(octADCShiftRaw, df_aoi, date1, date2) }}	
+
+
+
+	
+	
+	
+	
+	
+	{# Laser 救廢片 #}
+	{% elif sectShow == 'lsrCJScrapped' %}
+		<p class='title1'> Laser 救廢片</p>
+		
+		{#　
+		<h5>Date&nbsp;&nbsp; ↓</h5>
+		<input type="date" class='inDate1' name="lsrCJScrapped_date" value='{{date}}' size='7'  >
+		<button type='submit' class='in_subDate' name='lsrCJScrapped'>送出</button>&nbsp;&nbsp;&nbsp;
+		#}
+		</br>
+		<input type='submit' name='lsrCJScrapped_Upload' class='in_subDate' value="上傳">  
+		
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type='submit' name='lsrCJScrapped_history'  class='in_subDate' value="紀錄查詢">  
+		
+		
+		
+		{% import 'cj_scrapped.html' as form %}
+			{{ form.table_lsrCJScrapped(lsr_cj_scrapped, original_col, defs_list, boxes_list, select_box, select_holdNote, hdCount_list, total_count) }}</br>
+		{% if lsr_cj_scrapped|length == 0%}
+			{#　<p class='title1RED'> 今日資料未撈取，請回報管理員!!</p>　#}
+		{% endif %}
+	
+	{% elif sectShow == 'lsrCJScrapped_history' %}	
+		<p class='title1'> LASER 救廢片 紀錄查詢系統</p>
+		<h5>Date&nbsp;&nbsp; ↓</h5>
+		<input type="date" class='inDate1' name="lsrCJScrapped_date1" value='{{date1}}' size='7'  >&nbsp;&nbsp;~&nbsp;&nbsp;
+		<input type="date" class='inDate1' name="lsrCJScrapped_date2" value='{{date2}}' size='7'  >
+		{# <button type='submit' class='in_subDate' name='lsrCJScrapped_history'>送出</button>&nbsp;&nbsp;&nbsp; #}
+		<input type='submit' class='in_subDate' name='lsrCJScrapped_history'   value="送出">
+		</br></br>
+		<button type='submit' name='lsrCJScrapped'  class='in_subDate'> 返回cj救報廢 </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		
+			{% import 'cj_scrapped.html' as form %}
+			{{ form.table_lsrCJScrapped_history(df_cjhistory, date1, date2) }}
+	
+	{% elif sectShow == 'lsrBychip' %}	
+		<p class='title1'> [LASER] ChipID查詢系統</p>
+		<h5>ChipID&nbsp;&nbsp;↓</h5>
+		<input type="text" class='inDate1' name="lsrBychip_chipid" size='7' value="{{chipid}}"  >
+		<input type='submit' class='in_subDate' name='lsrBychip' value="搜尋">
+		<h5>資料選擇: </h5><input type="checkbox" class='in_subDate' name="Cell"  checked><b class='title3'>Cell <b class='title3'> 
+		<input type="checkbox" class='in_subDate' name="Array" checked ><b class='title3'>Array <b class='title3'>
+	
+		
+		{% import 'lsrBychip.html' as form %}</br>
+		{{ form.table_chipRaw(df_chipRaw, df_chipImg, df_arrayRaw) }}</br>
+		
+		</br></br>
+	{% elif sectShow == 'lsrRJCheck' %}	
+		<h5>Date&nbsp;&nbsp; ↓</h5>
+		<input type="date" class='inDate1' name="lsrRJCheck_date1" value='{{date1}}' size='7'  >&nbsp;&nbsp;~&nbsp;&nbsp;
+		<input type="date" class='inDate1' name="lsrRJCheck_date2" value='{{date2}}' size='7'  >
+		<input type='submit' class='in_subDate' name='lsrRJCheck' value='送出'>	
+		<p class='title1'>[LASER] RJ Ckeck系統</p>
+		{% import 'lsrRJCheck.html' as form %}
+		{{ form.table_lsrRJCheck(lsrRJCheck, date1, date2) }}
+	{% elif sectShow == 'lsrRJCheckRaw' %}
+		<h5>[LASER] RJ Ckeck系統 => Raw Data</h5>
+		
+		{% import 'lsrRJCheck.html' as form %}
+		{{ form.table_lsrRJCheckRaw(lsrRJCheckRaw, df_adc, df_lsr, date1, date2) }}	
+	{% elif sectShow == 'lsrRJCheckCT1' %}
+		<h5>[LASER] RJ Ckeck系統 => CT1 Raw Data</h5>
+		
+		{% import 'lsrRJCheck.html' as form %}
+		{{ form.table_lsrRJCheckCT1(lsrRJCheckCT1) }}	
+		
+		
+	
+	{% elif sectShow == 'imgTest' %}	
+		<p class='title1'> 影像測試</p>
+		
+		<script language="JavaScript" type="text/javascript">
+		   function PopupPic(sPicURL) { 
+			 window.open( "static/popup.htm?"+sPicURL,"","resizable=1,height=1000,width=1000"); 
+		   } 
+		</script>
+
+		
+	
+		<a href="javascript:PopupPic('/static/LSR_CJ_IMG/CAJP8FB_%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20_F_B_10222_0000_00_202110312255_CCLRA202_01.jpg')"><img align="center" width='500' height='500' src="/static/LSR_CJ_IMG/lsrcj_example.jpg"> </a> 
+	
+	{{ url_for('static', filename='\LSR_CJ_IMG\lsrcj_example.jpg') }}
+	
+
+
+
+	/static/%5CLSR_CJ_IMG%5Clsrcj_example.jpg
+	</br>
+	<a href="javascript:PopupPic('/static/C9AK4ZD_C1_PWHITE.tif')"><img align="center" width='500' height='500' src="/static/C9AK4ZD_C1_PWHITE.tif"> </a> 
+	
+	
+	
+	 
+	
+	
+	
+	
+	<script type=text/javascript>
+	  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+	</script>
+	
+	
+	
+	<div class="form-group">
+	  <label for="theName">Name:</label>
+	  <input type="text" class="form-control" id="theName" value="{{ request.script_root|tojson|safe }}">
+	</div>
+	<div class="form-group">
+	  <label for="thefood">Food:</label>
+	  <input type="text" class="form-control" id="thefood">
+	</div>
+	<button id='testBTN' type='button'>testButton</button>     
+	<script language="javascript" type="text/javascript">
+		$('#thefood').keyup(
+		  function() {
+		 if (this.value.length == 3){
+			var form_data = new FormData();
+			form_data.append('theName', $("#theName").val());
+			form_data.append('thefood', $("#thefood").val());
+			// form_data.append('xxx', $("#xxx").text());
+			//附帶text也是可以的
+			$.ajax({
+				  type: "POST",
+				  url: $SCRIPT_ROOT + "/route_function",
+				  data: form_data,
+				  success: (data) => {
+					console.log(data.validate);
+					//alert(data)
+					alert($SCRIPT_ROOT + "/route_function")
+					alert(data.Rtnfood)
+					//也可以用jquery來呈現結果
+				  },
+				  contentType: false,
+				  processData: false,
+				  dataType: "json"
+				});
+			}
+		}
+		);
+	</script>
+	
+	
+	{% elif sectShow == 'blockCheck' %}	
+		<p class='title1'> 換線 Block量測 (OCT & CT1)</p>
+		
+		
+		
+		</br></br></br></br>
+		<table>
+		<tr>
+			<td><p class="title2_BLK">Date ↓</p></td>
+			<td>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</td>
+			<td><p class="title2_BLK">請選擇站點 ↓</p></td>
+			<td>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</td>
+			<td><p class="title2_BLK">EQP ↓</p></td>
+			<td>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</td>
+			<td><p class="title2_BLK">換線Model ↓</p></td>
+		</tr>
+		<tr>
+			<td><input type="date" class='inDate1' name="blockCheck_date" value='{{date}}' size='7'></td>
+			<td>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</td>
+			<td><select id="site-list2" name="site" onchange="changeEQP(this.selectedIndex)">
+				<option value="0" >---</option>
+				<option value="1" {%if site== 'CT1' %}selected="selected"{% endif %}>CT1</option>
+				<option value="2" {%if site== 'OCT' %}selected="selected"{% endif %}>OCT</option>
+				</select>
+			</td>
+			<td>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</td>
+			<td><select id="mach-list" name="eqp"></select></td>
+			<td>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</td>
+			<td><select  name="model_no" >
+				<option value="0">---</option>
+				<option value="T43QVN_P43QVN" {%if model_no== 'T43QVN_P43QVN' %}selected="selected"{% endif %}>T43QVN P43QVN</option>
+				<option value="T500QVN_P500QVN" {%if model_no== 'T500QVN_P500QVN' %}selected="selected"{% endif %}>T500QVN P500QVN</option>
+				<option value="T43HVN_P43HVN" {%if model_no== 'T43HVN_P43HVN' %}selected="selected"{% endif %}>T43HVN P43HVN</option>
+				
+				<option value="P42IVN" {%if model_no== 'P42IVN' %}selected="selected"{% endif %}>P42IVN</option>
+				{#
+				<option value="T420HVN02" {%if model_no== 'T420HVN02'%}selected="selected"{% endif %}>T420HVN02</option>
+				
+				#}
+				<option value="T430QVN03_8B" {%if model_no== 'T430QVN03_8B' %}selected="selected"{% endif %}>T430QVN03_8B</option>
+				
+				
+				</select>
+				
+			
+				
+			</td>
+			<td>&emsp;&emsp;<input type='submit' class='in_subDate' name='blockCheck' value='送出'>&nbsp;&nbsp;&nbsp;</td>
+			
+			
+		</tr>
+		
+		</table>
+		<script>{%if site== 'CT1' %}changeEQP(1);{%elif site== 'OCT' %}changeEQP(2);{% endif %}</script>
+		</br></br>
+		<script type="text/javascript">
+			function checkBlock(id0){
+				//alert(Number(id0));
+				var obj0 = document.getElementById(id0)
+			　	var block0= obj0.value;
+				var name0 = document.getElementById(id0).name; 
+				//alert(Number(block0));
+			　	
+				if ((Math.round(Number(block0)) - Number(id0.substr(-2, 2))) != 0){
+					
+					obj0.style.color="red"
+					//alert(id0.substr(0, 3)+'數值異常!! 請再次確認');
+				}else{
+					obj0.style.color="black"
+				}
+					
+			}
+		</script>
+		{% for bc in bc_list %}
+			{# 第一行跳行 #}
+			
+			{% if loop.index in [1, 5, 9,13,(bc_list|length)-1] and bc[0] == "" %}
+				<table class = 'redTable2'>
+			
+			{% elif loop.index in [1, 5, 9,13,(bc_list|length)-1] %}
+				<table class = 'redTable2'>
+			
+			{% elif bc[0] == "" %}
+				<table class = 'redTable2' align="left" > 
+			{% else%}
+				<table class = 'redTable2' align="left" > 
+			{% endif %}
+			{% set s_number = (loop.index|string).rjust(2, '0') %}
+			<tr><td colspan={{bc|length}}>S{{s_number}}</td></tr>
+			<tr>
+			{% for ch in bc %}
+				{% if ch not in ["", "CH00"]  %}
+					<td>{{ch}}</td>
+				{% else %}
+					<td>XXX</td>
+				{% endif %}
+				
+			{% endfor %}
+			</tr>
+			
+			<tr>
+			{% for ch in bc %}
+				{% if ch not in ["", "CH00"] %}
+					<td> 
+					<input type="text" name="S{{s_number}}_{{(loop.index|string).rjust(2, '0')}}" id="S{{s_number}}_{{ch[2:].rjust(2, '0')}}" class="in_subDate" size="1" onchange="checkBlock(this.id)"></td>
+				{% else %}
+					<td>N/A</td>
+				{% endif %}
+			{% endfor %}
+			</tr>
+			
+			</table>
+			
+			{% if loop.index in [1, 5,9,(bc_list|length)-1] %}
+				<br/><br/><br/>
+			{%endif%}
+		{% endfor %}
+		<br/><br/><br/><br/><br/><br/>
+		
+		
+		{% if bc_list|length > 0%}
+			<input type='submit' class='in_subDate' name='blockCheck' value='資料上傳'>
+			
+		{% endif%}
+		{# 上傳紀錄#}
+		<br/><br/><br/>
+		<hr size="8px" align="center" width="100%" class='title1'>
+		<p class='title1'> 上傳紀錄</p>
+		
+		<table class = 'redTable' align="left">
+			<thead><tr>
+			{% for i in df_record.head(1)%}
+					<th>{{i}}</th>
+			{% endfor %}
+			</tr></thead>
+
+			{% for key,value in df_record.iterrows() %}
+			<tr>
+				{% for i in df_record.head(1)%}
+					<td>{{value[i]}}</td>
+				{% endfor %}
+			</tr>
+			{% endfor %}
+		</table>
+	{% elif sectShow == 'healthy365' %}	
+		<p class='title1'>Healthy365</p>
+		
+		<table class = 'redTable' align="left">
+			<thead><tr>
+			{% for i in df_healthy365.head(1)%}
+					<th>{{i}}</th>
+			{% endfor %}
+			</tr></thead>
+
+			{% for key,value in df_healthy365.iterrows() %}
+			<tr>
+				{% for i in df_healthy365.head(1)%}
+					<td>{{value[i]}}</td>
+				{% endfor %}
+			</tr>
+			{% endfor %}
+		</table>
+		
+		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+		<script type='text/javascript' src='http://gcp-edatbl12.corpnet.auo.com/javascripts/api/viz_v1.js'>
+		</script>
+		<div class='tableauPlaceholder' style='width: 1890px; height: 753px;'>
+		<object class='tableauViz' width='1890' height='753' style='display:none;'>
+		<param name='host_url' value='http%3A%2F%2Fgcp-edatbl12.corpnet.auo.com%2F' /> 
+		<param name='embed_code_version' value='3' /> <param name='site_root' value='&#47;t&#47;L7A' />
+		<param name='name' value='healthy365&#47;healthy365' /><param name='tabs' value='no' />
+		<param name='toolbar' value='yes' /><param name='device' value='desktop' />
+		<param name='filter' value='' /><param name='filter' value='=' />
+		<param name='refresh' value='yes' /><param name='filter' value='eda_user=2106158' />
+		<param name='filter' value='eda_user_name=%E8%95%AD%E6%99%BA%E4%BA%88' />
+		<param name='filter' value='eda_user_dep=ML7AC2' /><param name='filter' value='eda_user_site=L7A' />
+		<param name='filter' value='eda_user_id=CraigHsiao' /><param name='filter' value='authkey=126051F86145479373627' />
+		<param name='filter' value='usePublishedSize=true' />
+		</object></div>
+		
+		
+		
+		<iframe src="/default.asp" width="100%" height="300" style="border:1px solid black;">
+		</iframe>
+		
+	{% elif sectShow == 'ct1AGMPara' %}	
+		<p class='title1'>CT1 AGM Alarm系統當前設定:</p>
+		<br/><br/><br/><br/>
+		<table class='t2' >
+		<thead><tr><th colspan=5><b class='txt2'>AGM Alarm項目:</b></th></tr></thead>
+		<div id="checkboxs">
+		<tr>
+		{#<td><input type="checkbox"  id="chk_all" name="chk_all" value="Y" onclick="selectAll(this)" checked><b class='txt2'> 全選</b></td>
+		#}
+		{% for key0 in dict_ison.keys()%}
+	
+		{# loop.index 號碼從1開始, 1,2,3... #}
+			{% if  'CCGL' in key0   %}
+				<td>
+					<input type="checkbox" id="{{key0}}" name="{{key0}}" id="chk_{{i}}" value="Y" {% if dict_ison[key0] == 'Y' %} checked{%endif%}>
+					<label for="{{key0}}" ><b class='txt2'> {{key0}}</b></label>
+				</td>
+			{% elif  key0  in ['isON']   %}
+				<td>
+					<input type="checkbox" id="{{key0}}" name="{{key0}}" id="chk_{{i}}" value="Y" {% if dict_ison[key0] == 'Y' %} checked{%endif%}>
+					<label for="{{key0}}" ><b class='txt2'>是否開啟</b></label>
+				</td>
+			{% endif %}
+			{% if  loop.index in [8, 13, 18, 23]   %}
+				</tr><tr>
+			{% endif %}
+
+
+		{% endfor %}
+		
+		</tr></table>	
+		<br/><br/>
+		
+		<p class='title1RED'>{{upload_ans}}</p>
+		<link rel="stylesheet" href="//apps.bdimg.com/libs/jqueryui/1.10.4/css/jquery-ui.min.css">
+	  <script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+	  <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+		<link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
+		<input type='submit' class='in_subDate' name='ct1AGMPara' value="更改後請上傳">
+		<script>
+		$( "#dialog" ).dialog({ autoOpen: false });
+		
+		
+		
+		{% if upload_ans != ""%}
+			
+		  $("#dialog").dialog({
+
+			//height: 1600,
+			position: {
+
+				  my: "top",
+
+				  at: "top"
+
+			   }
+			
+			});
+	 
+
+				//alert('{{upload_ans|safe}}');
+				$(function() {
+					$( "#dialog" ).dialog({
+					  autoOpen: false,
+					  show: {
+						// blind, bounce, clip, drop, explode, fade, fold, highlight,
+						//pulsate, puff, slide, scale, size, shake, transfer
+						effect: "bounce",
+						duration: 1000
+					  },
+					  hide: {
+						effect: "explode",
+						duration: 1000
+					  },
+					  position: {
+
+						  my: "top",
+
+						  at: "top"
+
+					   }
+					});
+				 
+					
+				$( "#dialog" ).dialog( "open" );
+					
+				  });
+				  
+
+		</script>
+		{% endif %}
+		
+		<div id="dialog" title="通知">
+		  <p class='title2'>{{upload_ans|safe}}</p>
+		</div>
+				
+		
+		
+		
+	{% elif sectShow == 'sysHealthy' %}	
+		<p class='title1'>系統健康度</p>
+		
+		<table class = 'redTable' align="left">
+			<thead><tr>
+			{% for i in df_sysHeal.head(1)%}
+					<th>{{i}}</th>
+			{% endfor %}
+			</tr></thead>
+
+			{% for key,value in df_sysHeal.iterrows() %}
+			<tr>
+				{% for i in df_sysHeal.head(1)%}
+					{% if i in ['Status'] and value[i] == 'R'%}
+						<td><img src="{{ url_for('static', filename='Red.gif')}}" ></td>
+					{% elif i in ['Status'] and value[i] == 'G'%}
+						<td><img src="{{ url_for('static', filename='Green.gif')}}" ></td>
+					{% else %}
+						<td>{{value[i]}}</td>
+					{% endif %}
+				{% endfor %}
+			</tr>
+			{% endfor %}
+		</table>
+	
+	{% elif sectShow == 'dlTime' %}	
+		
+	{% endif %}
+	
+   
+
+
+  </aside>
+  
+  </form>
+  <footer id="footer">
+    <h1></h1>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,570 @@
+{# num為超過幾片要紅底#}
+{% macro table_octOLD1(df,num) -%}
+<table class = 'redTable' align="left">
+<thead><tr>
+{% for i in df.head(1)%}
+	
+	{% if  i == 'RATIO' %}
+		<th>{{i}} (%)</th>
+	{% elif  loop.index <= 4 %}
+		<th>{{i}}</th>
+	{% endif %}
+{% endfor %}
+<tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+<tr>
+	{% for i in df.head(1)%}
+		{# loop.index 號碼從1開始, 1,2,3... #}
+		
+		{% if  i == 'RATIO' %}
+		<td>{{value[i]}}</td>
+		{% elif  i == 'OLD' %}
+			{% if value[i]|int > num %}<td bgcolor="#D9B3B3">{% else %}<td>	{% endif %} 
+			{{value[i]}}</td>
+		{% elif  loop.index <= 4 %}
+		<td>{{value[i]}}</td>
+		{% endif %}
+	{% endfor %}
+</tr>
+{% endfor %}
+
+</table>
+
+{%- endmacro %}
+
+
+
+
+{# num為超過幾片要紅底#}
+{% macro table_octOLD2(df, num) -%}
+
+<table class = 'redTable' align="left">
+<thead><tr><th colspan=5>原始資料</th><th colspan=4>確認後資料</th></tr>
+<thead><tr>
+{% for i in df.head(1)%}
+	{# loop.index 號碼從1開始, 1,2,3... #}
+	{% if  i[-5:] == 'RATIO' %}
+		<th>{{i}} (%)</th>
+	{% elif  loop.index <= 5 or i in ['OK','NG', '待確認']%}
+		<th>{{i}}</th>
+	{% endif %}
+{% endfor %}
+</tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+<tr>
+	{% for i in df.head(1)%}
+		{# loop.index 號碼從1開始, 1,2,3... #}
+		
+		{% if  i == 'RATIO' and value['OLD'] >= 1%}
+		<td><input type="submit" class='in_sub' value ="{{value[i]}}" name = "octOLDRaw__{{value['START_DAY']}}+{{value['END_DAY']}}__{{value['PRODUCT_CODE']}}__{{value['EQP']}}__{{value['SHIFT']}}__OTHER LINE DEFECT"> </td>
+		{% elif  i in ['OLD'] %}
+			{% if value[i]|int > num %}<td bgcolor="#D9B3B3">{% else %}<td>	{% endif %} 
+			{{value[i]}}</td>
+		{% elif  i in ['待確認'] %}
+			{% if value[i]|int > num %}<td bgcolor="#FFC1E0">{% else %}<td>	{% endif %} 
+			{{(value[i]|string)[0:-2]}}</td>
+		{% elif  loop.index <= 5 %}
+		<td>{{value[i]}}</td>
+		{% elif  i in ['OK','NG']%}
+		<td>{{(value[i]|string)[0:-2]}}</td>
+		{% elif  i in ['NG_RATIO']%}
+		<td>{{(value[i]|string)[0:4]}}</td>
+		
+		
+		
+		{% endif %}
+	{% endfor %}
+</tr>
+{% endfor %}
+
+</table>
+
+{%- endmacro %}
+
+
+
+
+{# Simple Yield 2表專用#}
+{% macro table_octOLD2_(df, num) -%}
+
+<table class = 'redTable' align="left">
+<thead><tr><th colspan=5>原始資料</th><th colspan=4>確認後資料</th></tr>
+<thead><tr>
+{% for i in df.head(1)%}
+	{# loop.index 號碼從1開始, 1,2,3... #}
+	{% if  i[-5:] == 'RATIO' %}
+		<th>{{i}} (%)</th>
+	{% elif  loop.index <= 5 or i in ['OK','NG', '待確認']%}
+		<th>{{i}}</th>
+	{% endif %}
+{% endfor %}
+</tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+<tr>
+	{% for i in df.head(1)%}
+		{# loop.index 號碼從1開始, 1,2,3... #}
+		
+		{% if  i == 'RATIO' and value['OLD'] >= 1%}
+		<td><input type="submit" class='in_sub' value ="{{value[i]}}" name = "octOLDSYRaw__{{value['START_DAY']}}+{{value['END_DAY']}}__{{value['PRODUCT_CODE']}}__{{value['EQP']}}__{{value['SHIFT']}}__OTHER LINE DEFECT"> </td>
+		{% elif  i in ['OLD'] %}
+			{% if value[i]|int > num %}<td bgcolor="#FFC1E0">{% else %}<td>	{% endif %} 
+			{{value[i]}}</td>
+		{% elif  i in ['待確認'] %}
+			{% if value[i]|int > num %}<td bgcolor="#FFC1E0">{% else %}<td>	{% endif %} 
+			{{(value[i]|string)[0:-2]}}</td>
+		{% elif  loop.index <= 5 %}
+		<td>{{value[i]}}</td>
+		{% elif  i in ['OK','NG']%}
+		<td>{{(value[i]|string)[0:-2]}}</td>
+		{% elif  i in ['NG_RATIO']%}
+		<td>{{(value[i]|string)[0:4]}}</td>
+		
+		
+		
+		{% endif %}
+	{% endfor %}
+</tr>
+{% endfor %}
+
+</table>
+
+{%- endmacro %}
+
+
+
+{#--------------------------------------OCT指標第二層  CHIPID檢查列表----------------------------------------------#}
+{% macro table_octOLDRaw(df, octaoi_list, octadc_list, ct1img_list, ct1_subImgsList, ct1_areaImgsList , ct1_othersImgsList) -%}
+
+<table class = 'redTable'>
+<thead><tr>
+{% for i in df.head(1)%}
+	{# loop.index 號碼從1開始, 1,2,3... #}
+	{% if i == 'Check' %}
+		<th>確認結果</th>
+	{% elif i == 'Reason' %}
+		<th>原因</th>
+	{% elif i == 'Explain' %}
+		<th>說明</th>
+		
+	{% else %}
+		<th>{{i}}</th>
+	{% endif %}
+{% endfor %}
+<tr></thead>
+
+<script>
+	function changeReason(num, value){
+			//站台的陣列
+		//這裡放系所的陣列(有順序性，對應各學院的資料)
+		var reason = document.getElementById('reason'+num);
+        reason.innerHTML="<option  value='hiii'>測試2222222</option>";
+		ok_list = ['aaa', 'bbb'];
+		ng_list = ['aaa', 'bbb'];
+		nn_list = ['----'];
+		if value == 'NG'{
+	
+			for(var i=0;i<ng_list.length;i++){
+            Sinner=Sinner+'<option  value="' +ng_list[i]+'">'+ng_list[i]+'</option>';
+			}
+		}else{
+			for(var i=0;i<nn_list.length;i++){
+            Sinner=Sinner+'<option  value="' +nn_list[i]+'">'+nn_list[i]+'</option>';
+			}
+		
+		}
+		
+		
+		var reason = document.getElementById('reason'+num);
+        reason.innerHTML="<option  value='hiii'>測試2222222</option>";
+			
+    }
+	</script>
+{% for key,value in df.iterrows() %}
+<tr>
+	{% for i in df.head(1)%}
+		{# loop.index 號碼從1開始, 1,2,3... #}
+		
+		{% if i == 'OCT_IMAGE_AOI' %}
+			<td>
+			{% if octaoi_list[key]|length <= -1 %}
+				{% for imgs in octaoi_list[key] %}
+					{% if imgs[-4:] == '.tif' %}
+					<a href="{{ imgs }}">CCD link</a>
+					{% elif imgs == ' ' %}
+					No Img
+					{% else  %}
+					<a href="{{ imgs }}"><img align="center" width='160' height='120' src="{{ imgs }}"></a>  
+					{% endif  %}
+					<input type="text" value ="{{ imgs }}" name = "AOI_IMG{{loop.index}}__{{key}}" style="width:0; height:0; border:0; text-indent:-9999px;">
+				{% endfor %}
+			{% endif %}
+			</td>
+		
+		{% elif i == 'OCT_IMAGE_ADC1' %}
+			<td>
+			{% for imgs in octadc_list[key] %}
+				{% if imgs[-4:] == '.tif' %}
+				<a href="{{ imgs }}">CCD link</a>
+				{% elif imgs == ' ' %}
+				No Img
+				{% else  %}
+				<a href="{{ imgs }}"><img align="center" width='160' height='120' src="{{ imgs }}"></a>  
+				{% endif  %}
+				<input type="text" value ="{{ imgs }}" name = "ADC_IMG{{loop.index}}__{{key}}" style="width:0; height:0; border:0; text-indent:-9999px;">
+			{% endfor %}
+			</td>
+		{% elif i == 'CT1_IMAGE' %}
+			<td>
+			{% if ct1img_list[key]|length <= 3 %}
+				{% for imgs in ct1img_list[key] %}
+					{% if imgs[-4:] == '.tif' %}
+					<a href="{{ imgs }}">CCD{{loop.index}}</a>
+					{% elif imgs == ' ' %}
+					No Img
+					{% else  %}
+						{% if loop.index <= 15  %}
+							<a href="{{ imgs }}"><img align="center" width='160' height='120' src="{{ imgs }}"   onerror="this.src=this.parentNode.removeChild(this)"></a>  
+						{% else %} 
+							<a href="{{ imgs }}"><img align="center" width='160' height='120' src="{{ imgs }}"   onerror="this.src='https://png.pngtree.com/element_our/20190528/ourmid/pngtree-fork-symbol-icon-design-image_1164181.jpg'"> </a>  
+						{% endif  %}
+					{% endif  %}
+					<input type="text" value ="{{ imgs }}" name = "CT1_IMG{{loop.index}}__{{key}}" style="width:0; height:0; border:0; text-indent:-9999px;">
+				{% endfor %}
+			{% endif %}
+			</td>
+		
+		{% elif i == 'Check' %}
+			{% if  value['Check'] != 'NN' %}
+				<td>{{value['Check']}}</td>
+			{% else %}
+				<td><input type="radio" name="Check__{{key}}" value="OK" >OK<input type="radio" name="Check__{{key}}"  value="NG" id="{{key}}" onchange="changeReason(this.id, this.value)">NG</td>
+			{% endif %}
+			
+		
+		
+	
+		
+		
+		{% elif i == 'Reason' %}
+		
+			{% if  value['Check'] != 'NN' %}
+				<td>{{value['Reason']}}</td>
+		
+			{% else %}
+				<td>
+				<select id="reason{{key}}" name="Reason__{{key}}" >
+				   <option  value="---">請選擇</option>
+					<option  value="CT1來料相關呈像">CT1來料相關呈像</option>
+					<option  value="點片確認有呈像">點片確認有呈像</option>
+					<option  value="驗証確認無異常">驗証確認無異常</option>
+					<option  value="OCT機台異常">OCT機台異常</option>
+					<option  value="其他請說明">其他請說明</option>
+				</select>
+				</td>
+			{% endif %}
+		{% elif i == 'Explain' %}
+		
+			{% if  value['Check'] != 'NN' %}
+				<td>{{value['Explain']}}</td>
+		
+			{% else %}
+				<td><input type="text" name="Explain__{{key}}" value=""></td>
+		
+			{% endif %}
+
+		{% elif i in ['CREATE_DTM', 'TEST_TIME', 'CT1_TIME', 'MODEL_NO', 'OCT_DEFECT' ] %}	
+			<td><input type="text" class='in1' name="{{i}}__{{key}}" value ="{{value[i]}}" size="14" readonly></td>
+			
+			
+		{% else %}	
+			<td><input type="text" class='in1' name="{{i}}__{{key}}" value ="{{value[i]}}" size="10" readonly></td>
+		{%  endif %}
+		
+		
+	{% endfor %}	
+		
+		
+		
+		
+		
+		
+		
+		
+	
+</tr>
+{% endfor %}
+
+</table>
+
+
+<p class='title1'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Defect影像檢查完畢後，請記得按下「上傳」↓↓↓</p>
+{# <input type="button"  style="width:100px;height:60px;font:50px"  value="返回" onClick="javascript:history.back()">&nbsp;&nbsp;&nbsp;
+#}
+<button type='submit' name='octCheckUpload'  style="width:100px;height:60px;font-size:30px;font-weight:bold;">上傳</button>
+
+
+{# 圖太多張時，移至下方另以表格呈現 #}
+</br></br></br>
+<p class='title1'>AOI圖</p>
+<table class = 'redTable'>
+<thead><tr>
+<th>CHIPID</th>
+<th>AOI_01</th>
+<th>AOI_02</th>
+<th>AOI_03</th>
+<th>AOI_04</th>
+<th>AOI_05</th>
+</tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+
+     {% if octaoi_list[key]|length > 0 %}
+		<tr>                   
+		<td> <input type="text" class='in1' value ="{{value['CHIP_ID']}}" readonly></td>
+		 
+		{% for imgs in octaoi_list[key] %}
+			{% if loop.index %5 == 1  and loop.index != 1 %}
+				</tr><tr><td></td>
+			{% endif  %}
+			
+			
+			
+			{% if imgs[-4:] == '.tif' %}
+				<td> <a href="{{ imgs }}">CCD link</a></td> 
+			
+			{% else  %}
+				<td><a href="{{ imgs }}"><img align="center" width='160' height='120' src="{{ imgs }}"  ></a>
+			{% endif  %}
+				<input type="text" value ="{{ imgs }}" name = "AOI_IMG{{loop.index}}__{{key}}" style="width:0; height:0; border:0; text-indent:-9999px;">
+			
+		{% endfor %}
+		</tr>	
+	{% endif  %}	
+
+{% endfor  %}
+</table>
+
+
+
+</br></br></br>
+<p class='title1'>ADC圖</p>
+<table class = 'redTable'>
+<thead><tr>
+<th>CHIPID</th>
+<th>ADC_01</th>
+<th>ADC_02</th>
+<th>ADC_03</th>
+<th>ADC_04</th>
+<th>ADC_05</th>
+</tr></thead>
+
+
+{% for key,value in df.iterrows() %}
+
+     {% if octadc_list[key]|length > 0 %}
+		<tr>                   
+		<td> <input type="text" class='in1' value ="{{value['CHIP_ID']}}" readonly></td>
+		 
+		{% for imgs in octadc_list[key] %}
+			{% if loop.index %5 == 1  and loop.index != 1 %}
+				</tr><tr><td></td>
+			{% endif  %}
+			
+			
+			
+			{% if imgs[-4:] == '.tif' %}
+				<td> <a href="{{ imgs }}">CCD link</a></td> 
+			
+			{% else  %}
+				<td><a href="{{ imgs }}"><img align="center" width='160' height='120' src="{{ imgs }}"  ></a>
+			{% endif  %}
+				<input type="text" value ="{{ imgs }}" name = "AOI_IMG{{loop.index}}__{{key}}" style="width:0; height:0; border:0; text-indent:-9999px;">
+			
+		{% endfor %}
+		</tr>	
+	{% endif  %}	
+
+{% endfor  %}
+</table>
+
+
+{# CT1圖太多 #}
+</br></br></br>
+<p class='title1'>CT1圖</p>
+<table class = 'redTable'>
+<thead><tr>
+<th>CHIPID</th>
+
+<th>MHGO</th>
+<th>RD</th>
+<th>LD</th>
+<th>LM</th>
+<th>Func</th>
+
+
+</tr></thead>
+{% for key,value in df.iterrows() %}
+	{% if ct1img_list[key]|length == 0 %}
+		<tr>                   
+		<td> <input type="text" class='in1' value ="{{value['CHIP_ID']}}" readonly></td>
+		 
+     {% elif ct1img_list[key]|length > 0 %}
+		<tr>                   
+		<td> <input type="text" class='in1' value ="{{value['CHIP_ID']}}" readonly></td>
+		 <td>
+		{% for imgs in ct1img_list[key] %}
+			
+			{% if imgs[-4:] == '.tif' %}
+			</td><td><a href="{{ imgs }}">CCD{{loop.index}}</a>
+			<input type="text" value ="{{ imgs }}" name = "CT1_IMG{{loop.index}}__{{key}}" style="width:0; height:0; border:0; text-indent:-9999px;" >
+		
+			{% else %} 
+				{% if loop.index in [3] %}
+					<a href="{{ imgs }}"><img align="center" width='160' height='120' src="{{ imgs }}"   onerror="javascript:this.src='{{imgs[:-15]+'3'+imgs[-15:]}}'; this.onerror = this.parentNode.removeChild(this)"></a>  
+					</td><td>
+				{% elif loop.index in [ 6, 9, 12] %}
+					
+					<a href="{{ imgs }}"><img align="center" width='160' height='120' src="{{ imgs }}"   onerror="this.parentNode.removeChild(this)"></a>  
+					</td><td>
+				{% elif loop.index <= 3 %}
+					<a href="{{ imgs }}"><img align="center" width='160' height='120' src="{{ imgs }}"   onerror="javascript:this.src='{{imgs[:-15]+'3'+imgs[-15:]}}'; this.onerror = this.parentNode.removeChild(this)" ></a>  
+					<b>──────────</b>
+				{% elif loop.index <= 12 %}
+					<a href="{{ imgs }}"><img align="center" width='160' height='120' src="{{ imgs }}"   onerror="this.parentNode.removeChild(this)"></a>  
+					<b>──────────</b>
+				{% else %} 
+					
+					
+				{% endif  %}
+				
+			{% endif  %}
+			
+		{% endfor %}
+		
+		
+		
+		{% for imgs in ct1_subImgsList[key] %}
+			{% if imgs[-4:] == '.tif' %}
+				<a href="{{ imgs }}">TIF {{loop.index}}</a>
+			{% else %} 
+				<a href="{{ imgs }}"><img align="center" width='160' height='120' src="{{ imgs }}"   onerror="this.src='https://png.pngtree.com/element_our/20190528/ourmid/pngtree-fork-symbol-icon-design-image_1164181.jpg'"></a>  
+			{% endif %}
+		{% endfor %}
+		
+		
+		{#</td>
+		
+		<td>
+		{% for imgs in ct1_areaImgsList[key] %}
+			{% if imgs[-4:] == '.tif' %}
+				<a href="{{ imgs }}">TIF {{loop.index}}</a>
+			{% else %} 
+				<a href="{{ imgs }}"><img align="center" width='160' height='120' src="{{ imgs }}"   onerror="this.src='https://png.pngtree.com/element_our/20190528/ourmid/pngtree-fork-symbol-icon-design-image_1164181.jpg'"></a>  
+			{% endif %}
+		{% endfor %}
+		</td>
+		
+		<td>
+		{% for imgs in ct1_othersImgsList[key] %}
+			{% if imgs[-4:] == '.tif' %}
+				<a href="{{ imgs }}">TIF {{loop.index}}</a>
+			{% else %} 
+				<a href="{{ imgs }}"><img align="center" width='160' height='120' src="{{ imgs }}"   onerror="this.src='https://png.pngtree.com/element_our/20190528/ourmid/pngtree-fork-symbol-icon-design-image_1164181.jpg'"></a>  
+			{% endif %}
+		{% endfor %}
+		#}
+		</td></tr>
+		
+		
+	{% endif  %}	
+	
+{% endfor  %}
+</table>
+
+
+
+
+
+{%- endmacro %}
+
+
+
+{% macro table_octPADCOR(df1, df2) -%}
+
+{# 上表 #}
+<table class = 'redTable'>
+<thead><tr>
+{% for i in df1.head(1)%}
+	{% if  i == 'RATIO' %}
+		<th>{{i}} (%)</th>
+	{% elif  loop.index <= 4 %}
+		<th>{{i}}</th>
+	{% endif %}
+{% endfor %}
+<tr></thead>
+
+{% for key,value in df1.iterrows() %}
+<tr>
+	{% for i in df1.head(1)%}
+		{% if  i == 'RATIO' and value['PAD_COUNT'] >= 1%}
+		<td><input type="submit" class='in_sub' value ="{{value[i]}}" name = "octOLDRaw__{{value['START_DAY']}}+{{value['END_DAY']}}__{{value['PRODUCT_CODE']}}__{{value['EQP']}}__{{value['SHIFT']}}__PAD CORROSION"> </td>
+		{% elif  i == 'PAD_CONUT' %}
+			{% if value[i]|int >= 5 %}<td bgcolor="#FFC1E0">{% else %}<td>	{% endif %} 
+			{{value[i]}}</td>
+		{% elif  loop.index <= 4 %}
+			<td>{{value[i]}}</td>
+		
+		
+		{% endif %}
+	{% endfor %}
+</tr>
+{% endfor %}
+
+</table>  
+
+</br></br></br>
+{# 下表 #}
+<table class = 'redTable' align="left">
+<thead><tr>
+{% for i in df2.head(1)%}<th>{{i}}</th>{% endfor %}
+<tr></thead>
+
+{% for key,value in df2.iterrows() %}
+<tr>
+	{% for i in df2.head(1)%}
+	
+		<td>{{value[i]}}</td>
+		
+	{% endfor %}
+</tr>
+{% endfor %}
+
+</table>
+
+{%- endmacro %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

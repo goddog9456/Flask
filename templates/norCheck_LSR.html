@@ -1,0 +1,220 @@
+
+
+
+{% macro ClearCheckList(class0, mach0,user, name, auth, shift, time, mode,notify) -%}
+<h3>清潔抽檢</h3>
+<h2>Mode: <input type="text" name="Mode"  value="{{mode}}" size="8" class='in1' readonly></h2>
+<h2>人員:<input type="text" name="User"  value="{{user}}" size="8" class='in1'  readonly><input type="text" name="Name"  value="{{name}}" size="6" class='in1'   readonly></h2>
+<h2> 班別:<input type="text" name="Shift"  value="{{shift}}" size="8" class='in1'  readonly><input type="text" name="Auth"  value="{{auth}}" size="8" class='in1'  readonly></h2><h2> 班別:<input type="text" name="Shift"  value="{{shift}}" size="8" class='in1'  readonly><input type="text" name="Auth"  value="{{auth}}" size="8" class='in1'  readonly></h2><h2>站點:<input type="text" name="Class"  value="{{class0}}" size="8" class='in1'   readonly></h2></h2>
+<h2>EQ:<input type="text" name="Machine"  value="{{mach0}}" size="8" class='in1' readonly></h2>
+
+<h2> 點檢時間:<input type="text" name="time"  value="{{time}}" size="8" class='in1'   readonly></h2>
+<h3> {{notify}}</h3> 
+<table class = 't2'>
+<tr>
+	<td>點檢狀況</td>
+	<td><input type="radio" name="Clear_Check_OK" value="OK" checked>OK    <input type="radio" name="Clear_Check_OK" value="NG">NG</td>
+	<td><input type="text" name="Clear_Check_rem"  value="  " size="20"></td>
+</tr>
+
+</table>
+</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" name="return" class='in_subDate' value="返回" onClick="javascript:history.back()">
+<input type='text' class='in_subDate' name='CheckBtn'  onclick="this.form.submit(this.name);this.disabled=true;" value="送出">
+{%- endmacro %}
+
+{% macro CSTCheckList(class0, mach0,user, name, auth, shift, time, mode,notify) -%}
+{% if mach0 in ['CPD100'] %}
+	<h3>Dent點檢</h3>
+	<h2>Mode: <input type="text" name="Mode"  value="{{mode}}" size="8" class='in1' readonly></h2>
+	<h2>人員:<input type="text" name="User"  value="{{user}}" size="8" class='in1'  readonly><input type="text" name="Name"  value="{{name}}" size="6" class='in1'   readonly></h2>
+	<h2> 班別:<input type="text" name="Shift"  value="{{shift}}" size="8" class='in1'  readonly><input type="text" name="Auth"  value="{{auth}}" size="8" class='in1'  readonly></h2><h2>站點:<input type="text" name="Class"  value="{{class0}}" size="8" class='in1'   readonly></h2></h2>
+	<h2>EQ:<input type="text" name="Machine"  value="{{mach0}}" size="8" class='in1' readonly></h2>
+
+	<h2> 點檢時間:<input type="text" name="time"  value="{{time}}" size="8" class='in1'   readonly></h2>
+	<h3> {{notify}}</h3> 
+	<table class = 't2'>
+	<tr>
+	<td>CHIP ID</td><td><input type="text" name="CST_Check_ID01" value="" placeholder="請輸入CHIP ID" required   size="9" maxlength="7" ></td>
+	<td><input type="radio" name="CST_Check_ID01_OK" value="OK" checked>OK<input type="radio" name="CST_Check_ID01_OK" value="NG">NG</td>
+	<td><input type="text" name="CST_Check_ID01_rem"  value=" " size="20"></td>
+	</tr>
+	
+	
+	
+
+{%else %}
+	<h3>機台CST點檢</h3>
+	<h2>Mode: <input type="text" name="Mode"  value="{{mode}}" size="8" class='in1' readonly></h2>
+	<h2>人員:<input type="text" name="User"  value="{{user}}" size="8" class='in1'  readonly><input type="text" name="Name"  value="{{name}}" size="6" class='in1'   readonly></h2>
+	<h2> 班別:<input type="text" name="Shift"  value="{{shift}}" size="8" class='in1'  readonly><input type="text" name="Auth"  value="{{auth}}" size="8" class='in1'  readonly></h2><h2>站點:<input type="text" name="Class"  value="{{class0}}" size="8" class='in1'   readonly></h2></h2>
+	<h2>EQ:<input type="text" name="Machine"  value="{{mach0}}" size="8" class='in1' readonly></h2>
+
+	<h2> 點檢時間:<input type="text" name="time"  value="{{time}}" size="8" class='in1'   readonly></h2>
+	<h3> {{notify}}</h3> 
+	<table class = 't2'>
+
+
+
+
+	<tr>
+	<td>Port :</td><td><input type="radio" name="CST_Check_ID01_port" value="2" >2<input type="radio" name="CST_Check_ID01_port" value="3" >3<input type="radio" name="CST_Check_ID01_port" value="4" >4
+	<td>CST ID</td><td><input type="text" name="CST_Check_ID01" value="" placeholder="請輸入CSD ID" required   size="9" maxlength="6" ></td>
+	<td><input type="radio" name="CST_Check_ID01_OK" value="OK" checked>OK<input type="radio" name="CST_Check_ID01_OK" value="NG">NG</td>
+	<td><input type="text" name="CST_Check_ID01_rem"  value="  " size="20"></td>
+	</tr>
+
+{%endif %}
+</table>
+</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" name="return" class='in_subDate' value="返回" onClick="javascript:history.back()">
+<input type='text' class='in_subDate' name='CheckBtn'  onclick="this.form.submit(this.name);this.disabled=true;" value="送出">
+{%- endmacro %}
+
+
+
+{% macro showClear(df) -%}
+<h3>清潔點檢</h3>
+<table class = 't2'>
+<tr>
+<thead>
+<tr><th>    </th>   <th>    EQP      </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['Machine']}}</th>{% endfor %}</tr>
+<tr><th>    </th>   <th>    Date     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['time'][0:10]}}</th>{% endfor %}</tr></tr>
+<tr><th>    </th>   <th>    Time     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['time'][11:]}}</th>{% endfor %}</tr></tr>
+<tr><th>    </th>   <th>    填單人員     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['Name']}}</th>{% endfor %}</tr></tr>
+<tr><td>確認狀況</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	      <td><input type="text" class='in0' name='{{key}}' value ="{{value['Clear_Check_OK']}}" title="{{value['Clear_Check_rem']}}" size="4" readonly></td>
+{% endfor %}</tr>
+
+</table>
+{%- endmacro %}
+
+
+{% macro showCST(df) -%}
+<h3>CST點檢</h3>
+<table class = 't2'>
+<tr>
+<thead>
+<tr><th>    </th>   <th>    EQP      </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['Machine']}}</th>{% endfor %}</tr>
+<tr><th>    </th>   <th>    Date     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['time'][0:10]}}</th>{% endfor %}</tr></tr>
+<tr><th>    </th>   <th>    Time     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['time'][11:]}}</th>{% endfor %}</tr></tr>
+<tr><th>    </th>   <th>    填單人員     </th><th></th>{% for key,value in df.iterrows() %}<th>{{df.loc[key]['Name']}}</th>{% endfor %}</tr></tr>
+<tr><td>CST ID 01</td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CST_Check_ID01_OK']}}, {{value['CST_Check_ID01']}}" size="8" readonly></td>
+{% endfor %}</tr>
+<tr><td>Port </td><td></td><td></td>
+{% for key,value in df.iterrows() %}
+	<td><input type="text" class='in0' name='{{key}}' value ="{{value['CST_Check_ID01_port']}}" readonly></td>
+{% endfor %}</tr>
+</table>
+{%- endmacro %}
+
+{% macro ConsumCheckList(class0, mach0,user, name, auth,  shift, time, mode,consum_date) -%}
+<h3>耗材更換警示</h3>
+<h2>Mode: <input type="text" name="Mode"  value="{{mode}}" size="8" class='in1' readonly></h2>
+<h2> 人員:<input type="text" name="User"  value="{{user}}" size="8" class='in1'  readonly><input type="text" name="Name"  value="{{name}}" size="6" class='in1'   readonly></h2>
+<h2> 班別:<input type="text" name="Shift"  value="{{shift}}" size="8" class='in1'  readonly><input type="text" name="Auth"  value="{{auth}}" size="8" class='in1'  readonly></h2>
+<h2>站點:<input type="text" name="Class"  value="{{class0}}" size="8" class='in1'   readonly></h2></h2>
+<h2>EQ:<input type="text" name="Machine"  value="{{mach0}}" size="8" class='in1' readonly></h2>
+
+<h2> 上次更換時間:<input type="text"   value="{{consum_date}}" size="8" class='in1'   readonly></h2>
+
+<script type="text/javascript">
+	function checkConsum(Obj){
+		var names = ['Consum_LSRstopper', 'Consum_LSRalignment', 'Consum_TOUclamp', 
+					 'Consum_TOUstopper', 'Consum_TOUpositionY', 'Consum_CVclamp',
+					 'Consum_Exitalignment'];
+		for (var i = 0; i < names.length; i++){
+			var element = document.getElementsByName(names[i]);
+			if (element.length == 2){
+				if(element[0].checked || element[1].checked){ 
+					continue;
+				}else{
+					alert("有項目未填寫，請重新確認!!");
+					return;
+				} 
+			}
+		}			
+		Obj.form.submit(Obj.name);
+		Obj.disabled=true;				
+	}
+</script>
+
+<table class = 't2'>
+<thead><tr><th>機台別</th><th>UNIT</th><th>檢查方式</th></tr></thead>
+	<tr> <td colspan=3><h2>&nbsp;&nbsp;&nbsp;更換日期: </td> <td colspan=2><input type='date' name="Consum_Date" value="{{time}}"></td> 
+{% if  mach0 in ['LRB802', 'LRB803'] %}
+	<tr><td rowspan=5>旭東</td><td rowspan=2>Laser</td><td>stopper 是否損壞</td>
+	<td><input type="radio" name="Consum_LSRstopper" value="OK">OK<input type="radio" name="Consum_LSRstopper" value="NG">NG</td>
+	<td>備註:<input type="text" name="Consum_LSRstopper_rem"  value="" size="20"></td></tr>
+													<tr><td>alignment 是否損壞</td>
+	<td><input type="radio" name="Consum_LSRalignment" value="OK">OK<input type="radio" name="Consum_LSRalignment" value="NG">NG</td>
+	<td>備註:<input type="text" name="Consum_LSRalignment_rem"  value="" size="20"></td></tr>
+	
+						      <tr><td rowspan=3>TOU</td><td>Clamp 是否損壞</td>
+	<td><input type="radio" name="Consum_TOUclamp" value="OK">OK<input type="radio" name="Consum_TOUclamp" value="NG">NG</td>
+	<td>備註:<input type="text" name="Consum_TOUclamp_rem"  value="" size="20"></td></tr>
+														<td>stopper 是否損壞</td>
+	<td><input type="radio" name="Consum_TOUstopper" value="OK">OK<input type="radio" name="Consum_TOUstopper" value="NG">NG</td>
+	<td>備註:<input type="text" name="Consum_TOUstopper_rem"  value="" size="20"></td></tr>
+														<td>靠位Y 是否損壞</td>
+	<td><input type="radio" name="Consum_TOUpositionY" value="OK">OK<input type="radio" name="Consum_TOUpositionY" value="NG">NG</td>
+	<td>備註:<input type="text" name="Consum_TOUpositionY_rem"  value="" size="20"></td></tr>
+							 
+					
+{% elif  mach0 in ['LRB902'] %}
+	<tr><td rowspan=3>旭東</td><td rowspan=2>Laser</td><td>stopper 是否損壞</td>
+	<td><input type="radio" name="Consum_LSRstopper" value="OK">OK<input type="radio" name="Consum_LSRstopper" value="NG">NG</td>
+	<td>備註:<input type="text" name="Consum_LSRstopper_rem"  value="" size="20"></td></tr>
+													<tr><td>alignment 是否損壞</td>
+	<td><input type="radio" name="Consum_LSRalignment" value="OK">OK<input type="radio" name="Consum_LSRalignment" value="NG">NG</td>
+	<td>備註:<input type="text" name="Consum_LSRalignment_rem"  value="" size="20"></td></tr>
+							  <tr><td rowspan=3>CV</td><td>Clamp 是否損壞</td>
+	<td><input type="radio" name="Consum_CVclamp" value="OK">OK<input type="radio" name="Consum_CVclamp" value="NG">NG</td>
+	<td>備註:<input type="text" name="Consum_CVclamp_rem"  value="" size="20"></td></tr>
+{% elif  mach0 in ['LRA702', 'LRA703', 'LRA802'] %}
+	<tr><td rowspan=6>東捷</td><td rowspan=1>TOU</td><td>Clamp 是否損壞</td>
+	<td><input type="radio" name="Consum_TOUclamp" value="OK">OK<input type="radio" name="Consum_TOUclamp" value="NG">NG</td>
+	<td>備註:<input type="text" name="Consum_TOUclamp_rem"  value="" size="20"></td></tr>
+{% elif  mach0 in ['LRA102', 'LRA202', 'LRA302', 'LRB102'] %}	
+	<tr><td rowspan=6>HHT</td><td rowspan=1>TOU</td><td>Clamp 是否損壞</td>
+	<td><input type="radio" name="Consum_TOUclamp" value="OK">OK<input type="radio" name="Consum_TOUclamp" value="NG">NG</td>
+	<td>備註:<input type="text" name="Consum_TOUclamp_rem"  value="" size="20"></td></tr>		
+{% elif  mach0 in ['CPD102'] %}	
+	<tr><td rowspan=6>伊鑽</td><td rowspan=1>出入口</td><td>alignment 是否損壞</td>
+	<td><input type="radio" name="Consum_Exitalignment" value="OK">OK<input type="radio" name="Consum_Exitalignment" value="NG">NG</td>
+	<td>備註:<input type="text" name="Consum_Exitalignment_rem"  value="" size="20"></td></tr>	
+		 		
+	
+	
+	
+	
+{% endif %}
+</table>
+
+
+</br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="button" name="return" class='in_subDate' value="返回" onClick="javascript:history.back()">
+<input type='text' class='in_subDate' name='CheckBtn'  onclick="checkConsum(this)" value="送出">
+
+{%- endmacro %}

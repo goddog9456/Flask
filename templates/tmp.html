@@ -1,0 +1,147 @@
+<table class = 't2'>
+
+<tr><th>Step</th><th>機台</th><th>點檢位</th><th>檢查方式</th><th>OK/NG</th><th>備註</th></tr>
+
+{% if mach0[3] != 'A'  %}
+<tr><td>A</td><td>MJC</td><td>Pre-Alignment</td><td>1. STOPPER是否損壞或無法轉動<br/>(需於未夾取Panel時檢查，不可有固定位置凹槽或單邊磨秏，不分嚴重輕微皆更換，平均磨為正常)</td>
+<td><input type="radio" name="CT1_A1" value="OK" checked>OK<input type="radio" name="CT1_A1" value="NG">NG<td><input type="text" name="CT1_A1_rem"  value="  " size="20"></td></tr>
+<tr><td>A</td><td>MJC</td><td>Pre-Alignment</td><td>2. STOPPER無法轉動(未夾取Panel時檢查)</td>
+<td><input type="radio" name="CT1_A2" value="OK" checked>OK<input type="radio" name="CT1_A2" value="NG">NG<td><input type="text" name="CT1_A2_rem"  value="  " size="20"></td></tr>
+<tr><td>A</td><td>MJC</td><td>Pre-Alignment</td><td>3. 點檢Panel夾取後，Panel於Stopper，需在白區內</td>
+<td><input type="radio" name="CT1_A3" value="OK" checked>OK<input type="radio" name="CT1_A3" value="NG">NG<td><input type="text" name="CT1_A3_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck1.JPG"</td></tr>
+
+<tr><td>A</td><td>MJC</td><td>Pre-Alignment</td><td>ˋ4. 用手推動滑塊，檢查是否有移動會卡住及彈簧是否斷掉 </td>
+<td><input type="radio" name="CT1_A4" value="OK" checked>OK<input type="radio" name="CT1_A4" value="NG">NG<td><input type="text" name="CT1_A4_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck2.JPG"</td></tr>
+
+<tr><td>B</td><td>MJC</td><td>Pre-Alignment</td><td>1. 上下手臂至放PANEL是否置中(A等於B) </td>
+<td><input type="radio" name="CT1_B1" value="OK" checked>OK<input type="radio" name="CT1_B1" value="NG">NG<td><input type="text" name="CT1_B1_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck3.JPG"</td></tr>
+
+
+<tr><td>B</td><td>MJC</td><td>Up Carrier</td><td>2. Carrier優力膠塊是否受損<br/>(需於未夾取Panel時檢查，不可有固定位置凹槽或單邊磨秏，不分嚴重輕微皆更換，平均磨為正常)<br/>(未夾取Panel時檢查) </td>
+<td><input type="radio" name="CT1_B2" value="OK" checked>OK<input type="radio" name="CT1_B2" value="NG">NG<td><input type="text" name="CT1_B2_rem"  value="  " size="20"></td></tr>
+<tr><td>B</td><td>MJC</td><td>Down Carrier</td><td>3. Carrier優力膠塊是否受損<br/>(需於未夾取Panel時檢查，不可有固定位置凹槽或單邊磨秏，不分嚴重輕微皆更換，平均磨為正常)<br/>(未夾取Panel時檢查) </td>
+<td><input type="radio" name="CT1_B3" value="OK" checked>OK<input type="radio" name="CT1_B3" value="NG">NG<td><input type="text" name="CT1_B3_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck4.JPG"</td></tr>
+
+<tr><td>C</td><td>MJC</td><td>Up Carrier</td><td>1. Carrier的上頂PIN彈簧是否斷裂 </td>
+<td><input type="radio" name="CT1_C1" value="OK" checked>OK<input type="radio" name="CT1_C1" value="NG">NG<td><input type="text" name="CT1_C1_rem"  value="  " size="20"></td></tr>
+<tr><td>C</td><td>MJC</td><td>Down Carrier</td><td>2. Carrier的上頂PIN彈簧是否斷裂 </td>
+<td><input type="radio" name="CT1_C2" value="OK" checked>OK<input type="radio" name="CT1_C2" value="NG">NG<td><input type="text" name="CT1_C2_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck5.JPG"</td></tr>
+
+
+<tr><td>C</td><td>MJC</td><td> Up Carrier</td><td>3. 優力膠底座螺絲重新鎖附測試有無鬆動 </td>
+<td><input type="radio" name="CT1_C3" value="OK" checked>OK<input type="radio" name="CT1_C3" value="NG">NG<td><input type="text" name="CT1_C3_rem"  value="  " size="20"></td></tr>
+<tr><td>C</td><td>MJC</td><td> Down Carrier</td><td>4. 優力膠底座螺絲重新鎖附測試有無鬆動 </td>
+<td><input type="radio" name="CT1_C4" value="OK" checked>OK<input type="radio" name="CT1_C4" value="NG">NG<td><input type="text" name="CT1_C4_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck6.JPG"</td></tr>
+
+<tr><td>D</td><td>MJC</td><td>Workstage</td><td>1. STOPPER & CLAMP是否損壞<br/>(需於未夾取Panel時檢查，不可有固定位置凹槽或單邊磨秏，不分嚴重輕微，更換後觀察，平均磨為正常) </td>
+<td><input type="radio" name="CT1_D1" value="OK" checked>OK<input type="radio" name="CT1_D1" value="NG">NG<td><input type="text" name="CT1_D1_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck7.JPG"</td></tr>
+
+<tr><td>D</td><td>MJC</td><td>Workstage</td><td>2. Workstage框上溝槽是否有玻璃屑<br/>(有，需拍照及點檢機構並MAIL告知ENG，清除後，交接點檢該處3個班，是否仍有玻璃屑) </td>
+<td><input type="radio" name="CT1_D2" value="OK" checked>OK<input type="radio" name="CT1_D2" value="NG">NG<td><input type="text" name="CT1_D2_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck8.JPG"</td></tr>
+
+<tr><td>D</td><td>MJC</td><td>Workstage</td><td>3. 鐵氟龍膠帶是否有受損(Panel接觸面，單邊受損大於2mm且3處以上，直接更換) </td>
+<td><input type="radio" name="CT1_D3" value="OK" checked>OK<input type="radio" name="CT1_D3" value="NG">NG<td><input type="text" name="CT1_D3_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck9.JPG"</td></tr>
+
+<tr><td>D</td><td>MJC</td><td>Workstage</td><td>4. CLAMP作動是否有3段Sensor燈號(夾不到：不亮、正確：亮、沒夾到：不亮) </td>
+<td><input type="radio" name="CT1_D4" value="OK" checked>OK<input type="radio" name="CT1_D4" value="NG">NG<td><input type="text" name="CT1_D4_rem"  value="  " size="20"></td></tr>
+<tr><td>D</td><td>MJC</td><td>Workstage</td><td>5. 用手轉動STOPPER，確認Panel都有承靠在右邊Stopper上 </td>
+<td><input type="radio" name="CT1_D5" value="OK" checked>OK<input type="radio" name="CT1_D5" value="NG">NG<td><input type="text" name="CT1_D5_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck10.JPG"</td></tr>
+
+<tr><td>E</td><td>MJC</td><td>Workstage </td><td>1. 傳片位置確認(STOPPER與PANEL距離)，塑膠尺量測約0.8~2mm </td>
+<td><input type="radio" name="CT1_E1" value="OK" checked>OK<input type="radio" name="CT1_E1" value="NG">NG<td><input type="text" name="CT1_E1_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck11.JPG"</td></tr>
+
+<tr><td>F</td><td>MJC</td><td>Workstage </td><td>1. Carrier撈抓與Stage溝槽是否置中(塑膠尺量測左、右皆需大於2mm) </td>
+<td><input type="radio" name="CT1_F1" value="OK" checked>OK<input type="radio" name="CT1_F1" value="NG">NG<td><input type="text" name="CT1_F1_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck12.JPG"</td></tr>
+
+<tr><td>G</td><td>MJC</td><td>Block</td><td>1. 是否有鎖緊(手去搖動) </td>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck13.JPG"</td></tr>
+<td><input type="radio" name="CT1_G1" value="OK" checked>OK<input type="radio" name="CT1_G1" value="NG">NG<td><input type="text" name="CT1_G1_rem"  value="  " size="20"></td></tr>
+
+<tr><td>G</td><td>MJC</td><td>Block</td><td>2. 是否有多餘block，依量測電壓表確認數量(僅換線點檢確認) </td>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck14.JPG"</td></tr>
+<td><input type="radio" name="CT1_G2" value="OK" checked>OK<input type="radio" name="CT1_G2" value="NG">NG<td><input type="text" name="CT1_G2_rem"  value="  " size="20"></td></tr>
+
+<tr><td>H</td><td>MJC</td><td>縮針確認</td><td>1. 按壓探針後，再目視確認是否縮針 </td>
+<td><input type="radio" name="CT1_H1" value="OK" checked>OK<input type="radio" name="CT1_H1" value="NG">NG<td><input type="text" name="CT1_H1_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck15.JPG"</td></tr>
+
+<tr><td>I</td><td>MJC</td><td>Workstage</td><td>1. STOPPER與PANEL間，是否可以利用塑膠尺(1mm厚)刷過 </td>
+<td><input type="radio" name="CT1_I1" value="OK" checked>OK<input type="radio" name="CT1_I1" value="NG">NG<td><input type="text" name="CT1_I1_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck16.JPG"</td></tr>
+
+<tr><td>K</td><td>MJC</td><td>Panel 外觀檢</td><td>1. 使用手電筒，於Pre-A處，確認當下Panel(上下臂各兩片)，四邊是否有延裂/破片 </td>
+<td colspan = 2>
+CHIP ID 1 &nbsp;<input type="text" name="OCT_K1_ID01" id="OCT_K1_ID01"  placeholder="請輸入ChipID" size="8" maxlength="6">&nbsp;&nbsp;&nbsp;<input type="text" name="OCT1_K1_rem"  value="" placeholder="備註" size="10"><br/>
+CHIP ID 2 &nbsp;<input type="text" name="OCT_K1_ID02" id="OCT_K1_ID02"  placeholder="請輸入ChipID" size="8" maxlength="6"><br/>
+CHIP ID 3 &nbsp;<input type="text" name="OCT_K1_ID03" id="OCT_K1_ID03"  placeholder="請輸入ChipID" size="8" maxlength="6"><br/>
+CHIP ID 4 &nbsp;<input type="text" name="OCT_K1_ID04" id="OCT_K1_ID04"  placeholder="請輸入ChipID" size="8" maxlength="6"><br/>
+<input type="text" class='in1'  value ="" size="20" readonly>
+</td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck18.JPG"</td></tr>
+
+<tr><td>M</td><td>C/V</td><td>VCR、CT#1、CT#2夾取處</td><td>1. 是否Clamp是否鬆動(柱子沒鎖或電動缸損壞)及優力膠是否可正常轉動 </td>
+<td><input type="radio" name="CT1_M1" value="OK" checked>OK<input type="radio" name="CT1_M1" value="NG">NG<td><input type="text" name="CT1_M1_rem"  value="  " size="20"></td></tr>
+<tr><td>M</td><td>C/V</td><td>VCR、CT#1、CT#2夾取處</td><td>2. 是否有玻璃屑 </td>
+<td><input type="radio" name="CT1_M2" value="OK" checked>OK<input type="radio" name="CT1_M2" value="NG">NG<td><input type="text" name="CT1_M2_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck19.JPG"</td></tr>
+
+<tr><td>N</td><td>ULD</td><td>VCR夾取處</td><td>1. 是否Clamp是否鬆動(柱子沒鎖或電動缸損壞)及優力膠是否可正常轉動 </td>
+<td><input type="radio" name="CT1_N1" value="OK" checked>OK<input type="radio" name="CT1_N1" value="NG">NG<td><input type="text" name="CT1_N1_rem"  value="  " size="20"></td></tr>
+<tr><td>N</td><td>ULD</td><td>VCR夾取處</td><td>2. 是否有玻璃屑 </td>
+<td><input type="radio" name="CT1_N2" value="OK" checked>OK<input type="radio" name="CT1_N2" value="NG">NG<td><input type="text" name="CT1_N2_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck20.JPG"</td></tr>
+
+<tr><td>A</td><td>Robot</td><td>上下FORK吸嘴</td><td>5. 確認吸嘴是否有受損(使用手電筒，手轉吸嘴360度確認)，無論損傷狀況先更換處理 </td>
+<td><input type="radio" name="CT1_A5" value="OK" checked>OK<input type="radio" name="CT1_A5" value="NG">NG<td><input type="text" name="CT1_A5_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck22.JPG"</td></tr>
+
+<tr><td>D</td><td>MJC</td><td>Carrier</td><td>6. 傳送範圍內機台下方是否有玻璃碎片 </td>
+<td><input type="radio" name="CT1_D6" value="OK" checked>OK<input type="radio" name="CT1_D6" value="NG">NG<td><input type="text" name="CT1_D6_rem"  value="  " size="20"></td></tr>
+
+
+{% else %}
+
+
+<tr><td>{{class0}}</td><td>GPM</td><td>Workstage</td><td>1. STOPPER是否損壞或無法轉動<br/>(未夾取Panel時檢查) </td>
+<td><input type="radio" name="CT1_2_1" value="OK" checked>OK<input type="radio" name="CT1_2_1" value="NG">NG<td><input type="text" name="CT1_2_1_rem"  value="  " size="20"></td></tr>
+<tr><td>{{class0}}</td><td>GPM</td><td>Workstage</td><td>2. 機構範圍是否有玻璃屑<br/>(Pre-Alignment平躺時檢查) </td>
+<td><input type="radio" name="CT1_2_2" value="OK" checked>OK<input type="radio" name="CT1_2_2" value="NG">NG<td><input type="text" name="CT1_2_2_rem"  value="  " size="20"></td></tr>
+
+<tr><td>M</td><td>C/V</td><td>VCR、CT#1、CT#2夾取處</td><td>25. 是否Clamp是否鬆動(柱子沒鎖或電動缸損壞)及優力膠是否可正常轉動 </td>
+<td><input type="radio" name="CT1_M1" value="OK" checked>OK<input type="radio" name="CT1_M1" value="NG">NG<td><input type="text" name="CT1_M1_rem"  value="  " size="20"></td></tr>
+<tr><td>M</td><td>C/V</td><td>VCR、CT#1、CT#2夾取處</td><td>26. 是否有玻璃屑 </td>
+<td><input type="radio" name="CT1_M2" value="OK" checked>OK<input type="radio" name="CT1_M2" value="NG">NG<td><input type="text" name="CT1_M2_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck19.JPG"</td></tr>
+
+<tr><td>N</td><td>ULD</td><td>VCR夾取處</td><td>27. 是否Clamp是否鬆動(柱子沒鎖或電動缸損壞)及優力膠是否可正常轉動 </td>
+<td><input type="radio" name="CT1_N1" value="OK" checked>OK<input type="radio" name="CT1_N1" value="NG">NG<td><input type="text" name="CT1_N1_rem"  value="  " size="20"></td></tr>
+<tr><td>N</td><td>ULD</td><td>VCR夾取處</td><td>28. 是否有玻璃屑 </td>
+<td><input type="radio" name="CT1_N2" value="OK" checked>OK<input type="radio" name="CT1_N2" value="NG">NG<td><input type="text" name="CT1_N2_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck20.JPG"</td></tr>
+
+
+<tr><td>O</td><td>CV</td><td>CV上臂吸附真空處</td><td>29. 用眼睛觀察Panel在吸附真空後，外圍是否有下垂(看真空數值<-40) </td>
+<td><input type="radio" name="CT1_O1" value="OK" checked>OK<input type="radio" name="CT1_O1" value="NG">NG<td><input type="text" name="CT1_O1_rem"  value="  " size="20"></td></tr>
+<tr><td colspan=6><img src="/static/norCheck_source/ct1_norcheck21.JPG"</td></tr>
+
+
+<tr><td>{{class0}}</td><td>GPM</td><td>Workstage </td><td>8. 清潔Diffuser </td>
+<td><input type="radio" name="CT1_2_8" value="OK" checked>OK<input type="radio" name="CT1_2_8" value="NG">NG<td><input type="text" name="CT1_2_8_rem"  value="  " size="20"></td></tr>
+{% endif %}
+<tr><td></td><td></td><td></td><td></td><td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td><td></td></tr>
+
+</table>

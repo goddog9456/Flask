@@ -1,0 +1,30 @@
+﻿<html>
+<body style="background-color:#CF9E9E;">
+<title>ML7AC2 周報評分系統</title>
+
+<h2> <font face="微軟正黑體">ML7AC2 周報評分系統(測試改善中)</font></h2>
+<form method='post' action={{ url_for('vote') }}>
+	<p>User:<select name="name">
+　		
+　		<option value="yida">Yida</option>
+　		<option value="roger">Roger</option>
+　		<option value="calvin">Calvin</option>
+　		<option value="jhhsu">jhhsu</option>
+		<option value="alexxcpan">alexxcpan</option>
+                <option value="craig">Craig</option>
+                <option value="kjchen">kjchen</option></p>
+	</select>
+	</br>	
+	<p>P W:&ensp; &ensp; <input type = "password" name = 'pw' /></p>
+	<p>分數:&ensp; <input type='text' name='score' /> </p>
+            </br>
+	
+	</br>
+	<input id="date" type="date">		
+			</br>
+
+	<button type='submit'>Submit</button>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+﻿<html>
+<script language="javascript">
+		// window_onload()網頁預先載入內容
+	function window_onload(){
+		var date=window.document.getElementById('mach_Date');
+		var now = new Date();
+		var mon = (now.getMonth() + 1) >= 10 ? (now.getMonth() + 1) : ("0" + (now.getMonth() + 1));
+		var today = now.getFullYear().toString() + mon.toString() + now.getDate().toString();
+		date.value=today;
+		//<input id="date" type="date">		
+			
+		}
+　		//var Today=new Date();
+　		//document.write('<input type='text' name=machDate value="'+getTodayDate()+'">');
+
+</script>
+
+<body style="background-color:#CF9E9E;" LANGUAGE=javascript onload="return window_onload()">
+
+<title>ML7AC2 機台保養系統</title>
+
+<div align="center">
+<h2> <font face="微軟正黑體">ML7AC2 機台保養系統(測試用)</font></h2>
+<form  method='post' action={{ url_for('maintMess', us = user) }}>
+        <p><b>請選擇站點:</b></p>
+    	<select id="site-list" onchange="changeCollege(this.selectedIndex)"></select>
+    	<p>機台</p>
+    	<select id="mach-list" name="machName"></select>
+	
+	</br>	
+        <p>本次保養日期: &ensp; <input type='text' id='mach_Date' name='maintDate' value=''>
+        <p>備註: &ensp; <input type='text' name='remarks' value='N/A' style="height: 10%;">
+	
+       
+	
+
+	<button type='submit'>Submit</button>
+</form>
+</div>
+
+
+<script type="text/javascript">
+    //站台的陣列
+    var site = ['ct1', 'oct', 'laser']
+    //document就是這html文件。
+    //getElementById是裡面的方法，參數給"site-list"抓到這id標籤列
+    var collegeSelect=document.getElementById("site-list");
+    //製造一個字串，以html的語法填入院的陣列
+    var inner="";
+	
+    for(var i=0;i<site.length;i++){
+        //inner第一行就會像是 <option value=0>商學院</option>
+        inner=inner+'<option value=i>'+site[i]+'</option>';
+    }
+    //innerHTML 賦值inner給這element屬性
+    collegeSelect.innerHTML=inner;
+    /*
+    其實就是用程式碼的方式把XML文件修改成這樣
+    <select id="college-list">
+        <option value="0">商學院</option>
+        <option value="1">工學院</option>
+        <option value="2">建設學院</option>
+        <option value="3">建築專業學院</option>		
+        ....		
+    </select>
+    */
+    //這裡放系所的陣列(有順序性，對應各學院的資料)
+    var mach_list=new Array();
+	mach_list[0]=['CCCGL100 ','CCCGL200' ,'CCCGL200','CCCGL300','CCCGL400','CCCGL500','CCCGL600','CCCGL700','CCCGL800','CCCGL900','CCCGLA00'];
+	mach_list[1]=['CTS100 ','CTS200' ,'CTS200','CTS300','CTS400','CTS500','CTS600','CTS900','CTSA00','OCT100','OCT200','OCT300','OCT400','OCT600','OCT700','OCTA00','OCTB00','OCTC00'];  
+	mach_list[2]=['CCLRA100','CCLRA200','CCLRA700','CCLRA800','CCLRB100','CCLRB800','CCLRB900']
+	
+	//動到"site-list"這select元素後呼叫此方法
+    function changeCollege(index){
+        //跟剛剛一樣，製造一個字串，以html的語法填入系所的陣列
+        var Sinner="";
+        for(var i=0;i<mach_list[index].length;i++){
+            Sinner=Sinner+'<option value="'+mach_list[index][i]+'">'+mach_list[index][i]+'</option>';
+        }
+        //抓到"mach-list"這select元素，修改其值
+        var mach_listelect=document.getElementById("mach-list");
+        mach_listelect.innerHTML=Sinner;
+    }
+    //這裡呼叫一次"changeCollege"這方法，讓瀏覽器在讀完XML後可以直接讓系所的資料出來(商學院)
+    changeCollege(document.getElementById("site-list").selectedIndex);
+
+</script>
+</body>
+</html>

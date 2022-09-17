@@ -1,0 +1,308 @@
+﻿{% macro input(name, value='', type='text', size=20) -%}
+    <input type="{{ type }}" name="{{ name }}" value="{{
+        value|e }}" size="{{ size }}">
+{%- endmacro %}
+
+
+
+{% macro table02(seq) -%}
+
+<table>
+  
+{% for item in seq %}
+    <tr>
+    <td>{{ item }}</td>
+    <td><img src="{{ url_for('static', filename='Red.gif')}}"></td>
+    </tr>
+{% endfor %}
+
+{%- endmacro %}
+
+
+
+
+
+
+
+{% macro table03(seq) -%}
+
+<table>
+  
+{% for item in seq %}
+  <form method='post' action={{ url_for('consume') }}>
+    <tr>
+    
+    <td>{{ item[1] }}</td>
+    
+    {% if item[2] %}
+    <td><img src="{{ url_for('static', filename='Green.gif')}}>" {{item[2]}}></td>
+    {% else %}
+    <td><img src="{{ url_for('static', filename='Red.gif')}}>"   {{item[2]}}"></td>
+    {% endif %}
+   <td></td><td></td>
+
+  </form>
+
+   </tr>
+{% endfor %}
+
+
+   
+</table>
+{%- endmacro %}
+
+
+
+
+{% macro table_maint(seq) -%}
+  <link type="text/css" rel="stylesheet" href="/static/css/bootstrap.css"/>
+        <link type="text/css" rel="stylesheet" href="/static/css/main.css"/>
+        <link type="text/css" rel="stylesheet" href="/static/css/bootstrap-datetimepicker.min.css"/>
+        <link type="text/css" rel="stylesheet" href="/static/css/checkbox.css"/>
+        <link type="text/css" rel="stylesheet" href="/static/css/jquery-ui.css"/>
+        <link type="text/css" rel="stylesheet" href="/static/css/tagsinput.css"/>
+        <link type="text/css" rel="stylesheet" href="/static/css/bootstrap-tagsinput.css"/>
+
+
+
+
+
+
+
+<table  style="border-top:3px #FFD382 solid;border-bottom:3px brown solid;" cellpadding="10" border='0' rules='rows'>
+  <form method='post' role="form" action={{ url_for('userMain') }}>
+    <div class="form-group">
+    <tr><td align='center' valign="middle">CT1</td> 
+        <td align='center' valign="middle">OCT</td> 
+        <td align='center' valign="middle">LASER</td></tr>
+    <tr><td align='center' valign="middle"><img src="{{ url_for('static', filename='Green.gif')}}"></td>
+        <td align='center' valign="middle"><img src="{{ url_for('static', filename='Green.gif')}}"></td>
+        <td align='center' valign="middle"><img src="{{ url_for('static', filename='Green.gif')}}"></td></tr>
+{% for item in seq %}
+    
+    <tr><td></td><td></td><td></td></tr>
+
+    {# IF CT1 進入紙並表格位至  其他為空#}
+  {% if item[0] == 'CT1' %}
+
+     <tr><td>{{item[1]}}
+     {% if item[4] == 1 %}
+     <img src="{{ url_for('static', filename='Green.gif')}}">
+  
+     {% elif item[4] == 0  %}
+     <img src="{{ url_for('static', filename='Red.gif')}}">
+     {% endif %}
+     
+  
+    
+     <input type="text" name="date_{{ item[1] }}" size='7'  class="form-control" >
+     
+    
+
+
+     <button type='submit' name='{{item[1]}}' value='{{item[2]}}'>Upload</button>
+     </td><td></td><td></td></tr>
+  
+    
+
+    {# IF OCT 進入紙並表格位至  其他為空#}
+  {% elif item[0] == 'OCT' %}
+      
+     <tr><td></td><td>{{item[1]}}
+     {% if item[4] == 1 %}
+     <img src="{{ url_for('static', filename='Green.gif')}}">
+  
+     {% elif item[4] == 0  %}
+     <img src="{{ url_for('static', filename='Red.gif')}}">
+     {% endif %}
+     
+  
+    
+     <input type="date" name="date_{{ item[1] }}" size='7'>
+     <button type='submit' name='{{item[1]}}' value='{{item[2]}}'>Upload</button>
+     </td><td></td></tr>
+
+
+
+   {# IF LASER 進入紙並表格位至  其他為空#}
+  {% elif item[0] == 'LASER' %}
+      
+     <tr><td></td><td></td><td>{{item[1]}}
+     {% if item[4] == 1 %}
+     <img src="{{ url_for('static', filename='Green.gif')}}">
+  
+     {% elif item[4] == 0  %}
+     <img src="{{ url_for('static', filename='Red.gif')}}">
+     {% endif %}
+     
+  
+    
+     <input type="date" name="date_{{ item[1] }}" size='7'>
+     <button type='submit' name='{{item[1]}}' value='{{item[2]}}'>Upload</button>
+     </td></tr>
+  {% endif %}
+
+
+   </div>
+    </form>
+
+   </tr>
+{% endfor %}
+
+
+   
+</table>
+{%- endmacro %}
+
+
+
+
+{% macro table_maint2(seq) -%}
+
+<table  style="border-top:3px #FFD382 solid;border-bottom:3px brown solid;" cellpadding="10" border='0' rules='rows'>
+  <form method='post' role="form" action={{ url_for('userMain') }}>
+    <div class="form-group">
+    <tr><td align='center' valign="middle">CT1</td> 
+        <td align='center' valign="middle">OCT</td> 
+        <td align='center' valign="middle">LASER</td></tr>
+    <tr><td align='center' valign="middle"><img src="{{ url_for('static', filename='Green.gif')}}"></td>
+        <td align='center' valign="middle"><img src="{{ url_for('static', filename='Green.gif')}}"></td>
+        <td align='center' valign="middle"><img src="{{ url_for('static', filename='Green.gif')}}"></td></tr>
+{% for item in seq %}
+    
+    
+    {# IF CT1 進入紙並表格位至  其他為空#}
+  {% if item[0] == 'CT1' %}
+     <tr><td></td><td></td><td></td></tr>
+
+     <tr><td>{{item[1]}}
+     {% if item[4] == 1 %}
+     <img src="{{ url_for('static', filename='Green.gif')}}">
+  
+     {% elif item[4] == 0 %}
+     <img src="{{ url_for('static', filename='Red.gif')}}">
+     {% endif %}
+   
+  
+    
+     <input type="text" name="date_{{ item[1] }}" size='7'  class="form-control" >
+     
+    
+
+
+     <button type='submit' name='{{item[1]}}' value='{{item[2]}}'>Upload</button>
+     </td></tr>
+  {% else  %}
+  
+   {% endif %}
+{% endfor %}
+
+    
+
+
+   </div>
+    </form>
+
+   </tr>
+
+
+
+   
+</table>
+{%- endmacro %}
+
+
+{% macro table_maint3(seq, maint_showId) -%}
+
+<table  style="border-top:3px #FFD382 solid;border-bottom:3px brown solid;" cellpadding="10" border='0' rules='rows'>
+  <form method='post' role="form" action={{ url_for('userMain') }}>
+    <div class="form-group">
+     <tr><td align='center' valign="middle">CT1</td> 
+        <td align='center' valign="middle">OCT</td> 
+        <td align='center' valign="middle">LASER</td></tr>
+    <tr><td align='center' valign="middle"><img src="{{ url_for('static', filename='Green.gif')}}"></td>
+        <td align='center' valign="middle"><img src="{{ url_for('static', filename='Green.gif')}}"></td>
+        <td align='center' valign="middle"><img src="{{ url_for('static', filename='Green.gif')}}"></td></tr>
+
+{% set num=0 %}
+{% for idx in maint_showId %}
+    
+    <tr><td></td><td></td><td></td></tr>
+
+    {# IF CT1 進入紙並表格位 #}
+    
+	
+	{{loop.index}}
+	{% if  loop.index%3 == 1 %}
+	{{loop.index%3}}
+	<tr>
+	{% endif %}
+	
+	
+    {% if seq[idx][0] == 'CT1' %}
+   
+		 <td>{{seq[idx][1]}}
+		 {% if seq[idx][4] == 1 %}
+		 <img src="{{ url_for('static', filename='Green.gif')}}">
+	  
+		 {% elif seq[idx][4] == 0  %}
+		 <img src="{{ url_for('static', filename='Red.gif')}}">
+		 {% endif %}
+		 
+		 <input type="text" name="date_{{ seq[idx][1] }}" size='7'  class="form-control" >
+		 <button type='submit' name='{{seq[idx][1]}}' value='{{seq[idx][2]}}'>Upload</button>
+		 </td>
+	 
+	 {% elif seq[idx][0] == 'OCT' %}
+		 <td>
+		 {{seq[idx][1]}}
+		 {% if seq[idx][4] == 1 %}
+		 <img src="{{ url_for('static', filename='Green.gif')}}">
+	  
+		 {% elif seq[idx][4] == 0  %}
+		 <img src="{{ url_for('static', filename='Red.gif')}}">
+		 {% endif %}
+		 
+		 <input type="text" name="date_{{ seq[idx][1] }}" size='7'  class="form-control" >
+		 <button type='submit' name='{{seq[idx][1]}}' value='{{seq[idx][2]}}'>Upload</button>
+		 
+		 
+		 </td>
+	 
+	 {% elif seq[idx][0] == 'LASER' %}
+		 <td>
+		 {{seq[idx][1]}}
+		 {% if seq[idx][4] == 1 %}
+		 <img src="{{ url_for('static', filename='Green.gif')}}">
+	  
+		 {% elif seq[idx][4] == 0  %}
+		 <img src="{{ url_for('static', filename='Red.gif')}}">
+		 {% endif %}
+		 
+		 <input type="text" name="date_{{ seq[idx][1] }}" size='7'  class="form-control" >
+         <button type='submit' name='{{seq[idx][1]}}' value='{{seq[idx][2]}}'>Upload</button>
+		 </td>
+     {% else  %}
+	 <td></td>
+   
+	 {%  endif  %}
+     
+	
+	 
+	{% if  loop.index%3 == 1 %}
+	
+	</tr>
+	{% endif %}
+	 
+   
+  
+   {% endfor %}
+   </div>
+    </form>
+
+
+
+</table>
+{%- endmacro %}
+
+

@@ -1,0 +1,395 @@
+﻿
+
+
+
+
+{% macro input(name, value='', type='text', size=20) -%}
+    <input type="{{ type }}" name="{{ name }}" value="{{
+        value|e }}" size="{{ size }}">
+{%- endmacro %}
+
+
+
+{% macro table02(seq) -%}
+
+<table>
+  
+{% for item in seq %}
+    <tr>
+    <td>{{ item }}</td>
+    <td><img src="{{ url_for('static', filename='Red.gif')}}"></td>
+    </tr>
+{% endfor %}
+
+{%- endmacro %}
+
+
+
+
+
+{% macro table_maint3(seq, maint_showId, min_Done) -%}
+
+<table  class='redTable' align='left' cellpadding="5" border='0' rules='rows'>
+  
+    <div class="form-group">
+     <tr><td ><h2>CT1</h2></td> 
+        <td ><h2>OCT</h2></td> 
+        <td ><h2>LASER</h2></td></tr>
+    <tr>
+	    {% if min_Done[0] >= 1 %}
+	    <td ><img src="{{ url_for('static', filename='Green.gif')}}"    width="30%"></td>
+		{% elif min_Done[0] == 0 %}
+		<td ><img align="center" src="{{ url_for('static', filename='yellow01.JPG')}}"  width="20%"></td>
+		
+		{% else %}
+		<td ><img src="{{ url_for('static', filename='Red.gif')}}"      width="30%"></td>
+		{% endif %}
+		
+		{% if min_Done[1] >= 1 %}
+	    <td ><img src="{{ url_for('static', filename='Green.gif')}}"    width="30%"></td>
+		{% elif min_Done[1] == 0 %}
+		<td ><img align="center" src="{{ url_for('static', filename='yellow01.JPG')}}"  width="20%"></td>
+		{% else %}
+		<td ><img src="{{ url_for('static', filename='Red.gif')}}"      width="30%"></td>
+		{% endif %}
+		
+		{% if min_Done[2] >= 1 %}
+	    <td ><img src="{{ url_for('static', filename='Green.gif')}}"    width="30%"></td>
+		{% elif min_Done[2] == 0 %}
+		<td ><img align="center" src="{{ url_for('static', filename='yellow01.JPG')}}"  width="20%"></td>
+		{% else %}
+		<td ><img src="{{ url_for('static', filename='Red.gif')}}"      width="30%"></td>
+		{% endif %}
+    </tr>
+
+<tr><td></td><td></td><td></td></tr>
+
+{% for idx in maint_showId %}
+    
+    
+    
+    {# IF CT1 進入紙並表格位 #}
+    
+	
+	
+	{% if  loop.index%3 == 1 %}
+	
+	<tr>
+	{% endif %}
+	
+	{% if idx == -1 %}
+	<td></td>
+    {% elif seq[idx][0] == 'CT1' %}
+   
+		 <td  >
+		 {{seq[idx][1]}}
+		 </br>
+		 {% if seq[idx][4] >= 1 %}
+		 <img align="center" src="{{ url_for('static', filename='Green.gif')}}">
+	     {% elif seq[idx][4] == 0 %}
+		 <img align="center" src="{{ url_for('static', filename='yellow01.JPG')}}"  width="13%">
+		 {% else %}
+		 <img align="center" src="{{ url_for('static', filename='Red.gif')}}">
+		 {% endif %}
+		 
+		 </br>
+		 <input type="date" name="date_{{ seq[idx][1] }}" value='{{seq[idx][2][0:4]}}-{{seq[idx][2][4:6]}}-{{seq[idx][2][6:8]}}'  size='7'  class="form-control" >
+		 <button type='submit' name='consum_btn' value='{{seq[idx][1]}}'>Update</button>
+		 </td>
+	 
+	 {% elif seq[idx][0] == 'OCT' %}
+		 <td >
+		 {{seq[idx][1]}}
+		 </br>
+		 {% if seq[idx][4] >= 1 %}
+		 <img align="center" src="{{ url_for('static', filename='Green.gif')}}">
+	     {% elif seq[idx][4] == 0 %}
+		 <img align="center" src="{{ url_for('static', filename='yellow01.JPG')}}"  width="13%">
+		 {% else %}
+		 <img align="center" src="{{ url_for('static', filename='Red.gif')}}">
+		 {% endif %}
+		 
+		 </br>
+		 <input type="date" name="date_{{ seq[idx][1] }}" value='{{seq[idx][2][0:4]}}-{{seq[idx][2][4:6]}}-{{seq[idx][2][6:8]}}' size='7'  class="form-control" >
+		 <button type='submit' name='consum_btn' value='{{seq[idx][1]}}'>Update</button>
+		 
+		 
+		 </td>
+	 
+	 {% elif seq[idx][0] == 'LASER' %}
+		 <td >
+		 {{seq[idx][1]}}
+		 </br>
+		 
+		 {% if seq[idx][4] >= 1 %}
+		 <img align="center" src="{{ url_for('static', filename='Green.gif')}}">
+	     {% elif seq[idx][4] == 0 %}
+		 <img align="center" src="{{ url_for('static', filename='yellow01.JPG')}}"  width="13%">
+		 {% else %}
+		 <img align="center" src="{{ url_for('static', filename='Red.gif')}}">
+		 {% endif %}
+		 
+		 </br>
+		 <input type="date" name="date_{{ seq[idx][1] }}" value='{{seq[idx][2][0:4]}}-{{seq[idx][2][4:6]}}-{{seq[idx][2][6:8]}}' size='7'  class="form-control" >
+         <button type='submit' name='consum_btn' value='{{seq[idx][1]}}'>Update</button>
+		 </td>
+     {% else  %}
+	 <td></td>
+   
+	 {%  endif  %}
+     
+	
+	 
+	{% if  loop.index%3 == 0 %}
+	
+	</tr>
+	{% endif %}
+	 
+   
+  
+   {% endfor %}
+   </div>
+    
+
+
+
+</table>
+{%- endmacro %}
+
+
+
+
+
+{#當前使用版本#}
+{% macro table_maint4(seq, min_Done) -%}
+<p class='title1'>機台保養系統</p>
+<h3>PM Plan連結:</h3>
+<h3><a href='http://autceda.corpnet.auo.com/dashboard/sites/L7A/show/L7AC1_CELL_PM_PLAN/SUMMARY?title=CELL%20PM%20PLAN&layers=1&layers=103&'>請點我</a></h3>
+		
+<h3>【燈號說明】</h3>
+<img src="{{ url_for('static', filename='Green.gif')}}" >&nbsp;&nbsp; 已定期保養&nbsp;&nbsp; 
+<img src="{{ url_for('static', filename='Yellow.gif')}}" >&nbsp;&nbsp;可開始保養&nbsp;&nbsp; 
+<img src="{{ url_for('static', filename='Red.gif')}}" > &nbsp;&nbsp; 距離保養期限< 2周&nbsp;&nbsp; 
+</br></br></br>
+<table  class='redTable'>
+  
+    <div class="form-group">
+    <thead> <tr> <th style="width:150px;height:50px">CT1</th>   <th style="width:150px;height:50px">OCT</th>    <th style="width:150px;height:50px">LASER</th> </tr></thead>
+    <tr>
+	    {% if min_Done[0] >= 1 %}
+	    <td ><img src="{{ url_for('static', filename='Green.gif')}}"  width='90' height='80'  ></td>
+		{% elif min_Done[0] == 0 %}
+		<td ><img src="{{ url_for('static', filename='yellow.gif')}}" width='90' height='80' ></td>
+		
+		{% else %}
+		<td ><img src="{{ url_for('static', filename='Red.gif')}}"   width='90' height='80'   ></td>
+		{% endif %}
+		
+		{% if min_Done[1] >= 1 %}
+	    <td><img src="{{ url_for('static', filename='Green.gif')}}" width='90' height='80'   ></td>
+		{% elif min_Done[1] == 0 %}
+		<td><img src="{{ url_for('static', filename='yellow.gif')}}" width='90' height='80' ></td>
+		{% else %}
+		<td><img src="{{ url_for('static', filename='Red.gif')}}"    width='90' height='80'  ></td>
+		{% endif %}
+		
+		{% if min_Done[2] >= 1 %}
+	    <td><img src="{{ url_for('static', filename='Green.gif')}}"  width='90' height='80'   ></td>
+		{% elif min_Done[2] == 0 %}
+		<td><img src="{{ url_for('static', filename='yellow.gif')}}" width='90' height='80' ></td>
+		{% else %}
+		<td><img src="{{ url_for('static', filename='Red.gif')}}"  width='90' height='80'   ></td>
+		{% endif %}
+    </tr>
+
+<tr><td></td><td></td><td></td></tr>
+</table>
+
+</br></br></br>
+
+<table   class='t3'>
+     <tr> <td><h2>CT1</h2></td>
+	 {% set count0 = namespace(value=0) %}
+{% for mach in seq %}
+    
+	{# {% set col_names = (("record_no", "alpaca_name", "training", "duration", "date"),) %}  #}
+	     
+	  
+	 
+		
+	 
+	 {% if mach[0] == 'CT1' %}
+		 {% set count0.value = count0.value + 1 %}
+		
+		 {% if count0.value ==11 %}
+			</tr><tr><td></td>  {# 從第11項開始跳下一行 #}
+		 {% endif %}
+		<td>
+		 <h3>{{mach[1]}}</h3>
+		 </br>
+		
+	
+		{% if mach[4] >= 1 %}
+			{% if mach[2][4]|string() == '-'%}<input type="submit" class='green' value ="{{mach[0]}}_{{mach[1]}}_{{mach[2]}}" name = "Maint_Status" title="{{mach[2][0:4]}} / {{mach[2][5:7]}} / {{mach[2][8:10]}}">{%else%}
+		 
+				<input type="submit" class='green' value ="{{mach[0]}}_{{mach[1]}}_{{mach[2]}}" name = "Maint_Status" title="{{mach[2][0:4]}} / {{mach[2][4:6]}} / {{mach[2][6:8]}}" >
+			{%endif%}
+	     {% elif mach[4] == 0 %}
+			{% if mach[2][4]|string() == '-'%}<input type="submit" class='yellow' value ="{{mach[0]}}_{{mach[1]}}_{{mach[2]}}" name = "Maint_Status" title="{{mach[2][0:4]}} / {{mach[2][5:7]}} / {{mach[2][8:10]}}">{%else%}
+		 
+				<input type="submit" class='yellow' value ="{{mach[0]}}_{{mach[1]}}_{{mach[2]}}" name = "Maint_Status"   title="{{mach[2][0:4]}} / {{mach[2][4:6]}} / {{mach[2][6:8]}}" >
+			{%endif%}
+		 {% else %}
+			{% if mach[2][4]|string() == '-'%}<input type="submit" class='red' value ="{{mach[0]}}_{{mach[1]}}_{{mach[2]}}" name = "Maint_Status" title="{{mach[2][0:4]}} / {{mach[2][5:7]}} / {{mach[2][8:10]}}">{%else%}
+		 
+				<input type="submit" class='red' value ="{{mach[0]}}_{{mach[1]}}_{{mach[2]}}" name = "Maint_Status"   title="{{mach[2][0:4]}} / {{mach[2][4:6]}} / {{mach[2][6:8]}}" >
+			{%endif%}
+		 {% endif %}
+		 
+		 
+		</td><td></td>
+	{% endif %}
+	
+{% endfor %}
+     </tr>
+    <tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr>
+<tr> <td><h2>OCT</h2></td>
+	  {% set count0 = namespace(value=0) %}
+{% for mach in seq %}
+    
+	
+	 
+	 {% if mach[0] == 'OCT' %}
+	     {% set count0.value = count0.value + 1 %}
+		
+		 {% if count0.value in [9, 22] %}
+			</tr><tr><td></td>  {# 從第11項開始跳下一行 #}
+		 {% endif %}
+		 
+		<td>
+		 <h3>{{mach[1]}}</h3></br>
+		 {% if mach[4] >= 1 %}
+			{% if mach[2][4]|string() == '-'%}<input type="submit" class='green' value ="{{mach[0]}}_{{mach[1]}}_{{mach[2]}}" name = "Maint_Status" title="{{mach[2][0:4]}} / {{mach[2][5:7]}} / {{mach[2][8:10]}}">{%else%}
+		 
+				<input type="submit" class='green' value ="{{mach[0]}}_{{mach[1]}}_{{mach[2]}}" name = "Maint_Status" title="{{mach[2][0:4]}} / {{mach[2][4:6]}} / {{mach[2][6:8]}}" >
+			{%endif%}
+	     {% elif mach[4] == 0 %}
+			{% if mach[2][4]|string() == '-'%}<input type="submit" class='yellow' value ="{{mach[0]}}_{{mach[1]}}_{{mach[2]}}" name = "Maint_Status" title="{{mach[2][0:4]}} / {{mach[2][5:7]}} / {{mach[2][8:10]}}">{%else%}
+		 
+				<input type="submit" class='yellow' value ="{{mach[0]}}_{{mach[1]}}_{{mach[2]}}" name = "Maint_Status"   title="{{mach[2][0:4]}} / {{mach[2][4:6]}} / {{mach[2][6:8]}}" >
+			{%endif%}
+		 {% else %}
+			{% if mach[2][4]|string() == '-'%}<input type="submit" class='red' value ="{{mach[0]}}_{{mach[1]}}_{{mach[2]}}" name = "Maint_Status" title="{{mach[2][0:4]}} / {{mach[2][5:7]}} / {{mach[2][8:10]}}">{%else%}
+		 
+				<input type="submit" class='red' value ="{{mach[0]}}_{{mach[1]}}_{{mach[2]}}" name = "Maint_Status"   title="{{mach[2][0:4]}} / {{mach[2][4:6]}} / {{mach[2][6:8]}}" >
+			{%endif%}
+		 {% endif %}
+		 
+		</td><td></td>
+	{% endif %}
+{% endfor %}
+     </tr>
+	 <tr><td></td></tr><tr><td></td></tr><tr><td></td></tr><tr><td></td></tr>
+	 <tr> <td><h2>LASER</h2></td>
+{% for mach in seq %}
+    
+	
+	    
+	 {% if mach[0] == 'LASER' %}
+		 
+		<td>
+		<h3> {{mach[1]}}</h3>
+		 </br>
+		 {% if mach[4] >= 1 %}
+			{% if mach[2][4]|string() == '-'%}<input type="submit" class='green' value ="{{mach[0]}}_{{mach[1]}}_{{mach[2]}}" name = "Maint_Status" title="{{mach[2][0:4]}} / {{mach[2][5:7]}} / {{mach[2][8:10]}}">{%else%}
+		 
+				<input type="submit" class='green' value ="{{mach[0]}}_{{mach[1]}}_{{mach[2]}}" name = "Maint_Status" title="{{mach[2][0:4]}} / {{mach[2][4:6]}} / {{mach[2][6:8]}}" >
+			{%endif%}
+	     {% elif mach[4] == 0 %}
+			{% if mach[2][4]|string() == '-'%}<input type="submit" class='yellow' value ="{{mach[0]}}_{{mach[1]}}_{{mach[2]}}" name = "Maint_Status" title="{{mach[2][0:4]}} / {{mach[2][5:7]}} / {{mach[2][8:10]}}">{%else%}
+		 
+				<input type="submit" class='yellow' value ="{{mach[0]}}_{{mach[1]}}_{{mach[2]}}" name = "Maint_Status"   title="{{mach[2][0:4]}} / {{mach[2][4:6]}} / {{mach[2][6:8]}}" >
+			{%endif%}
+		 {% else %}
+			{% if mach[2][4]|string() == '-'%}<input type="submit" class='red' value ="{{mach[0]}}_{{mach[1]}}_{{mach[2]}}" name = "Maint_Status" title="{{mach[2][0:4]}} / {{mach[2][5:7]}} / {{mach[2][8:10]}}">{%else%}
+		 
+				<input type="submit" class='red' value ="{{mach[0]}}_{{mach[1]}}_{{mach[2]}}" name = "Maint_Status"   title="{{mach[2][0:4]}} / {{mach[2][4:6]}} / {{mach[2][6:8]}}" >
+			{%endif%}
+		 {% endif %}
+		 
+		</td><td></td>
+	{% endif %}
+{% endfor %}
+     </tr>
+	 
+	 
+	 
+	
+	
+	
+	
+  </div>  
+</table>
+
+{%- endmacro %}
+
+
+
+{% macro table_Norcheck_main01(norCheck,class0) -%}
+
+<table class = 'redTable'>
+<thead><tr>
+{% if  class0 == 'OCT'%}
+<th>EQP</th><th>點燈機點檢</th><th>機台清潔</th><th>CST點檢</th><th>保養點檢</th>
+{% elif  class0 == 'CT1'%}
+<th>EQP</th><th>點燈機點檢</th><th>Cold Run</th><th>CST點檢</th><th>無</th>
+{% endif %}
+<tr></thead>
+{% for key,value in norCheck.iterrows() %}
+<tr>
+     {% if  value['Class'] == class0%}
+	    <td>{{value['Machine']}}</td>
+		{% if value['Light_Status'] == 'G' %}
+		       <!--   <input type="submit" style="background-image:url({{ url_for('static', filename='Green.gif') }})">   -->
+	         <td> <input type="submit" class='green' value = '' name = "{{value['Machine']}}">
+			 </td>
+		{% elif value['Light_Status'] == 'Y' %}
+	         <td><img align="center" src="{{ url_for('static', filename='Yellow.gif')}}"></td>
+	    {% elif value['Light_Status'] == 'R' %}
+	         <td><img align="center" src="{{ url_for('static', filename='red.gif')}}"></td>
+        {% endif %}	   
+
+
+        {% if value['Clear_Status'] == 'G' %}
+	         <td><img align="center" src="{{ url_for('static', filename='Green.gif')}}" onclick='LightCheck(this)' id = '{{ value['Machine'] }}'></td>
+		{% elif value['Clear_Status'] == 'Y' %}
+	         <td><img align="center" src="{{ url_for('static', filename='Yellow.gif')}}"></td>
+	    {% elif value['Clear_Status'] == 'R' %}
+	         <td><img align="center" src="{{ url_for('static', filename='red.gif')}}"></td>
+        {% endif %}	    
+		
+		{% if value['CST_Status'] == 'G' %}
+	         <td><img align="center" src="{{ url_for('static', filename='Green.gif')}}"></td>
+		{% elif value['CST_Status'] == 'Y' %}
+	         <td><img align="center" src="{{ url_for('static', filename='Yellow.gif')}}"></td>
+	    {% elif value['CST_Status'] == 'R' %}
+	         <td><img align="center" src="{{ url_for('static', filename='red.gif')}}"></td>
+        {% endif %}	    
+		
+		{% if value['Maint_Status'] == 'NNN' %}
+	         <td><img align="center" src="{{ url_for('static', filename='Green.gif')}}"></td>
+		{% elif value['Maint_Status'] == 'NNN' %}
+	         <td><img align="center" src="{{ url_for('static', filename='Yellow.gif')}}"></td>
+	    {% elif value['Maint_Status'] == 'NNN' %}
+	         <td><img align="center" src="{{ url_for('static', filename='red.gif')}}"></td>
+        {% endif %}	    
+         		
+	 {% endif %}
+	 
+</tr>
+{% endfor  %}
+</table>
+{%- endmacro %}
+
+
+
